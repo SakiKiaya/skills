@@ -1,0 +1,5 @@
+Name,Address,DataType,Scope,Comment
+StartButton,X0,BOOL,Global,Start production button
+StopButton,X1,BOOL,Global,Emergency stop button
+MotorSpeed,D100,WORD,Global,Motor speed setting (0-1000)
+AlarmFlag,M0,BOOL,Global,System alarm flag
