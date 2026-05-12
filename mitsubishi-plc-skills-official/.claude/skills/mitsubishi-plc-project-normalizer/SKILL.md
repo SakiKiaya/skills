@@ -1,7 +1,7 @@
 ---
 name: mitsubishi-plc-project-normalizer
-description: Normalize exported Mitsubishi GX Works raw files into JSON. Use when the user has CSV, TXT, XML, ST, mnemonic, label, device comment, parameter, or cross-reference exports under exports/raw.
-version: 0.2.0
+description: Normalize exported Mitsubishi GX Works raw files into JSON. Use when the user has CSV, TXT, XML, ST, mnemonic, label, device comment, parameter, or cross-reference exports under exports/raw. 解析 GX Works2 / GX Works3 匯出的文字檔、CSV、XML、ST、mnemonic CSV，轉換成統一 JSON 結構。
+version: 0.3.0
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -84,3 +84,19 @@ python .claude/skills/mitsubishi-plc-project-normalizer/scripts/normalize_export
 ## References
 
 - See `references/normalized_schema.md` for expected JSON structure.
+
+## 支援的輸入格式 (Supported Input)
+
+- **CSV**: labels, device comments, parameters, cross reference
+- **TXT**: compile report, print report, parameter report
+- **ST**: Structured Text program
+- **XML**: 若 GX Works 或相關工具可匯出 XML，需保留原始節點與屬性
+- **Mnemonic CSV**: Ladder 轉 mnemonic 後的指令表
+
+## 解析規則 (Parsing Rules)
+
+* 保留原始欄位名稱。
+* 另外產生標準欄位，例如 name, address, data_type, scope, comment。
+* 無法判斷的欄位放入 raw。
+* 不要刪除未知欄位。
+* 所有解析錯誤需輸出到 diagnostics.json。

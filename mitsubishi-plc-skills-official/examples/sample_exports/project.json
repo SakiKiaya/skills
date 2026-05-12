@@ -1,0 +1,7 @@
+{
+  "name": "Sample PLC Project",
+  "plc_series": "iQ-R",
+  "cpu_model": "R04CPU",
+  "software": "GX Works3",
+  "exported_at": "2024-01-15"
+}

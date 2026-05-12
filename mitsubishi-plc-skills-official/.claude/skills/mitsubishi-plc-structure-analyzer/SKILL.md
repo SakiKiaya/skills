@@ -1,7 +1,7 @@
 ---
 name: mitsubishi-plc-structure-analyzer
-description: Analyze Mitsubishi PLC program structure, label/device usage, cross references, alarm/interlock candidates, and produce Mermaid diagrams from normalized JSON or exported source files.
-version: 0.2.0
+description: Analyze Mitsubishi PLC program structure, label/device usage, cross references, alarm/interlock candidates, and produce Mermaid diagrams from normalized JSON or exported source files. 分析 Mitsubishi PLC 專案的程式結構、Label 使用關係、Device 使用關係與 Cross Reference，產生架構文件與 Mermaid 圖。
+version: 0.3.0
 ---
 
 # Mitsubishi PLC Structure Analyzer
@@ -68,3 +68,29 @@ flowchart TD
 - Do not guess call relationships that are not present.
 - Do not claim a device is written unless cross reference or source proves write usage.
 - Do not infer safety logic without evidence.
+
+## 分析工具 (Analysis Tools)
+
+包含的 scripts：
+
+- `scripts/parse_st.py`: 解析 Structured Text 程式檔案
+- `scripts/parse_mnemonic.py`: 解析 ladder 助記碼 CSV 檔案
+
+執行方式：
+
+```bash
+# Parse ST files
+python .claude/skills/mitsubishi-plc-structure-analyzer/scripts/parse_st.py exports/raw/programs exports/normalized
+
+# Parse mnemonic files
+python .claude/skills/mitsubishi-plc-structure-analyzer/scripts/parse_mnemonic.py exports/raw/programs exports/normalized
+```
+
+## 分析任務 (Analysis Tasks)
+
+1. 列出 programs, POU, FB, functions 清單（若有）
+2. 摘要程式語言類型：Ladder mnemonic, ST, FBD, SFC
+3. 從 ST 或文本中提取可見的函數呼叫
+4. 從原始碼和 cross reference 提取 device 使用情況
+5. 根據 device comments 中的關鍵字識別 alarm 候選項（alarm, error, 異常, 警報, 故障）
+6. 根據 comments 識別 interlock 候選項（interlock, lock, 禁止, 互鎖, 條件）

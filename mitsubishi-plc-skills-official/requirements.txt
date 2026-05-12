@@ -1,0 +1,14 @@
+# Mitsubishi PLC Skills Pack - Python Requirements
+# Basic Python dependencies for normalization and documentation generation
+
+# Standard library (included with Python):
+# - pathlib
+# - json
+# - csv
+# - re
+# - xml.etree.ElementTree
+
+# Optional dependencies for advanced features:
+# pyyaml>=6.0          # For YAML parsing if needed
+# jinja2>=3.0          # For advanced template generation
+# pandas>=1.3          # For large CSV processing
