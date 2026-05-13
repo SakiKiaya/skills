@@ -1,7 +1,7 @@
 ---
 name: winforms-ui-analyzer
 description: Analyze WinForms Designer.cs and Designer.vb files to extract forms, controls, UI hierarchy, event binding, layout hints, and Mermaid diagrams.
-version: 0.2.0
+version: 0.3.0
 allowed-tools: Read Write Edit Bash
 ---
 

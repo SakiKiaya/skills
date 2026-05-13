@@ -83,3 +83,32 @@
   }
 ]
 ```
+
+## v0.3 Additional IR
+
+### event_flows.json
+
+```json
+[
+  {
+    "flow_name": "MainForm.btnStart.Click -> btnStart_Click",
+    "form": "MainForm",
+    "trigger": {"control": "btnStart", "event": "Click"},
+    "handler": "btnStart_Click",
+    "handler_source": "MainForm.cs",
+    "handler_line_range": [50, 80],
+    "called_methods": ["StartGrab"]
+  }
+]
+```
+
+### call_graph.json
+
+```json
+[
+  {
+    "caller": {"method": "btnStart_Click", "source_file": "MainForm.cs"},
+    "callee": {"target": "CameraManager", "method": "StartGrab"}
+  }
+]
+```

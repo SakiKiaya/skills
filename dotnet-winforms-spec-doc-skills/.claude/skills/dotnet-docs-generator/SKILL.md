@@ -1,7 +1,7 @@
 ---
 name: dotnet-docs-generator
 description: Generate human-readable technical documentation for .NET Framework / WinForms C# and VB.NET projects from normalized IR.
-version: 0.2.0
+version: 0.3.0
 allowed-tools: Read Write Edit Bash
 ---
 

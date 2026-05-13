@@ -1,7 +1,7 @@
 ---
 name: dotnet-openspec-generator
 description: Generate OpenSpec-compatible specs for AI Agents from normalized .NET WinForms IR, including solution architecture, UI forms, business logic, configuration, and dependencies.
-version: 0.2.0
+version: 0.3.0
 allowed-tools: Read Write Edit Bash
 ---
 

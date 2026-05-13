@@ -1,7 +1,7 @@
 ---
 name: dotnet-project-normalizer
 description: Normalize C# and VB.NET WinForms source files into structured JSON IR, including classes, methods, forms, controls, events, configs, and diagnostics.
-version: 0.2.0
+version: 0.3.0
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -51,3 +51,10 @@ python .claude/skills/dotnet-project-normalizer/scripts/normalize_project.py . e
 - Preserve control names and event bindings.
 - Preserve `source_file`, `line_range`, and `language`.
 - Do not only summarize; create reusable normalized IR.
+
+## v0.3 Method and Event Analysis
+
+- Generates `event_flows.json`.
+- Generates `call_graph.json`.
+- Maps Designer/AddHandler/VB Handles events to handler methods.
+- Extracts approximate method line ranges and static call candidates.
