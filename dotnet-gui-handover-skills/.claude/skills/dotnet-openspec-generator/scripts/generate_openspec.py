@@ -2,6 +2,7 @@
 from __future__ import annotations
 from pathlib import Path
 import json
+import re
 import sys
 from typing import Any
 
@@ -49,7 +50,35 @@ def chunk_doc(docs_chunks: Path, chunk: dict[str, Any]) -> str:
     if not p.exists():
         return ""
     text = p.read_text(encoding="utf-8", errors="replace").strip()
-    return text[:1000] + ("..." if len(text) > 1000 else "")
+    text = sanitize_markdown_excerpt(text)
+    return truncate_markdown(text, 1000)
+
+def sanitize_markdown_excerpt(text: str) -> str:
+    text = re.sub(
+        r"```[A-Za-z0-9_-]*\n.*?\n```",
+        "> Diagram or code block omitted from OpenSpec excerpt.",
+        text,
+        flags=re.S,
+    )
+    lines = []
+    for line in text.splitlines():
+        if line.startswith("# "):
+            lines.append("### " + line[2:])
+        elif line.startswith("## "):
+            lines.append("#### " + line[3:])
+        elif line.startswith("### "):
+            lines.append("##### " + line[4:])
+        else:
+            lines.append(line)
+    return "\n".join(lines).strip()
+
+def truncate_markdown(text: str, max_chars: int) -> str:
+    if len(text) <= max_chars:
+        return text
+    cutoff = text.rfind("\n", 0, max_chars)
+    if cutoff < max_chars // 2:
+        cutoff = max_chars
+    return text[:cutoff].rstrip() + "\n\n> Excerpt truncated. See the full chunk document."
 
 def main(analysis_dir: str, chunks_dir: str, docs_chunks_dir: str, openspec_dir: str) -> int:
     analysis = Path(analysis_dir)

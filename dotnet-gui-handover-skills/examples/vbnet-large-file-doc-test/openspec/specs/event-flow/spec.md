@@ -17,9 +17,9 @@ The system SHALL route `btnStart.Click` to handler `btnStart_Click`.
 
 **Chunk Summary:**
 
-# Event Flow: btnStart.Click -> btnStart_Click
+### Event Flow: btnStart.Click -> btnStart_Click
 
-## Event Entry
+#### Event Entry
 
 | Item | Value |
 |---|---|
@@ -29,39 +29,33 @@ The system SHALL route `btnStart.Click` to handler `btnStart_Click`.
 | Line | 16 |
 | Confidence | 0.75 |
 
-## Simplified Sequence Diagram
+#### Simplified Sequence Diagram
 
-```mermaid
-sequenceDiagram
-  participant User
-  participant UI
-  participant Handler
-  participant Logic
-  participant Device
-  User->>UI: btnStart.Click
-  UI->>Handler: btnStart_Click()
-  Handler->>Device: CaptureCameraImage()
-  Device-->>Handler: result/status
-  Handler->>Device: ConnectPlc()
-  Device-->>Handler: result/status
-  Handler->>Logic: EvaluateResult()
-  Logic-->>Handler: result/status
-  Handler->>Logic: SaveRecipe()
-  Logic-->>Handler: result/status
-  Handler->>Logic: StartInspection()
-  Logic-->>Handler: result/status
-  Handler->>Logic: UpdateStatus()
-  Logic-->>Handler: result/status
-  Handler->>Logic: btnSave_Click()
-  Logic-->>Handler: result/status
-  Handler-->>UI: update/complete
-```
+> Diagram or code block omitted from OpenSpec excerpt.
 
-## Call Chain
+#### Call Chain
 
-```mermaid
-flowchart TD
- ...
+> Diagram or code block omitted from OpenSpec excerpt.
+
+#### Handler Method Details
+
+| Method | Calls | Side Effects | Source |
+|---|---|---|---|
+| btnStart_Click | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus', 'btnSave_Click'] | ['Persistence or write operation candidate 推測', 'External device/API interaction candidate 推測'] | Forms/MainForm.vb |
+
+#### Method Purpose Analysis
+
+##### btnStart_Click
+
+**用途：**
+處理 GUI 或系統事件；執行 Start 類型流程。推測
+
+**推測依據：**
+- 由事件或事件流程觸發: btnStart.Click, btnStart.Click
+- 方法名稱包含事件處理常見關鍵字
+- 名稱或呼叫鏈包含 Start 相關關鍵字: start
+
+> Excerpt truncated. See the full chunk document.
 
 ### Requirement: btnSave.Click shall invoke btnSave_Click
 
@@ -78,9 +72,9 @@ The system SHALL route `btnSave.Click` to handler `btnSave_Click`.
 
 **Chunk Summary:**
 
-# Event Flow: btnSave.Click -> btnSave_Click
+### Event Flow: btnSave.Click -> btnSave_Click
 
-## Event Entry
+#### Event Entry
 
 | Item | Value |
 |---|---|
@@ -90,39 +84,34 @@ The system SHALL route `btnSave.Click` to handler `btnSave_Click`.
 | Line | 17 |
 | Confidence | 0.75 |
 
-## Simplified Sequence Diagram
+#### Simplified Sequence Diagram
 
-```mermaid
-sequenceDiagram
-  participant User
-  participant UI
-  participant Handler
-  participant Logic
-  participant Device
-  User->>UI: btnSave.Click
-  UI->>Handler: btnSave_Click()
-  Handler->>Device: CaptureCameraImage()
-  Device-->>Handler: result/status
-  Handler->>Device: ConnectPlc()
-  Device-->>Handler: result/status
-  Handler->>Logic: EvaluateResult()
-  Logic-->>Handler: result/status
-  Handler->>Logic: SaveRecipe()
-  Logic-->>Handler: result/status
-  Handler->>Logic: StartInspection()
-  Logic-->>Handler: result/status
-  Handler->>Logic: UpdateStatus()
-  Logic-->>Handler: result/status
-  Handler-->>UI: update/complete
-```
+> Diagram or code block omitted from OpenSpec excerpt.
 
-## Call Chain
+#### Call Chain
 
-```mermaid
-flowchart TD
-  N0["btnSave_Click"]
-  N0 --> N1["CaptureCameraImage"]
-  N1 --> N2["Connect...
+> Diagram or code block omitted from OpenSpec excerpt.
+
+#### Handler Method Details
+
+| Method | Calls | Side Effects | Source |
+|---|---|---|---|
+| btnSave_Click | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測', 'External device/API interaction candidate 推測'] | Forms/MainForm.vb |
+
+#### Method Purpose Analysis
+
+##### btnSave_Click
+
+**用途：**
+處理 GUI 或系統事件；執行 Start 類型流程。推測
+
+**推測依據：**
+- 由事件或事件流程觸發: btnSave.Click, btnSave.Click
+- 方法名稱包含事件處理常見關鍵字
+- 名稱或呼叫鏈包含 Start 相關關鍵字: start
+- 呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus
+
+> Excerpt truncated. See the full chunk document.
 
 
 ## Safety Notes
