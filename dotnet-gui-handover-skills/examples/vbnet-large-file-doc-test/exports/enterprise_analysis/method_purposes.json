@@ -1,0 +1,607 @@
+[
+  {
+    "method": "New",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 12,
+    "called_by": [],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus",
+      "btnSave_Click",
+      "btnStart_Click"
+    ],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click, btnStart_Click"
+    ],
+    "analysis_inputs": {
+      "method_name": "New",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click",
+        "btnStart_Click"
+      ],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "btnStart_Click",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 19,
+    "called_by": [
+      "New"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus",
+      "btnSave_Click"
+    ],
+    "triggers": [
+      {
+        "source_type": "event",
+        "trigger": "btnStart.Click",
+        "source": "Forms/MainForm.vb",
+        "line": 16
+      },
+      {
+        "source_type": "event_flow",
+        "trigger": "btnStart.Click",
+        "source": "Forms/MainForm.vb",
+        "line": 16
+      }
+    ],
+    "inferred_purpose": "處理 GUI 或系統事件；執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為 GUI / 事件流程的入口或處理節點",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: ui, form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "由事件或事件流程觸發: btnStart.Click, btnStart.Click",
+      "方法名稱包含事件處理常見關鍵字",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click"
+    ],
+    "analysis_inputs": {
+      "method_name": "btnStart_Click",
+      "class_or_file": "MainForm",
+      "event_triggers": [
+        "btnStart.Click",
+        "btnStart.Click"
+      ],
+      "called_methods": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click"
+      ],
+      "called_by": [
+        "New"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "btnSave_Click",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 24,
+    "called_by": [
+      "New",
+      "btnStart_Click"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus"
+    ],
+    "triggers": [
+      {
+        "source_type": "event",
+        "trigger": "btnSave.Click",
+        "source": "Forms/MainForm.vb",
+        "line": 17
+      },
+      {
+        "source_type": "event_flow",
+        "trigger": "btnSave.Click",
+        "source": "Forms/MainForm.vb",
+        "line": 17
+      }
+    ],
+    "inferred_purpose": "處理 GUI 或系統事件；執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為 GUI / 事件流程的入口或處理節點",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: ui, form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "由事件或事件流程觸發: btnSave.Click, btnSave.Click",
+      "方法名稱包含事件處理常見關鍵字",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus"
+    ],
+    "analysis_inputs": {
+      "method_name": "btnSave_Click",
+      "class_or_file": "MainForm",
+      "event_triggers": [
+        "btnSave.Click",
+        "btnSave.Click"
+      ],
+      "called_methods": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "called_by": [
+        "New",
+        "btnStart_Click"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "StartInspection",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 29,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult"
+    ],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能更新 UI 狀態或顯示內容: form",
+      "可能建立新物件或初始化流程: new",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult"
+    ],
+    "analysis_inputs": {
+      "method_name": "StartInspection",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult"
+      ],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "EvaluateResult",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 36,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form",
+      "可能建立新物件或初始化流程: new"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "EvaluateResult",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ConnectPlc",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1121,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "SaveRecipe",
+      "UpdateStatus"
+    ],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: CaptureCameraImage, SaveRecipe, UpdateStatus"
+    ],
+    "analysis_inputs": {
+      "method_name": "ConnectPlc",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [
+        "CaptureCameraImage",
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "CaptureCameraImage",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1126,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection",
+      "ConnectPlc"
+    ],
+    "calls": [
+      "SaveRecipe",
+      "UpdateStatus"
+    ],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection, ConnectPlc",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: SaveRecipe, UpdateStatus"
+    ],
+    "analysis_inputs": {
+      "method_name": "CaptureCameraImage",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection",
+        "ConnectPlc"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "SaveRecipe",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1130,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "ConnectPlc",
+      "CaptureCameraImage"
+    ],
+    "calls": [
+      "UpdateStatus"
+    ],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "協調或委派後續方法呼叫"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, ConnectPlc, CaptureCameraImage",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "呼叫方法: UpdateStatus"
+    ],
+    "analysis_inputs": {
+      "method_name": "SaveRecipe",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [
+        "UpdateStatus"
+      ],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "ConnectPlc",
+        "CaptureCameraImage"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "UpdateStatus",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1135,
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "ConnectPlc",
+      "CaptureCameraImage",
+      "SaveRecipe"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc, camera, capture",
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "可能建立新物件或初始化流程: new",
+      "Persistence or write operation candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, ConnectPlc, CaptureCameraImage, SaveRecipe",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "UpdateStatus",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "ConnectPlc",
+        "CaptureCameraImage",
+        "SaveRecipe"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.75
+  }
+]

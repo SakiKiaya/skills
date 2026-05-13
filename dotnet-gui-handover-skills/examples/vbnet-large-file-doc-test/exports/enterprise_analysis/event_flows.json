@@ -1,0 +1,43 @@
+[
+  {
+    "entry": "btnStart.Click",
+    "handler": "btnStart_Click",
+    "source": "Forms/MainForm.vb",
+    "line": 16,
+    "call_chain": [
+      "btnStart_Click",
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus",
+      "btnSave_Click"
+    ],
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "confidence": 0.75
+  },
+  {
+    "entry": "btnSave.Click",
+    "handler": "btnSave_Click",
+    "source": "Forms/MainForm.vb",
+    "line": 17,
+    "call_chain": [
+      "btnSave_Click",
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus"
+    ],
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "confidence": 0.75
+  }
+]

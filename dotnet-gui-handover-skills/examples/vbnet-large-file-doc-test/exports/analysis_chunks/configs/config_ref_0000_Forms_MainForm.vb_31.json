@@ -1,0 +1,16 @@
+{
+  "chunk_type": "config",
+  "chunk_id": "config_ref_0000_Forms_MainForm.vb_31",
+  "title": "Config Reference: Forms/MainForm.vb:31",
+  "summary": "In-code configuration reference chunk.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "type": "ConfigurationManager.AppSettings",
+    "source": "Forms/MainForm.vb",
+    "line": 31,
+    "expression": "ConfigurationManager.AppSettings"
+  },
+  "related_chunks": []
+}

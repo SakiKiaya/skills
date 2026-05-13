@@ -1,0 +1,18 @@
+[
+  {
+    "source": "Forms/MainForm.vb",
+    "line": 16,
+    "control": "btnStart",
+    "event": "Click",
+    "handler": "btnStart_Click",
+    "framework": "WinForms/VB"
+  },
+  {
+    "source": "Forms/MainForm.vb",
+    "line": 17,
+    "control": "btnSave",
+    "event": "Click",
+    "handler": "btnSave_Click",
+    "framework": "WinForms/VB"
+  }
+]

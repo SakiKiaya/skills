@@ -1,0 +1,15 @@
+{
+  "chunk_type": "config",
+  "chunk_id": "config_file_0000_App.config",
+  "title": "Config File: App.config",
+  "summary": "Configuration file chunk.",
+  "source_refs": [
+    "App.config"
+  ],
+  "data": {
+    "path": "App.config",
+    "extension": ".config",
+    "kind": "configuration_candidate"
+  },
+  "related_chunks": []
+}

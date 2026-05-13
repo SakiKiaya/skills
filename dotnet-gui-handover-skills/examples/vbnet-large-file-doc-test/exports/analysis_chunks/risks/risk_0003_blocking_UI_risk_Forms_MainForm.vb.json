@@ -1,0 +1,16 @@
+{
+  "chunk_type": "risk",
+  "chunk_id": "risk_0003_blocking_UI_risk_Forms_MainForm.vb",
+  "title": "Risk: blocking UI risk",
+  "summary": "Maintainability or architecture risk chunk.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "risk_type": "blocking UI risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "thread.sleep",
+    "confidence": 0.55
+  },
+  "related_chunks": []
+}

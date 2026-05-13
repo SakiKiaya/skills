@@ -1,0 +1,19 @@
+{
+  "valid": true,
+  "errors": [],
+  "checked_files": [
+    "classes.json",
+    "configuration.json",
+    "dependencies.json",
+    "enterprise_analysis.json",
+    "event_flows.json",
+    "events.json",
+    "external_dependencies.json",
+    "methods.json",
+    "projects.json",
+    "risks.json",
+    "source_blocks.json",
+    "source_files.json",
+    "user_workflows.json"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "chunk_type": "project",
+  "chunk_id": "VbLargeFileDocTest",
+  "title": "Project: VbLargeFileDocTest",
+  "summary": "Project-level chunk for module responsibility and dependencies.",
+  "source_refs": [
+    "VbLargeFileDocTest.vbproj"
+  ],
+  "data": {
+    "project": {
+      "name": "VbLargeFileDocTest",
+      "path": "VbLargeFileDocTest.vbproj",
+      "language": "VB.NET",
+      "target_framework": "net48",
+      "output_type": "WinExe",
+      "is_gui": true,
+      "project_references": [],
+      "references": [
+        "System.Windows.Forms",
+        "System.Configuration"
+      ],
+      "nuget_packages": [],
+      "responsibility_inference": []
+    },
+    "dependencies": [
+      {
+        "type": "Reference",
+        "project": "VbLargeFileDocTest",
+        "target": "System.Windows.Forms",
+        "source": "VbLargeFileDocTest.vbproj"
+      },
+      {
+        "type": "Reference",
+        "project": "VbLargeFileDocTest",
+        "target": "System.Configuration",
+        "source": "VbLargeFileDocTest.vbproj"
+      }
+    ],
+    "related_methods": [],
+    "external_dependency_candidates": [
+      {
+        "dependency_type": "Reference",
+        "name": "System.Windows.Forms",
+        "project": "VbLargeFileDocTest",
+        "purpose": "Referenced dependency",
+        "risk": "Version or deployment mismatch risk",
+        "confidence": 0.75
+      },
+      {
+        "dependency_type": "Reference",
+        "name": "System.Configuration",
+        "project": "VbLargeFileDocTest",
+        "purpose": "Referenced dependency",
+        "risk": "Version or deployment mismatch risk",
+        "confidence": 0.75
+      }
+    ],
+    "risk_candidates": []
+  },
+  "related_chunks": []
+}

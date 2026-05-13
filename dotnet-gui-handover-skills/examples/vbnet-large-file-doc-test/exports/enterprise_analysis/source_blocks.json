@@ -1,0 +1,90 @@
+[
+  {
+    "kind": "class",
+    "name": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 6,
+    "end_line": 1143
+  },
+  {
+    "kind": "method",
+    "name": "New",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 12,
+    "end_line": 18
+  },
+  {
+    "kind": "method",
+    "name": "btnStart_Click",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 19,
+    "end_line": 23
+  },
+  {
+    "kind": "method",
+    "name": "btnSave_Click",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 24,
+    "end_line": 28
+  },
+  {
+    "kind": "method",
+    "name": "StartInspection",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 29,
+    "end_line": 35
+  },
+  {
+    "kind": "method",
+    "name": "EvaluateResult",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 36,
+    "end_line": 1120
+  },
+  {
+    "kind": "method",
+    "name": "ConnectPlc",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 1121,
+    "end_line": 1125
+  },
+  {
+    "kind": "method",
+    "name": "CaptureCameraImage",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 1126,
+    "end_line": 1129
+  },
+  {
+    "kind": "method",
+    "name": "SaveRecipe",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 1130,
+    "end_line": 1134
+  },
+  {
+    "kind": "method",
+    "name": "UpdateStatus",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 1135,
+    "end_line": 1142
+  },
+  {
+    "kind": "switch",
+    "name": "mode",
+    "source": "Forms/MainForm.vb",
+    "language": "VB.NET",
+    "start_line": 38,
+    "end_line": 45
+  }
+]

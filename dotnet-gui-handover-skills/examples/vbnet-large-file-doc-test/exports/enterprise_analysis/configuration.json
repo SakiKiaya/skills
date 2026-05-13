@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "App.config",
+      "extension": ".config",
+      "kind": "configuration_candidate"
+    }
+  ],
+  "code_references": [
+    {
+      "type": "ConfigurationManager.AppSettings",
+      "source": "Forms/MainForm.vb",
+      "line": 31,
+      "expression": "ConfigurationManager.AppSettings"
+    },
+    {
+      "type": "ConfigurationManager.AppSettings",
+      "source": "Forms/MainForm.vb",
+      "line": 1132,
+      "expression": "ConfigurationManager.AppSettings"
+    }
+  ]
+}

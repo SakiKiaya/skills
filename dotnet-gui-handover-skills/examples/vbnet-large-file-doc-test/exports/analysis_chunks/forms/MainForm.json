@@ -1,0 +1,157 @@
+{
+  "chunk_type": "form",
+  "chunk_id": "MainForm",
+  "title": "Form: MainForm",
+  "summary": "Form-level chunk for UI responsibility and event analysis.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "form_name": "MainForm",
+    "events": [
+      {
+        "source": "Forms/MainForm.vb",
+        "line": 16,
+        "control": "btnStart",
+        "event": "Click",
+        "handler": "btnStart_Click",
+        "framework": "WinForms/VB"
+      },
+      {
+        "source": "Forms/MainForm.vb",
+        "line": 17,
+        "control": "btnSave",
+        "event": "Click",
+        "handler": "btnSave_Click",
+        "framework": "WinForms/VB"
+      }
+    ],
+    "event_flows": [
+      {
+        "entry": "btnStart.Click",
+        "handler": "btnStart_Click",
+        "source": "Forms/MainForm.vb",
+        "line": 16,
+        "call_chain": [
+          "btnStart_Click",
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus",
+          "btnSave_Click"
+        ],
+        "side_effects": [
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "confidence": 0.75
+      },
+      {
+        "entry": "btnSave.Click",
+        "handler": "btnSave_Click",
+        "source": "Forms/MainForm.vb",
+        "line": 17,
+        "call_chain": [
+          "btnSave_Click",
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus"
+        ],
+        "side_effects": [
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "confidence": 0.75
+      }
+    ],
+    "handler_methods": [
+      {
+        "name": "btnSave_Click",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 24,
+        "end_line": 28,
+        "params": "sender As Object, e As EventArgs",
+        "called_by": [
+          "New",
+          "btnStart_Click"
+        ],
+        "calls": [
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus"
+        ],
+        "purpose": "Event handler / UI operation entry candidate 推測",
+        "side_effects": [
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "risks": []
+      },
+      {
+        "name": "btnStart_Click",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 19,
+        "end_line": 23,
+        "params": "sender As Object, e As EventArgs",
+        "called_by": [
+          "New"
+        ],
+        "calls": [
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus",
+          "btnSave_Click"
+        ],
+        "purpose": "Event handler / UI operation entry candidate 推測",
+        "side_effects": [
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "risks": []
+      }
+    ],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ]
+  },
+  "related_chunks": [
+    "method:Forms_MainForm.vb_btnSave_Click_24",
+    "method:Forms_MainForm.vb_btnStart_Click_19"
+  ]
+}

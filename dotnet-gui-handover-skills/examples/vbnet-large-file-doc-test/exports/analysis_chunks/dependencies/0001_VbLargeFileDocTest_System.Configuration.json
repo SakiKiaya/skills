@@ -1,0 +1,16 @@
+{
+  "chunk_type": "dependency",
+  "chunk_id": "0001_VbLargeFileDocTest_System.Configuration",
+  "title": "Dependency: VbLargeFileDocTest -> System.Configuration",
+  "summary": "Dependency chunk.",
+  "source_refs": [
+    "VbLargeFileDocTest.vbproj"
+  ],
+  "data": {
+    "type": "Reference",
+    "project": "VbLargeFileDocTest",
+    "target": "System.Configuration",
+    "source": "VbLargeFileDocTest.vbproj"
+  },
+  "related_chunks": []
+}

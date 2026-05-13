@@ -1,0 +1,534 @@
+﻿{
+  "version": "1.0.0",
+  "source_analysis_dir": "D:\\work\\project\\skills\\dotnet-gui-handover-skills\\examples\\vbnet-large-file-doc-test\\exports\\enterprise_analysis",
+  "chunks_dir": "D:\\work\\project\\skills\\dotnet-gui-handover-skills\\examples\\vbnet-large-file-doc-test\\exports\\analysis_chunks",
+  "counts": {
+    "source_file": 1,
+    "large_file_task": 15,
+    "project": 1,
+    "method": 9,
+    "event_flow": 2,
+    "form": 1,
+    "dependency": 7,
+    "config": 3,
+    "risk": 4
+  },
+  "chunks": [
+    {
+      "chunk_type": "source_file",
+      "chunk_id": "Forms_MainForm.vb",
+      "title": "Source File: Forms/MainForm.vb",
+      "path": "source_files/Forms_MainForm.vb.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_New_12",
+        "method:Forms_MainForm.vb_btnStart_Click_19",
+        "method:Forms_MainForm.vb_btnSave_Click_24",
+        "method:Forms_MainForm.vb_StartInspection_29",
+        "method:Forms_MainForm.vb_EvaluateResult_36",
+        "method:Forms_MainForm.vb_ConnectPlc_1121",
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1_5",
+      "title": "Large File Task: Forms/MainForm.vb lines 1-5",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1_5.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_6_11",
+      "title": "Large File Task: Forms/MainForm.vb lines 6-11",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_6_11.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_12_18",
+      "title": "Large File Task: Forms/MainForm.vb lines 12-18",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_12_18.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_New_12"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_19_23",
+      "title": "Large File Task: Forms/MainForm.vb lines 19-23",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_19_23.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_btnStart_Click_19"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_24_28",
+      "title": "Large File Task: Forms/MainForm.vb lines 24-28",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_24_28.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_btnSave_Click_24"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_29_35",
+      "title": "Large File Task: Forms/MainForm.vb lines 29-35",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_29_35.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_StartInspection_29"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_36_37",
+      "title": "Large File Task: Forms/MainForm.vb lines 36-37",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_36_37.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_EvaluateResult_36"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_38_45",
+      "title": "Large File Task: Forms/MainForm.vb lines 38-45",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_38_45.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_EvaluateResult_36"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_46_845",
+      "title": "Large File Task: Forms/MainForm.vb lines 46-845",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_46_845.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_EvaluateResult_36"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_846_1120",
+      "title": "Large File Task: Forms/MainForm.vb lines 846-1120",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_846_1120.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_EvaluateResult_36"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1121_1125",
+      "title": "Large File Task: Forms/MainForm.vb lines 1121-1125",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1121_1125.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_ConnectPlc_1121"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1126_1129",
+      "title": "Large File Task: Forms/MainForm.vb lines 1126-1129",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1126_1129.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1130_1134",
+      "title": "Large File Task: Forms/MainForm.vb lines 1130-1134",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1130_1134.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_SaveRecipe_1130"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1135_1142",
+      "title": "Large File Task: Forms/MainForm.vb lines 1135-1142",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1135_1142.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb",
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "large_file_task",
+      "chunk_id": "Forms_MainForm.vb_lines_1143_1143",
+      "title": "Large File Task: Forms/MainForm.vb lines 1143-1143",
+      "path": "large_file_tasks/Forms_MainForm.vb_lines_1143_1143.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "source_file:Forms_MainForm.vb"
+      ]
+    },
+    {
+      "chunk_type": "project",
+      "chunk_id": "VbLargeFileDocTest",
+      "title": "Project: VbLargeFileDocTest",
+      "path": "projects/VbLargeFileDocTest.json",
+      "source_refs": [
+        "VbLargeFileDocTest.vbproj"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_New_12",
+      "title": "Method: New",
+      "path": "methods/Forms_MainForm.vb_New_12.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_ConnectPlc_1121",
+        "method:Forms_MainForm.vb_EvaluateResult_36",
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_StartInspection_29",
+        "method:Forms_MainForm.vb_UpdateStatus_1135",
+        "method:Forms_MainForm.vb_btnSave_Click_24",
+        "method:Forms_MainForm.vb_btnStart_Click_19"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_btnStart_Click_19",
+      "title": "Method: btnStart_Click",
+      "path": "methods/Forms_MainForm.vb_btnStart_Click_19.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_ConnectPlc_1121",
+        "method:Forms_MainForm.vb_EvaluateResult_36",
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_StartInspection_29",
+        "method:Forms_MainForm.vb_UpdateStatus_1135",
+        "method:Forms_MainForm.vb_btnSave_Click_24"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_btnSave_Click_24",
+      "title": "Method: btnSave_Click",
+      "path": "methods/Forms_MainForm.vb_btnSave_Click_24.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_ConnectPlc_1121",
+        "method:Forms_MainForm.vb_EvaluateResult_36",
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_StartInspection_29",
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_StartInspection_29",
+      "title": "Method: StartInspection",
+      "path": "methods/Forms_MainForm.vb_StartInspection_29.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_ConnectPlc_1121",
+        "method:Forms_MainForm.vb_EvaluateResult_36"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_EvaluateResult_36",
+      "title": "Method: EvaluateResult",
+      "path": "methods/Forms_MainForm.vb_EvaluateResult_36.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_ConnectPlc_1121",
+      "title": "Method: ConnectPlc",
+      "path": "methods/Forms_MainForm.vb_ConnectPlc_1121.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_CaptureCameraImage_1126",
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_CaptureCameraImage_1126",
+      "title": "Method: CaptureCameraImage",
+      "path": "methods/Forms_MainForm.vb_CaptureCameraImage_1126.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_SaveRecipe_1130",
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_SaveRecipe_1130",
+      "title": "Method: SaveRecipe",
+      "path": "methods/Forms_MainForm.vb_SaveRecipe_1130.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_UpdateStatus_1135"
+      ]
+    },
+    {
+      "chunk_type": "method",
+      "chunk_id": "Forms_MainForm.vb_UpdateStatus_1135",
+      "title": "Method: UpdateStatus",
+      "path": "methods/Forms_MainForm.vb_UpdateStatus_1135.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "event_flow",
+      "chunk_id": "0000_btnStart.Click_btnStart_Click",
+      "title": "Event Flow: btnStart.Click -> btnStart_Click",
+      "path": "event_flows/0000_btnStart.Click_btnStart_Click.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_btnStart_Click_19"
+      ]
+    },
+    {
+      "chunk_type": "event_flow",
+      "chunk_id": "0001_btnSave.Click_btnSave_Click",
+      "title": "Event Flow: btnSave.Click -> btnSave_Click",
+      "path": "event_flows/0001_btnSave.Click_btnSave_Click.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_btnSave_Click_24"
+      ]
+    },
+    {
+      "chunk_type": "form",
+      "chunk_id": "MainForm",
+      "title": "Form: MainForm",
+      "path": "forms/MainForm.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": [
+        "method:Forms_MainForm.vb_btnSave_Click_24",
+        "method:Forms_MainForm.vb_btnStart_Click_19"
+      ]
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "0000_VbLargeFileDocTest_System.Windows.Forms",
+      "title": "Dependency: VbLargeFileDocTest -> System.Windows.Forms",
+      "path": "dependencys/0000_VbLargeFileDocTest_System.Windows.Forms.json",
+      "source_refs": [
+        "VbLargeFileDocTest.vbproj"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "0001_VbLargeFileDocTest_System.Configuration",
+      "title": "Dependency: VbLargeFileDocTest -> System.Configuration",
+      "path": "dependencys/0001_VbLargeFileDocTest_System.Configuration.json",
+      "source_refs": [
+        "VbLargeFileDocTest.vbproj"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "external_0000_PLC",
+      "title": "External Dependency: PLC",
+      "path": "dependencys/external_0000_PLC.json",
+      "source_refs": [],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "external_0001_Camera_SDK",
+      "title": "External Dependency: Camera SDK",
+      "path": "dependencys/external_0001_Camera_SDK.json",
+      "source_refs": [],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "external_0002_Vision_SDK",
+      "title": "External Dependency: Vision SDK",
+      "path": "dependencys/external_0002_Vision_SDK.json",
+      "source_refs": [],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "external_0003_Reference",
+      "title": "External Dependency: Reference",
+      "path": "dependencys/external_0003_Reference.json",
+      "source_refs": [],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "dependency",
+      "chunk_id": "external_0004_Reference",
+      "title": "External Dependency: Reference",
+      "path": "dependencys/external_0004_Reference.json",
+      "source_refs": [],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "config",
+      "chunk_id": "config_file_0000_App.config",
+      "title": "Config File: App.config",
+      "path": "configs/config_file_0000_App.config.json",
+      "source_refs": [
+        "App.config"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "config",
+      "chunk_id": "config_ref_0000_Forms_MainForm.vb_31",
+      "title": "Config Reference: Forms/MainForm.vb:31",
+      "path": "configs/config_ref_0000_Forms_MainForm.vb_31.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "config",
+      "chunk_id": "config_ref_0001_Forms_MainForm.vb_1132",
+      "title": "Config Reference: Forms/MainForm.vb:1132",
+      "path": "configs/config_ref_0001_Forms_MainForm.vb_1132.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "risk",
+      "chunk_id": "risk_0000_cross-thread_UI_risk_Forms_MainForm.vb",
+      "title": "Risk: cross-thread UI risk",
+      "path": "risks/risk_0000_cross-thread_UI_risk_Forms_MainForm.vb.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "risk",
+      "chunk_id": "risk_0001_cross-thread_UI_risk_Forms_MainForm.vb",
+      "title": "Risk: cross-thread UI risk",
+      "path": "risks/risk_0001_cross-thread_UI_risk_Forms_MainForm.vb.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "risk",
+      "chunk_id": "risk_0002_event_leak_risk_Forms_MainForm.vb",
+      "title": "Risk: event leak risk",
+      "path": "risks/risk_0002_event_leak_risk_Forms_MainForm.vb.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    },
+    {
+      "chunk_type": "risk",
+      "chunk_id": "risk_0003_blocking_UI_risk_Forms_MainForm.vb",
+      "title": "Risk: blocking UI risk",
+      "path": "risks/risk_0003_blocking_UI_risk_Forms_MainForm.vb.json",
+      "source_refs": [
+        "Forms/MainForm.vb"
+      ],
+      "related_chunks": []
+    }
+  ]
+}
