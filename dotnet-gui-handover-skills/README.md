@@ -30,9 +30,18 @@ This version solves problem 2:
 ### Usage
 
 ```bash
+python .claude/skills/dotnet-gui-project-analyzer/scripts/enterprise_gui_analyzer.py . exports/enterprise_analysis
 python .claude/skills/dotnet-method-purpose-analyzer/scripts/method_purpose_analyzer.py exports/enterprise_analysis
 python .claude/skills/dotnet-enterprise-doc-generator/scripts/generate_enterprise_docs.py exports/enterprise_analysis docs
 ```
+
+`dotnet-gui-project-analyzer` validates the generated analysis JSON and writes
+`exports/enterprise_analysis/schema_validation.json`. A failed validation stops
+the pipeline before documentation generation.
+
+`dotnet-enterprise-doc-generator` is now marked as the fallback generator. Prefer
+`dotnet-chunk-aware-doc-generator` in the full v0.8/v0.9 pipeline when chunk
+outputs are present.
 
 Or:
 

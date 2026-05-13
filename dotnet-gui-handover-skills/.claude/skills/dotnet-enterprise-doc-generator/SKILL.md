@@ -1,8 +1,9 @@
 ---
 name: dotnet-enterprise-doc-generator
-description: Generate enterprise-grade GUI project handover documents.
+description: Fallback generator for enterprise-grade GUI project handover documents.
 version: 0.8.2
 allowed-tools: Read Write Edit Bash
+fallback: true
 ---
 
 # dotnet-enterprise-doc-generator
