@@ -1,7 +1,7 @@
 ---
 name: dotnet-semantic-analyzer
-description: Semantic reverse-engineering analyzer for legacy WinForms systems.
-version: 0.4.0
+description: Infer architecture layers, UI responsibilities, critical operations, and device topology from normalized and semantic .NET WinForms IR.
+version: 0.5.0
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -9,14 +9,14 @@ allowed-tools: Read Write Edit Bash
 
 ## Purpose
 
-Infer:
+Infer semantic architecture information for legacy WinForms reverse engineering.
 
-- architecture layers
-- AOI device topology
-- UI responsibilities
-- critical operations
-- backend workflow mappings
-- threading models
+## Inputs
+
+```text
+exports/normalized/
+exports/semantic/
+```
 
 ## Outputs
 
@@ -24,8 +24,14 @@ Infer:
 exports/semantic/
   architecture_layers.json
   ui_responsibilities.json
-  device_topology.json
-  threading_model.json
   critical_operations.json
+  device_topology.json
   backend_mappings.json
+  threading_model.json
 ```
+
+## Rules
+
+- Keep confirmed data and inferred data separate.
+- All inference must include confidence.
+- Naming-based inference must not be treated as guaranteed truth.
