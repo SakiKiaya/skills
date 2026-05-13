@@ -1,0 +1,26 @@
+[
+  {
+    "risk_type": "cross-thread UI risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "invoke",
+    "confidence": 0.55
+  },
+  {
+    "risk_type": "cross-thread UI risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "begininvoke",
+    "confidence": 0.55
+  },
+  {
+    "risk_type": "event leak risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "addhandler",
+    "confidence": 0.55
+  },
+  {
+    "risk_type": "blocking UI risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "thread.sleep",
+    "confidence": 0.55
+  }
+]

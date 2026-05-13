@@ -1,0 +1,140 @@
+{
+  "chunk_type": "method",
+  "chunk_id": "Forms_MainForm.vb_SaveRecipe_1130",
+  "title": "Method: SaveRecipe",
+  "summary": "Method-level chunk for purpose, flow, side effects, and maintenance notes.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "method": {
+      "name": "SaveRecipe",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1130,
+      "end_line": 1134,
+      "params": "",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "ConnectPlc",
+        "CaptureCameraImage"
+      ],
+      "calls": [
+        "UpdateStatus"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測"
+      ],
+      "risks": []
+    },
+    "purpose_analysis": [
+      {
+        "method": "SaveRecipe",
+        "class_or_file": "MainForm",
+        "source": "Forms/MainForm.vb",
+        "line": 1130,
+        "called_by": [
+          "New",
+          "btnStart_Click",
+          "btnSave_Click",
+          "ConnectPlc",
+          "CaptureCameraImage"
+        ],
+        "calls": [
+          "UpdateStatus"
+        ],
+        "triggers": [],
+        "inferred_purpose": "執行 Start 類型流程。推測",
+        "main_responsibility": [
+          "作為內部流程中的被呼叫方法",
+          "協調或委派後續方法呼叫"
+        ],
+        "side_effects": [
+          "可能存取外部設備 / SDK: plc, camera, capture",
+          "可能存取 DB 或資料儲存: update",
+          "可能更新 UI 狀態或顯示內容: form, update",
+          "可能建立新物件或初始化流程: new",
+          "Persistence or write operation candidate 推測"
+        ],
+        "maintenance_notes": [
+          "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+          "檢查資料庫連線、交易、例外處理與設定來源",
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+          "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+        ],
+        "evidence": [
+          "被其他方法呼叫: New, btnStart_Click, btnSave_Click, ConnectPlc, CaptureCameraImage",
+          "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+          "呼叫方法: UpdateStatus"
+        ],
+        "analysis_inputs": {
+          "method_name": "SaveRecipe",
+          "class_or_file": "MainForm",
+          "event_triggers": [],
+          "called_methods": [
+            "UpdateStatus"
+          ],
+          "called_by": [
+            "New",
+            "btnStart_Click",
+            "btnSave_Click",
+            "ConnectPlc",
+            "CaptureCameraImage"
+          ],
+          "has_config_candidate": false,
+          "has_db_candidate": true,
+          "has_file_candidate": false,
+          "has_device_candidate": true,
+          "has_ui_update_candidate": true,
+          "has_async_thread_timer_candidate": false,
+          "has_object_creation_candidate": true
+        },
+        "confidence": 0.75
+      }
+    ],
+    "event_triggers": [],
+    "event_flows": [],
+    "callers": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "ConnectPlc",
+      "CaptureCameraImage"
+    ],
+    "callees": [
+      "UpdateStatus"
+    ],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ]
+  },
+  "related_chunks": [
+    "method:Forms_MainForm.vb_UpdateStatus_1135"
+  ]
+}

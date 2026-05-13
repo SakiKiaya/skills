@@ -1,0 +1,16 @@
+{
+  "chunk_type": "risk",
+  "chunk_id": "risk_0002_event_leak_risk_Forms_MainForm.vb",
+  "title": "Risk: event leak risk",
+  "summary": "Maintainability or architecture risk chunk.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "risk_type": "event leak risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "addhandler",
+    "confidence": 0.55
+  },
+  "related_chunks": []
+}

@@ -67,6 +67,8 @@ def chunk_md_path(docs_chunks_dir: Path, chunk: dict[str, Any]) -> Path:
         "dependency": "dependencies",
         "config": "configs",
         "risk": "risks",
+        "source_file": "source_files",
+        "large_file_task": "large_file_tasks",
     }.get(ctype, f"{ctype}s")
     return docs_chunks_dir / folder / f"{chunk.get('chunk_id')}.md"
 
@@ -157,6 +159,8 @@ def main(analysis_dir: str, chunks_dir: str, docs_chunks_dir: str, docs_dir: str
     dependencies = [load_chunk(p) for p in list_chunk_json(chunks, "dependencies")]
     configs = [load_chunk(p) for p in list_chunk_json(chunks, "configs")]
     risks = [load_chunk(p) for p in list_chunk_json(chunks, "risks")]
+    source_files = [load_chunk(p) for p in list_chunk_json(chunks, "source_files")]
+    large_file_tasks = [load_chunk(p) for p in list_chunk_json(chunks, "large_file_tasks")]
 
     # fallback counts / data
     enterprise_projects = load(analysis / "projects.json", [])
@@ -276,6 +280,15 @@ See `docs/chunks/` for regenerated single-chunk documentation.
     doc = "# 05 Method Flow\n\n"
     doc += "## Method Chunk Index\n\n"
     doc += table(["Chunk ID", "Title", "Summary", "Source Refs", "Related"], [extract_chunk_summary(c) for c in methods])
+    doc += "\n## Source File Chunk Index\n\n"
+    doc += table(["Chunk ID", "Title", "Summary", "Source Refs", "Related"], [extract_chunk_summary(c) for c in source_files])
+    doc += "\n## Large File Task Index\n\n"
+    doc += table(["Chunk ID", "Title", "Summary", "Source Refs", "Related"], [extract_chunk_summary(c) for c in large_file_tasks])
+    doc += "\n## Large File Task Details\n\n"
+    for c in large_file_tasks[:LIMIT_INLINE_CHUNKS]:
+        section = include_chunk_md_section(docs, docs_chunks, c, max_chars=3500)
+        if section:
+            doc += section
     doc += "\n## Method Details from Chunks\n\n"
     for c in methods[:LIMIT_INLINE_CHUNKS]:
         section = include_chunk_md_section(docs, docs_chunks, c, max_chars=5000)

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "VbLargeFileDocTest",
+    "path": "VbLargeFileDocTest.vbproj",
+    "language": "VB.NET",
+    "target_framework": "net48",
+    "output_type": "WinExe",
+    "is_gui": true,
+    "project_references": [],
+    "references": [
+      "System.Windows.Forms",
+      "System.Configuration"
+    ],
+    "nuget_packages": [],
+    "responsibility_inference": []
+  }
+]

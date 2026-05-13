@@ -1,0 +1,14 @@
+[
+  {
+    "type": "Reference",
+    "project": "VbLargeFileDocTest",
+    "target": "System.Windows.Forms",
+    "source": "VbLargeFileDocTest.vbproj"
+  },
+  {
+    "type": "Reference",
+    "project": "VbLargeFileDocTest",
+    "target": "System.Configuration",
+    "source": "VbLargeFileDocTest.vbproj"
+  }
+]

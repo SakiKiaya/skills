@@ -1,0 +1,17 @@
+{
+  "chunk_type": "dependency",
+  "chunk_id": "external_0000_PLC",
+  "title": "External Dependency: PLC",
+  "summary": "External dependency candidate chunk.",
+  "source_refs": [],
+  "data": {
+    "dependency_type": "PLC",
+    "matched_keywords": [
+      "plc"
+    ],
+    "purpose": "External integration candidate 推測",
+    "risk": "Initialization, deployment, license, architecture, or runtime failure risk 推測",
+    "confidence": 0.55
+  },
+  "related_chunks": []
+}

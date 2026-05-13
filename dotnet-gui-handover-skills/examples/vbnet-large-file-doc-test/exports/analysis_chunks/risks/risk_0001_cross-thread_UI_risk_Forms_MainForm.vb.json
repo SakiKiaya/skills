@@ -1,0 +1,16 @@
+{
+  "chunk_type": "risk",
+  "chunk_id": "risk_0001_cross-thread_UI_risk_Forms_MainForm.vb",
+  "title": "Risk: cross-thread UI risk",
+  "summary": "Maintainability or architecture risk chunk.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "risk_type": "cross-thread UI risk",
+    "source": "Forms/MainForm.vb",
+    "evidence": "begininvoke",
+    "confidence": 0.55
+  },
+  "related_chunks": []
+}

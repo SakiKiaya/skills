@@ -26,6 +26,8 @@ PLURAL = {
     "dependency": "dependencies",
     "config": "configs",
     "risk": "risks",
+    "source_file": "source_files",
+    "large_file_task": "large_file_tasks",
 }
 
 def load(path: Path, default: Any = None):
@@ -243,6 +245,67 @@ def render_risk(chunk):
     doc += "- 補充影響範圍、修正成本與建議改善順序。\n"
     return doc
 
+def render_source_file(chunk):
+    data = chunk.get("data", {})
+    sf = data.get("source_file", {})
+    blocks = data.get("source_blocks", [])
+    methods = data.get("methods", [])
+    events = data.get("events", [])
+    risks = data.get("risk_candidates", [])
+    doc = f"# {esc(chunk.get('title'))}\n\n"
+    doc += "## File Summary\n\n"
+    doc += table(["Item", "Value"], [
+        ["Path", sf.get("path")],
+        ["Language", sf.get("language")],
+        ["Extension", sf.get("extension")],
+        ["Line Count", sf.get("line_count")],
+        ["Method Count", sf.get("method_count")],
+        ["Class Count", sf.get("class_count")],
+    ])
+    doc += "\n## Semantic Blocks\n\n"
+    doc += table(["Kind", "Name", "Start Line", "End Line"], [[b.get("kind"), b.get("name"), b.get("start_line"), b.get("end_line")] for b in blocks])
+    doc += "\n## Methods\n\n"
+    doc += table(["Method", "Start Line", "End Line", "Calls", "Called By"], [[m.get("name"), m.get("line"), m.get("end_line"), m.get("calls"), m.get("called_by")] for m in methods])
+    doc += "\n## Events\n\n"
+    doc += table(["Control", "Event", "Handler", "Line"], [[e.get("control"), e.get("event"), e.get("handler"), e.get("line")] for e in events])
+    doc += "\n## Risks\n\n"
+    doc += table(["Risk", "Evidence", "Confidence"], [[r.get("risk_type"), r.get("evidence"), r.get("confidence")] for r in risks])
+    return doc
+
+def render_large_file_task(chunk):
+    data = chunk.get("data", {})
+    sf = data.get("source_file", {})
+    line_range = data.get("line_range", {})
+    context_range = data.get("context_line_range", {})
+    blocks = data.get("semantic_blocks", [])
+    methods = data.get("methods", [])
+    events = data.get("events", [])
+    risks = data.get("risk_candidates", [])
+    doc = f"# {esc(chunk.get('title'))}\n\n"
+    doc += "## Task Scope\n\n"
+    doc += table(["Item", "Value"], [
+        ["Source File", sf.get("path")],
+        ["Language", sf.get("language")],
+        ["Task Number", data.get("task_no")],
+        ["Task Line Range", f"{line_range.get('start')}-{line_range.get('end')}"],
+        ["Context Line Range", f"{context_range.get('start')}-{context_range.get('end')}"],
+        ["Context Before Lines", data.get("context_before_lines")],
+        ["Context After Lines", data.get("context_after_lines")],
+        ["Task Strategy", data.get("task_strategy")],
+        ["Split Reason", data.get("split_reason")],
+    ])
+    doc += "\n## Semantic Boundary\n\n"
+    doc += table(["Kind", "Name", "Start Line", "End Line"], [[b.get("kind"), b.get("name"), b.get("start_line"), b.get("end_line")] for b in blocks])
+    doc += "\n## Methods In Scope\n\n"
+    doc += table(["Method", "Start Line", "End Line", "Calls", "Side Effects"], [[m.get("name"), m.get("line"), m.get("end_line"), m.get("calls"), m.get("side_effects")] for m in methods])
+    doc += "\n## Events In Scope\n\n"
+    doc += table(["Control", "Event", "Handler", "Line"], [[e.get("control"), e.get("event"), e.get("handler"), e.get("line")] for e in events])
+    doc += "\n## Review Goals\n\n"
+    doc += bullet(data.get("review_goals"))
+    doc += "\n## Risk Candidates\n\n"
+    doc += table(["Risk", "Evidence", "Confidence"], [[r.get("risk_type"), r.get("evidence"), r.get("confidence")] for r in risks])
+    return doc
+
 RENDERERS = {
     "project": render_project,
     "form": render_form,
@@ -251,6 +314,8 @@ RENDERERS = {
     "dependency": render_dependency,
     "config": render_config,
     "risk": render_risk,
+    "source_file": render_source_file,
+    "large_file_task": render_large_file_task,
 }
 
 def load_chunk(path: Path):

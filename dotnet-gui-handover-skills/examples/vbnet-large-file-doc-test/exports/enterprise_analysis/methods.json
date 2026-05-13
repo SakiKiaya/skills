@@ -1,0 +1,215 @@
+[
+  {
+    "name": "New",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 12,
+    "end_line": 18,
+    "params": "",
+    "called_by": [],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus",
+      "btnSave_Click",
+      "btnStart_Click"
+    ],
+    "purpose": "",
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "btnStart_Click",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 19,
+    "end_line": 23,
+    "params": "sender As Object, e As EventArgs",
+    "called_by": [
+      "New"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus",
+      "btnSave_Click"
+    ],
+    "purpose": "Event handler / UI operation entry candidate 推測",
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "btnSave_Click",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 24,
+    "end_line": 28,
+    "params": "sender As Object, e As EventArgs",
+    "called_by": [
+      "New",
+      "btnStart_Click"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult",
+      "SaveRecipe",
+      "StartInspection",
+      "UpdateStatus"
+    ],
+    "purpose": "Event handler / UI operation entry candidate 推測",
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "StartInspection",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 29,
+    "end_line": 35,
+    "params": "",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "ConnectPlc",
+      "EvaluateResult"
+    ],
+    "purpose": "",
+    "side_effects": [
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "EvaluateResult",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 36,
+    "end_line": 1120,
+    "params": "mode As Integer",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection"
+    ],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ConnectPlc",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 1121,
+    "end_line": 1125,
+    "params": "ip As String",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection"
+    ],
+    "calls": [
+      "CaptureCameraImage",
+      "SaveRecipe",
+      "UpdateStatus"
+    ],
+    "purpose": "",
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "CaptureCameraImage",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 1126,
+    "end_line": 1129,
+    "params": "",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "StartInspection",
+      "ConnectPlc"
+    ],
+    "calls": [
+      "SaveRecipe",
+      "UpdateStatus"
+    ],
+    "purpose": "",
+    "side_effects": [
+      "Persistence or write operation candidate 推測",
+      "External device/API interaction candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "SaveRecipe",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 1130,
+    "end_line": 1134,
+    "params": "",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "ConnectPlc",
+      "CaptureCameraImage"
+    ],
+    "calls": [
+      "UpdateStatus"
+    ],
+    "purpose": "",
+    "side_effects": [
+      "Persistence or write operation candidate 推測"
+    ],
+    "risks": []
+  },
+  {
+    "name": "UpdateStatus",
+    "language": "VB.NET",
+    "source": "Forms/MainForm.vb",
+    "line": 1135,
+    "end_line": 1142,
+    "params": "message As String",
+    "called_by": [
+      "New",
+      "btnStart_Click",
+      "btnSave_Click",
+      "ConnectPlc",
+      "CaptureCameraImage",
+      "SaveRecipe"
+    ],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [
+      "Persistence or write operation candidate 推測"
+    ],
+    "risks": []
+  }
+]

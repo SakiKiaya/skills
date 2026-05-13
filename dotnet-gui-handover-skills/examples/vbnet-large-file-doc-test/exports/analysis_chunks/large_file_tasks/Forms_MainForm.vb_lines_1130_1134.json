@@ -1,0 +1,103 @@
+{
+  "chunk_type": "large_file_task",
+  "chunk_id": "Forms_MainForm.vb_lines_1130_1134",
+  "title": "Large File Task: Forms/MainForm.vb lines 1130-1134",
+  "summary": "Task chunk for reviewing a large source file in a bounded line range.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "source_file": {
+      "path": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "extension": ".vb",
+      "line_count": 1143,
+      "method_count": 9,
+      "class_count": 1
+    },
+    "task_no": 13,
+    "line_range": {
+      "start": 1130,
+      "end": 1134
+    },
+    "context_line_range": {
+      "start": 1120,
+      "end": 1143
+    },
+    "context_before_lines": 10,
+    "context_after_lines": 9,
+    "split_reason": "File has 1143 lines, exceeding the 1000-line threshold.",
+    "task_strategy": "method_aware",
+    "semantic_blocks": [
+      {
+        "kind": "method",
+        "name": "SaveRecipe",
+        "source": "Forms/MainForm.vb",
+        "language": "VB.NET",
+        "start_line": 1130,
+        "end_line": 1134
+      }
+    ],
+    "methods": [
+      {
+        "name": "SaveRecipe",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 1130,
+        "end_line": 1134,
+        "params": "",
+        "called_by": [
+          "New",
+          "btnStart_Click",
+          "btnSave_Click",
+          "ConnectPlc",
+          "CaptureCameraImage"
+        ],
+        "calls": [
+          "UpdateStatus"
+        ],
+        "purpose": "",
+        "side_effects": [
+          "Persistence or write operation candidate 推測"
+        ],
+        "risks": []
+      }
+    ],
+    "events": [],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ],
+    "review_goals": [
+      "Summarize responsibilities in this line range.",
+      "Identify event handlers, side effects, device/config/database interactions, and maintenance risks.",
+      "Link findings back to related method, event-flow, form, and source-file chunks."
+    ]
+  },
+  "related_chunks": [
+    "source_file:Forms_MainForm.vb",
+    "method:Forms_MainForm.vb_SaveRecipe_1130"
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  "projects": [
+    {
+      "name": "VbLargeFileDocTest",
+      "path": "VbLargeFileDocTest.vbproj",
+      "language": "VB.NET",
+      "target_framework": "net48",
+      "output_type": "WinExe",
+      "is_gui": true,
+      "project_references": [],
+      "references": [
+        "System.Windows.Forms",
+        "System.Configuration"
+      ],
+      "nuget_packages": [],
+      "responsibility_inference": []
+    }
+  ],
+  "dependencies": [
+    {
+      "type": "Reference",
+      "project": "VbLargeFileDocTest",
+      "target": "System.Windows.Forms",
+      "source": "VbLargeFileDocTest.vbproj"
+    },
+    {
+      "type": "Reference",
+      "project": "VbLargeFileDocTest",
+      "target": "System.Configuration",
+      "source": "VbLargeFileDocTest.vbproj"
+    }
+  ],
+  "classes": [
+    {
+      "name": "MainForm",
+      "kind": "Class",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 6,
+      "end_line": 1143
+    }
+  ],
+  "methods": [
+    {
+      "name": "New",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 12,
+      "end_line": 18,
+      "params": "",
+      "called_by": [],
+      "calls": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click",
+        "btnStart_Click"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "btnStart_Click",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 19,
+      "end_line": 23,
+      "params": "sender As Object, e As EventArgs",
+      "called_by": [
+        "New"
+      ],
+      "calls": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click"
+      ],
+      "purpose": "Event handler / UI operation entry candidate 推測",
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "btnSave_Click",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 24,
+      "end_line": 28,
+      "params": "sender As Object, e As EventArgs",
+      "called_by": [
+        "New",
+        "btnStart_Click"
+      ],
+      "calls": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "purpose": "Event handler / UI operation entry candidate 推測",
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "StartInspection",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 29,
+      "end_line": 35,
+      "params": "",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click"
+      ],
+      "calls": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "EvaluateResult",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 36,
+      "end_line": 1120,
+      "params": "mode As Integer",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection"
+      ],
+      "calls": [],
+      "purpose": "",
+      "side_effects": [],
+      "risks": []
+    },
+    {
+      "name": "ConnectPlc",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1121,
+      "end_line": 1125,
+      "params": "ip As String",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection"
+      ],
+      "calls": [
+        "CaptureCameraImage",
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "CaptureCameraImage",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1126,
+      "end_line": 1129,
+      "params": "",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "StartInspection",
+        "ConnectPlc"
+      ],
+      "calls": [
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "SaveRecipe",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1130,
+      "end_line": 1134,
+      "params": "",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "ConnectPlc",
+        "CaptureCameraImage"
+      ],
+      "calls": [
+        "UpdateStatus"
+      ],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測"
+      ],
+      "risks": []
+    },
+    {
+      "name": "UpdateStatus",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1135,
+      "end_line": 1142,
+      "params": "message As String",
+      "called_by": [
+        "New",
+        "btnStart_Click",
+        "btnSave_Click",
+        "ConnectPlc",
+        "CaptureCameraImage",
+        "SaveRecipe"
+      ],
+      "calls": [],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測"
+      ],
+      "risks": []
+    }
+  ],
+  "source_files": [
+    {
+      "path": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "extension": ".vb",
+      "line_count": 1143,
+      "method_count": 9,
+      "class_count": 1
+    }
+  ],
+  "source_blocks": [
+    {
+      "kind": "class",
+      "name": "MainForm",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 6,
+      "end_line": 1143
+    },
+    {
+      "kind": "method",
+      "name": "New",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 12,
+      "end_line": 18
+    },
+    {
+      "kind": "method",
+      "name": "btnStart_Click",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 19,
+      "end_line": 23
+    },
+    {
+      "kind": "method",
+      "name": "btnSave_Click",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 24,
+      "end_line": 28
+    },
+    {
+      "kind": "method",
+      "name": "StartInspection",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 29,
+      "end_line": 35
+    },
+    {
+      "kind": "method",
+      "name": "EvaluateResult",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 36,
+      "end_line": 1120
+    },
+    {
+      "kind": "method",
+      "name": "ConnectPlc",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 1121,
+      "end_line": 1125
+    },
+    {
+      "kind": "method",
+      "name": "CaptureCameraImage",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 1126,
+      "end_line": 1129
+    },
+    {
+      "kind": "method",
+      "name": "SaveRecipe",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 1130,
+      "end_line": 1134
+    },
+    {
+      "kind": "method",
+      "name": "UpdateStatus",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 1135,
+      "end_line": 1142
+    },
+    {
+      "kind": "switch",
+      "name": "mode",
+      "source": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "start_line": 38,
+      "end_line": 45
+    }
+  ],
+  "events": [
+    {
+      "source": "Forms/MainForm.vb",
+      "line": 16,
+      "control": "btnStart",
+      "event": "Click",
+      "handler": "btnStart_Click",
+      "framework": "WinForms/VB"
+    },
+    {
+      "source": "Forms/MainForm.vb",
+      "line": 17,
+      "control": "btnSave",
+      "event": "Click",
+      "handler": "btnSave_Click",
+      "framework": "WinForms/VB"
+    }
+  ],
+  "event_flows": [
+    {
+      "entry": "btnStart.Click",
+      "handler": "btnStart_Click",
+      "source": "Forms/MainForm.vb",
+      "line": 16,
+      "call_chain": [
+        "btnStart_Click",
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click"
+      ],
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "confidence": 0.75
+    },
+    {
+      "entry": "btnSave.Click",
+      "handler": "btnSave_Click",
+      "source": "Forms/MainForm.vb",
+      "line": 17,
+      "call_chain": [
+        "btnSave_Click",
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "confidence": 0.75
+    }
+  ],
+  "configuration": {
+    "files": [
+      {
+        "path": "App.config",
+        "extension": ".config",
+        "kind": "configuration_candidate"
+      }
+    ],
+    "code_references": [
+      {
+        "type": "ConfigurationManager.AppSettings",
+        "source": "Forms/MainForm.vb",
+        "line": 31,
+        "expression": "ConfigurationManager.AppSettings"
+      },
+      {
+        "type": "ConfigurationManager.AppSettings",
+        "source": "Forms/MainForm.vb",
+        "line": 1132,
+        "expression": "ConfigurationManager.AppSettings"
+      }
+    ]
+  },
+  "external_dependencies": [
+    {
+      "dependency_type": "PLC",
+      "matched_keywords": [
+        "plc"
+      ],
+      "purpose": "External integration candidate 推測",
+      "risk": "Initialization, deployment, license, architecture, or runtime failure risk 推測",
+      "confidence": 0.55
+    },
+    {
+      "dependency_type": "Camera SDK",
+      "matched_keywords": [
+        "camera",
+        "capture"
+      ],
+      "purpose": "External integration candidate 推測",
+      "risk": "Initialization, deployment, license, architecture, or runtime failure risk 推測",
+      "confidence": 0.65
+    },
+    {
+      "dependency_type": "Vision SDK",
+      "matched_keywords": [
+        "inspect"
+      ],
+      "purpose": "External integration candidate 推測",
+      "risk": "Initialization, deployment, license, architecture, or runtime failure risk 推測",
+      "confidence": 0.55
+    },
+    {
+      "dependency_type": "Reference",
+      "name": "System.Windows.Forms",
+      "project": "VbLargeFileDocTest",
+      "purpose": "Referenced dependency",
+      "risk": "Version or deployment mismatch risk",
+      "confidence": 0.75
+    },
+    {
+      "dependency_type": "Reference",
+      "name": "System.Configuration",
+      "project": "VbLargeFileDocTest",
+      "purpose": "Referenced dependency",
+      "risk": "Version or deployment mismatch risk",
+      "confidence": 0.75
+    }
+  ],
+  "user_workflows": [
+    {
+      "workflow": "btnStart.Click",
+      "steps": [
+        "btnStart_Click",
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click"
+      ],
+      "success_path": "Handler completes without exception 推測",
+      "failure_path": "Exception, validation failure, device/config dependency failure 推測",
+      "confidence": 0.75
+    },
+    {
+      "workflow": "btnSave.Click",
+      "steps": [
+        "btnSave_Click",
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "success_path": "Handler completes without exception 推測",
+      "failure_path": "Exception, validation failure, device/config dependency failure 推測",
+      "confidence": 0.75
+    }
+  ],
+  "risks": [
+    {
+      "risk_type": "cross-thread UI risk",
+      "source": "Forms/MainForm.vb",
+      "evidence": "invoke",
+      "confidence": 0.55
+    },
+    {
+      "risk_type": "cross-thread UI risk",
+      "source": "Forms/MainForm.vb",
+      "evidence": "begininvoke",
+      "confidence": 0.55
+    },
+    {
+      "risk_type": "event leak risk",
+      "source": "Forms/MainForm.vb",
+      "evidence": "addhandler",
+      "confidence": 0.55
+    },
+    {
+      "risk_type": "blocking UI risk",
+      "source": "Forms/MainForm.vb",
+      "evidence": "thread.sleep",
+      "confidence": 0.55
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "chunk_type": "dependency",
+  "chunk_id": "0000_VbLargeFileDocTest_System.Windows.Forms",
+  "title": "Dependency: VbLargeFileDocTest -> System.Windows.Forms",
+  "summary": "Dependency chunk.",
+  "source_refs": [
+    "VbLargeFileDocTest.vbproj"
+  ],
+  "data": {
+    "type": "Reference",
+    "project": "VbLargeFileDocTest",
+    "target": "System.Windows.Forms",
+    "source": "VbLargeFileDocTest.vbproj"
+  },
+  "related_chunks": []
+}

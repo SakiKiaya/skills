@@ -1,0 +1,178 @@
+{
+  "chunk_type": "event_flow",
+  "chunk_id": "0000_btnStart.Click_btnStart_Click",
+  "title": "Event Flow: btnStart.Click -> btnStart_Click",
+  "summary": "Event-flow chunk for single user action or UI event.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "event_flow": {
+      "entry": "btnStart.Click",
+      "handler": "btnStart_Click",
+      "source": "Forms/MainForm.vb",
+      "line": 16,
+      "call_chain": [
+        "btnStart_Click",
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult",
+        "SaveRecipe",
+        "StartInspection",
+        "UpdateStatus",
+        "btnSave_Click"
+      ],
+      "side_effects": [
+        "Persistence or write operation candidate 推測",
+        "External device/API interaction candidate 推測"
+      ],
+      "confidence": 0.75
+    },
+    "handler_methods": [
+      {
+        "name": "btnStart_Click",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 19,
+        "end_line": 23,
+        "params": "sender As Object, e As EventArgs",
+        "called_by": [
+          "New"
+        ],
+        "calls": [
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus",
+          "btnSave_Click"
+        ],
+        "purpose": "Event handler / UI operation entry candidate 推測",
+        "side_effects": [
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "risks": []
+      }
+    ],
+    "method_purpose": [
+      {
+        "method": "btnStart_Click",
+        "class_or_file": "MainForm",
+        "source": "Forms/MainForm.vb",
+        "line": 19,
+        "called_by": [
+          "New"
+        ],
+        "calls": [
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus",
+          "btnSave_Click"
+        ],
+        "triggers": [
+          {
+            "source_type": "event",
+            "trigger": "btnStart.Click",
+            "source": "Forms/MainForm.vb",
+            "line": 16
+          },
+          {
+            "source_type": "event_flow",
+            "trigger": "btnStart.Click",
+            "source": "Forms/MainForm.vb",
+            "line": 16
+          }
+        ],
+        "inferred_purpose": "處理 GUI 或系統事件；執行 Start 類型流程。推測",
+        "main_responsibility": [
+          "作為 GUI / 事件流程的入口或處理節點",
+          "協調或委派後續方法呼叫"
+        ],
+        "side_effects": [
+          "可能存取外部設備 / SDK: plc, camera, capture",
+          "可能存取 DB 或資料儲存: update",
+          "可能更新 UI 狀態或顯示內容: ui, form, update",
+          "可能建立新物件或初始化流程: new",
+          "Persistence or write operation candidate 推測",
+          "External device/API interaction candidate 推測"
+        ],
+        "maintenance_notes": [
+          "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+          "檢查資料庫連線、交易、例外處理與設定來源",
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+          "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+        ],
+        "evidence": [
+          "由事件或事件流程觸發: btnStart.Click, btnStart.Click",
+          "方法名稱包含事件處理常見關鍵字",
+          "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+          "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click"
+        ],
+        "analysis_inputs": {
+          "method_name": "btnStart_Click",
+          "class_or_file": "MainForm",
+          "event_triggers": [
+            "btnStart.Click",
+            "btnStart.Click"
+          ],
+          "called_methods": [
+            "CaptureCameraImage",
+            "ConnectPlc",
+            "EvaluateResult",
+            "SaveRecipe",
+            "StartInspection",
+            "UpdateStatus",
+            "btnSave_Click"
+          ],
+          "called_by": [
+            "New"
+          ],
+          "has_config_candidate": false,
+          "has_db_candidate": true,
+          "has_file_candidate": false,
+          "has_device_candidate": true,
+          "has_ui_update_candidate": true,
+          "has_async_thread_timer_candidate": false,
+          "has_object_creation_candidate": true
+        },
+        "confidence": 0.75
+      }
+    ],
+    "related_events": [
+      {
+        "source": "Forms/MainForm.vb",
+        "line": 16,
+        "control": "btnStart",
+        "event": "Click",
+        "handler": "btnStart_Click",
+        "framework": "WinForms/VB"
+      }
+    ],
+    "workflow_candidates": [
+      {
+        "workflow": "btnStart.Click",
+        "steps": [
+          "btnStart_Click",
+          "CaptureCameraImage",
+          "ConnectPlc",
+          "EvaluateResult",
+          "SaveRecipe",
+          "StartInspection",
+          "UpdateStatus",
+          "btnSave_Click"
+        ],
+        "success_path": "Handler completes without exception 推測",
+        "failure_path": "Exception, validation failure, device/config dependency failure 推測",
+        "confidence": 0.75
+      }
+    ]
+  },
+  "related_chunks": [
+    "method:Forms_MainForm.vb_btnStart_Click_19"
+  ]
+}
