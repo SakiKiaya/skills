@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-dotnet-analysis-chunker v0.8.3
+dotnet-analysis-chunker v0.8.5
 
 Step 1 of problem 3:
 - Add analysis_chunks split output.
+- Add source-file and large-file task chunks for files over 1000 lines.
+- Prefer class, method, and switch-aware large-file task splitting.
 - Do not change final docs generator yet.
 
 Usage:
@@ -16,6 +18,10 @@ import json
 import re
 import sys
 from typing import Any
+
+LARGE_FILE_LINE_THRESHOLD = 1000
+LARGE_FILE_TASK_LINES = 800
+OVERLAP_CONTEXT_LINES = 10
 
 def load(path: Path, default: Any):
     if path.exists():
@@ -64,6 +70,117 @@ def make_chunk(chunk_type: str, chunk_id: str, title: str, data: Any, summary: s
 def method_key(method: dict[str, Any]) -> str:
     return safe_id(f"{method.get('source','unknown')}::{method.get('name','method')}::{method.get('line','')}")
 
+def line_value(item: dict[str, Any]) -> int:
+    try:
+        return int(item.get("line") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+def int_value(item: dict[str, Any], key: str, default: int = 0) -> int:
+    try:
+        return int(item.get(key) or default)
+    except (TypeError, ValueError):
+        return default
+
+def ranges_overlap(a_start: int, a_end: int, b_start: int, b_end: int) -> bool:
+    return a_start <= b_end and b_start <= a_end
+
+def context_range(start_line: int, end_line: int, total_lines: int) -> dict[str, int]:
+    return {
+        "start": max(1, start_line - OVERLAP_CONTEXT_LINES),
+        "end": min(total_lines, end_line + OVERLAP_CONTEXT_LINES),
+    }
+
+def line_windows(line_count: int, window_size: int = LARGE_FILE_TASK_LINES) -> list[tuple[int, int]]:
+    if line_count <= 0:
+        return []
+    windows = []
+    start = 1
+    while start <= line_count:
+        end = min(start + window_size - 1, line_count)
+        windows.append((start, end))
+        start = end + 1
+    return windows
+
+def line_windows_for_range(start_line: int, end_line: int, window_size: int = LARGE_FILE_TASK_LINES) -> list[tuple[int, int]]:
+    if start_line > end_line:
+        return []
+    windows = []
+    start = start_line
+    while start <= end_line:
+        end = min(start + window_size - 1, end_line)
+        windows.append((start, end))
+        start = end + 1
+    return windows
+
+def block_start(block: dict[str, Any]) -> int:
+    return int_value(block, "start_line", int_value(block, "line"))
+
+def block_end(block: dict[str, Any]) -> int:
+    return int_value(block, "end_line", block_start(block))
+
+def block_size(start_line: int, end_line: int) -> int:
+    return max(0, end_line - start_line + 1)
+
+def child_blocks(blocks: list[dict[str, Any]], start_line: int, end_line: int, kinds: set[str]) -> list[dict[str, Any]]:
+    children = []
+    for block in blocks:
+        b_start = block_start(block)
+        b_end = block_end(block)
+        if block.get("kind") in kinds and start_line <= b_start <= end_line and b_end <= end_line:
+            children.append(block)
+    return sorted(children, key=lambda b: (block_start(b), block_end(b), str(b.get("kind")), str(b.get("name"))))
+
+def fallback_task_specs(start_line: int, end_line: int, reason: str) -> list[dict[str, Any]]:
+    return [
+        {
+            "line_range": {"start": start, "end": end},
+            "split_strategy": reason,
+            "semantic_blocks": [],
+        }
+        for start, end in line_windows_for_range(start_line, end_line)
+    ]
+
+def split_semantic_range(
+    start_line: int,
+    end_line: int,
+    scope_kind: str,
+    blocks: list[dict[str, Any]],
+    scope_block: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    if start_line > end_line:
+        return []
+
+    if block_size(start_line, end_line) <= LARGE_FILE_TASK_LINES:
+        semantic_blocks = [scope_block] if scope_block else []
+        return [{
+            "line_range": {"start": start_line, "end": end_line},
+            "split_strategy": f"{scope_kind}_aware",
+            "semantic_blocks": semantic_blocks,
+        }]
+
+    child_kind_order = {
+        "file": {"class"},
+        "class": {"method"},
+        "method": {"switch"},
+    }
+    children = child_blocks(blocks, start_line, end_line, child_kind_order.get(scope_kind, set()))
+    if not children:
+        return fallback_task_specs(start_line, end_line, f"{scope_kind}_line_window_fallback")
+
+    specs = []
+    cursor = start_line
+    for child in children:
+        child_start = block_start(child)
+        child_end = block_end(child)
+        if cursor < child_start:
+            specs.extend(fallback_task_specs(cursor, child_start - 1, f"{scope_kind}_gap_fallback"))
+        specs.extend(split_semantic_range(child_start, child_end, str(child.get("kind") or "block"), blocks, child))
+        cursor = max(cursor, child_end + 1)
+    if cursor <= end_line:
+        specs.extend(fallback_task_specs(cursor, end_line, f"{scope_kind}_gap_fallback"))
+    return specs
+
 def main(analysis_dir: str, chunks_dir: str) -> int:
     analysis = Path(analysis_dir)
     out = Path(chunks_dir)
@@ -71,6 +188,8 @@ def main(analysis_dir: str, chunks_dir: str) -> int:
 
     projects = load(analysis / "projects.json", [])
     dependencies = load(analysis / "dependencies.json", [])
+    source_files = load(analysis / "source_files.json", [])
+    source_blocks = load(analysis / "source_blocks.json", [])
     methods = load(analysis / "methods.json", [])
     method_purposes = load(analysis / "method_purposes.json", [])
     events = load(analysis / "events.json", [])
@@ -122,6 +241,97 @@ def main(analysis_dir: str, chunks_dir: str) -> int:
     risks_by_source: dict[str, list[dict[str, Any]]] = {}
     for r in risks:
         risks_by_source.setdefault(r.get("source"), []).append(r)
+
+    methods_by_source: dict[str, list[dict[str, Any]]] = {}
+    for m in methods:
+        methods_by_source.setdefault(m.get("source"), []).append(m)
+
+    events_by_source: dict[str, list[dict[str, Any]]] = {}
+    for e in events:
+        events_by_source.setdefault(e.get("source"), []).append(e)
+
+    blocks_by_source: dict[str, list[dict[str, Any]]] = {}
+    for b in source_blocks:
+        blocks_by_source.setdefault(b.get("source"), []).append(b)
+
+    # Source file chunks
+    for sf in source_files:
+        path = sf.get("path")
+        cid = safe_id(path)
+        related = [f"method:{method_key(m)}" for m in methods_by_source.get(path, [])]
+        sfdata = {
+            "source_file": sf,
+            "source_blocks": sorted(blocks_by_source.get(path, []), key=lambda b: (block_start(b), block_end(b))),
+            "methods": sorted(methods_by_source.get(path, []), key=line_value),
+            "events": sorted(events_by_source.get(path, []), key=line_value),
+            "risk_candidates": risks_by_source.get(path, []),
+        }
+        chunk = make_chunk(
+            "source_file",
+            cid,
+            f"Source File: {path}",
+            sfdata,
+            "Source-file chunk for file-level ownership, size, methods, events, and risks.",
+            related,
+        )
+        write(out / "source_files" / f"{cid}.json", chunk)
+        add_index(chunk)
+
+    # Large file task chunks
+    for sf in source_files:
+        path = sf.get("path")
+        try:
+            total_lines = int(sf.get("line_count") or 0)
+        except (TypeError, ValueError):
+            total_lines = 0
+        if total_lines <= LARGE_FILE_LINE_THRESHOLD:
+            continue
+
+        source_methods = sorted(methods_by_source.get(path, []), key=line_value)
+        source_events = sorted(events_by_source.get(path, []), key=line_value)
+        source_blocks_for_file = sorted(blocks_by_source.get(path, []), key=lambda b: (block_start(b), block_end(b)))
+        source_related = [f"source_file:{safe_id(path)}"]
+        task_specs = split_semantic_range(1, total_lines, "file", source_blocks_for_file)
+        for task_no, spec in enumerate(task_specs, start=1):
+            start_line = spec["line_range"]["start"]
+            end_line = spec["line_range"]["end"]
+            context = context_range(start_line, end_line, total_lines)
+            task_methods = [
+                m for m in source_methods
+                if ranges_overlap(start_line, end_line, line_value(m), int_value(m, "end_line", line_value(m)))
+            ]
+            task_events = [e for e in source_events if start_line <= line_value(e) <= end_line]
+            related = source_related + [f"method:{method_key(m)}" for m in task_methods]
+            task = {
+                "source_file": sf,
+                "task_no": task_no,
+                "line_range": {"start": start_line, "end": end_line},
+                "context_line_range": context,
+                "context_before_lines": start_line - context["start"],
+                "context_after_lines": context["end"] - end_line,
+                "split_reason": f"File has {total_lines} lines, exceeding the {LARGE_FILE_LINE_THRESHOLD}-line threshold.",
+                "task_strategy": spec["split_strategy"],
+                "semantic_blocks": spec["semantic_blocks"],
+                "methods": task_methods,
+                "events": task_events,
+                "risk_candidates": risks_by_source.get(path, []),
+                "review_goals": [
+                    "Summarize responsibilities in this line range.",
+                    "Identify event handlers, side effects, device/config/database interactions, and maintenance risks.",
+                    "Link findings back to related method, event-flow, form, and source-file chunks.",
+                ],
+            }
+            cid = safe_id(f"{path}::lines_{start_line}_{end_line}")
+            chunk = make_chunk(
+                "large_file_task",
+                cid,
+                f"Large File Task: {path} lines {start_line}-{end_line}",
+                task,
+                "Task chunk for reviewing a large source file in a bounded line range.",
+                related,
+            )
+            write(out / "large_file_tasks" / f"{cid}.json", chunk)
+            add_index(chunk)
 
     # Project chunks
     for p in projects:

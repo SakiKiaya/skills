@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 """
-dotnet-gui enterprise reverse engineering analyzer v0.7
+dotnet-gui enterprise reverse engineering analyzer v0.7.1
 
 Usage:
     python enterprise_gui_analyzer.py <repo_root> <out_dir>
 
 Produces:
     enterprise_analysis.json
-    solution_structure.json
-    ui_model.json
-    event_flow_model.json
-    method_flow_model.json
-    configuration_model.json
-    external_dependencies_model.json
-    user_workflow_model.json
-    risk_model.json
+    projects.json
+    dependencies.json
+    classes.json
+    methods.json
+    source_files.json
+    source_blocks.json
+    events.json
+    event_flows.json
+    configuration.json
+    external_dependencies.json
+    user_workflows.json
+    risks.json
+    schema_validation.json
 """
 from __future__ import annotations
 
@@ -34,6 +39,8 @@ PROJECT_EXTS = {".csproj", ".vbproj", ".vcxproj", ".fsproj"}
 CS_METHOD = re.compile(r'(?P<mod>public|private|protected|internal|static|async|virtual|override|sealed|\s)+\s+(?P<ret>[\w<>\[\],\s\?\.]+?)\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*\((?P<params>[^)]*)\)\s*\{', re.M)
 VB_METHOD = re.compile(r'^\s*(?P<mod>(?:Public|Private|Friend|Protected|Shared|Overrides|Overridable|Async|\s)*)\s*(?P<kind>Sub|Function)\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*\((?P<params>[^)]*)\)(?P<handles>[^\n]*Handles\s+[^\n]+)?', re.I | re.M)
 CLASS_RE = re.compile(r'\b(class|interface|enum|struct|Class|Interface|Enum|Structure|Module)\s+([A-Za-z_][A-Za-z0-9_]*)', re.I)
+CS_SWITCH = re.compile(r'\bswitch\s*\((?P<expr>[^)]*)\)\s*\{', re.M)
+VB_SELECT_CASE = re.compile(r'^\s*Select\s+Case\s+(?P<expr>.+)$', re.I | re.M)
 CALL_RE = re.compile(r'(?:(?P<target>[A-Za-z_][A-Za-z0-9_]*)\.)?(?P<method>[A-Za-z_][A-Za-z0-9_]*)\s*\(')
 EVENT_CS = re.compile(r'(?P<control>[A-Za-z_][A-Za-z0-9_]*)\.(?P<event>Click|Load|Shown|Closing|FormClosing|Tick|DoWork|DataReceived|SelectedIndexChanged|TextChanged|CheckedChanged|CellClick|Command)\s*\+=\s*(?:new\s+[\w\.]+\()?(?:this\.)?(?P<handler>[A-Za-z_][A-Za-z0-9_]*)', re.I)
 EVENT_VB = re.compile(r'(?:AddHandler\s+)?(?P<control>[A-Za-z_][A-Za-z0-9_]*)\.(?P<event>Click|Load|Shown|Closing|Tick|DoWork|DataReceived|SelectedIndexChanged|TextChanged|CheckedChanged|CellClick|Command).*?(?:AddressOf\s+)?(?P<handler>[A-Za-z_][A-Za-z0-9_]*)', re.I)
@@ -78,6 +85,8 @@ ANALYSIS_SCHEMA: dict[str, Any] = {
         "dependencies",
         "classes",
         "methods",
+        "source_files",
+        "source_blocks",
         "events",
         "event_flows",
         "configuration",
@@ -90,6 +99,14 @@ ANALYSIS_SCHEMA: dict[str, Any] = {
         "dependencies": {"type": "array", "items": {"type": "object", "required": ["type", "project", "target"]}},
         "classes": {"type": "array", "items": {"type": "object", "required": ["name", "kind", "source", "line"]}},
         "methods": {"type": "array", "items": {"type": "object", "required": ["name", "source", "line", "called_by", "calls"]}},
+        "source_files": {
+            "type": "array",
+            "items": {"type": "object", "required": ["path", "line_count", "method_count", "class_count"]},
+        },
+        "source_blocks": {
+            "type": "array",
+            "items": {"type": "object", "required": ["kind", "source", "start_line", "end_line"]},
+        },
         "events": {"type": "array", "items": {"type": "object", "required": ["source", "line", "event", "handler"]}},
         "event_flows": {"type": "array", "items": {"type": "object", "required": ["entry", "handler", "call_chain", "confidence"]}},
         "configuration": {
@@ -111,6 +128,8 @@ FILE_SCHEMAS: dict[str, dict[str, Any]] = {
     "dependencies": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["dependencies"]["items"]},
     "classes": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["classes"]["items"]},
     "methods": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["methods"]["items"]},
+    "source_files": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["source_files"]["items"]},
+    "source_blocks": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["source_blocks"]["items"]},
     "events": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["events"]["items"]},
     "event_flows": {"type": "array", "items": ANALYSIS_SCHEMA["properties"]["event_flows"]["items"]},
     "configuration": ANALYSIS_SCHEMA["properties"]["configuration"],
@@ -151,6 +170,62 @@ def ignored(path: Path) -> bool:
 
 def line_no(text: str, pos: int) -> int:
     return text.count("\n", 0, pos) + 1
+
+def line_count(text: str) -> int:
+    if not text:
+        return 0
+    return text.count("\n") + 1
+
+def find_matching_brace(text: str, open_pos: int) -> int | None:
+    if open_pos < 0 or open_pos >= len(text) or text[open_pos] != "{":
+        return None
+    depth = 0
+    in_line_comment = False
+    in_block_comment = False
+    in_string = False
+    string_quote = ""
+    escape = False
+    i = open_pos
+    while i < len(text):
+        ch = text[i]
+        nxt = text[i + 1] if i + 1 < len(text) else ""
+        if in_line_comment:
+            if ch == "\n":
+                in_line_comment = False
+        elif in_block_comment:
+            if ch == "*" and nxt == "/":
+                in_block_comment = False
+                i += 1
+        elif in_string:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == string_quote:
+                in_string = False
+        elif ch == "/" and nxt == "/":
+            in_line_comment = True
+            i += 1
+        elif ch == "/" and nxt == "*":
+            in_block_comment = True
+            i += 1
+        elif ch in {"\"", "'"}:
+            in_string = True
+            string_quote = ch
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return None
+
+def find_vb_end_line(text: str, start_pos: int, end_pattern: str) -> int:
+    match = re.search(end_pattern, text[start_pos:], re.I | re.M)
+    if not match:
+        return line_count(text)
+    return line_no(text, start_pos + match.end())
 
 def load_xml(path: Path):
     try:
@@ -255,6 +330,8 @@ def analyze_projects(repo: Path):
 
 def analyze_code(repo: Path):
     classes, methods, events, configs, risks = [], [], [], [], []
+    source_files = []
+    source_blocks = []
     method_names = set()
     method_entries = []
     for path in repo.rglob("*"):
@@ -262,19 +339,86 @@ def analyze_code(repo: Path):
             continue
         text = read_text(path)
         lang = "C#" if path.suffix.lower()==".cs" else "VB.NET" if path.suffix.lower()==".vb" else "XAML"
-        for m in CLASS_RE.finditer(text):
-            classes.append({"name":m.group(2), "kind":m.group(1), "language":lang, "source":rel(path,repo), "line":line_no(text,m.start())})
+        file_classes = list(CLASS_RE.finditer(text))
+        file_methods = []
         if path.suffix.lower() in [".cs", ".vb"]:
             rx = CS_METHOD if path.suffix.lower()==".cs" else VB_METHOD
-            for m in rx.finditer(text):
+            file_methods = list(rx.finditer(text))
+        source_files.append({
+            "path": rel(path, repo),
+            "language": lang,
+            "extension": path.suffix.lower(),
+            "line_count": line_count(text),
+            "method_count": len(file_methods),
+            "class_count": len(file_classes),
+        })
+        for m in file_classes:
+            start_line = line_no(text,m.start())
+            end_line = line_count(text)
+            if path.suffix.lower() in [".cs", ".xaml", ".axaml"]:
+                open_pos = text.find("{", m.end())
+                close_pos = find_matching_brace(text, open_pos)
+                if close_pos is not None:
+                    end_line = line_no(text, close_pos)
+            elif path.suffix.lower() == ".vb":
+                end_line = find_vb_end_line(text, m.end(), r"^\s*End\s+(Class|Interface|Enum|Structure|Module)\b")
+            class_entry = {"name":m.group(2), "kind":m.group(1), "language":lang, "source":rel(path,repo), "line":start_line, "end_line":end_line}
+            classes.append(class_entry)
+            source_blocks.append({
+                "kind": "class",
+                "name": m.group(2),
+                "source": rel(path, repo),
+                "language": lang,
+                "start_line": start_line,
+                "end_line": end_line,
+            })
+        if path.suffix.lower() in [".cs", ".vb"]:
+            for m in file_methods:
                 name = m.group("name")
                 method_names.add(name)
+                start_line = line_no(text,m.start())
+                end_line = line_count(text)
+                if path.suffix.lower() == ".cs":
+                    close_pos = find_matching_brace(text, m.end() - 1)
+                    if close_pos is not None:
+                        end_line = line_no(text, close_pos)
+                else:
+                    end_line = find_vb_end_line(text, m.end(), r"^\s*End\s+(Sub|Function)\b")
                 entry = {
                     "name": name, "language": lang, "source": rel(path,repo),
-                    "line": line_no(text,m.start()), "params": m.groupdict().get("params"),
+                    "line": start_line, "end_line": end_line, "params": m.groupdict().get("params"),
                     "called_by": [], "calls": [], "purpose": "", "side_effects": [], "risks": []
                 }
+                source_blocks.append({
+                    "kind": "method",
+                    "name": name,
+                    "source": rel(path, repo),
+                    "language": lang,
+                    "start_line": start_line,
+                    "end_line": end_line,
+                })
                 method_entries.append((entry, text[m.end():m.end()+3000]))
+            if path.suffix.lower() == ".cs":
+                for s in CS_SWITCH.finditer(text):
+                    close_pos = find_matching_brace(text, s.end() - 1)
+                    source_blocks.append({
+                        "kind": "switch",
+                        "name": (s.group("expr") or "switch").strip()[:120],
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": line_no(text, close_pos) if close_pos is not None else line_count(text),
+                    })
+            if path.suffix.lower() == ".vb":
+                for s in VB_SELECT_CASE.finditer(text):
+                    source_blocks.append({
+                        "kind": "switch",
+                        "name": (s.group("expr") or "Select Case").strip()[:120],
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": find_vb_end_line(text, s.end(), r"^\s*End\s+Select\b"),
+                    })
             erx = EVENT_CS if path.suffix.lower()==".cs" else EVENT_VB
             for e in erx.finditer(text):
                 events.append({"source":rel(path,repo),"line":line_no(text,e.start()),"control":e.group("control"),"event":e.group("event"),"handler":e.group("handler"),"framework":"WinForms/VB"})
@@ -316,7 +460,7 @@ def analyze_code(repo: Path):
             for target in methods:
                 if target["name"] == callee:
                     target["called_by"].append(m["name"])
-    return classes, methods, events, configs, risks
+    return classes, methods, source_files, source_blocks, events, configs, risks
 
 def analyze_configs(repo: Path):
     files = []
@@ -362,7 +506,7 @@ def main(repo_arg: str, out_arg: str):
     out = Path(out_arg).resolve()
     out.mkdir(parents=True, exist_ok=True)
     projects, deps = analyze_projects(repo)
-    classes, methods, events, code_configs, code_risks = analyze_code(repo)
+    classes, methods, source_files, source_blocks, events, code_configs, code_risks = analyze_code(repo)
     config_files = analyze_configs(repo)
     event_flows = build_event_flows(events, methods)
     workflows = build_workflows(events, methods)
@@ -383,6 +527,8 @@ def main(repo_arg: str, out_arg: str):
         "dependencies":deps,
         "classes":classes,
         "methods":methods,
+        "source_files":source_files,
+        "source_blocks":source_blocks,
         "events":events,
         "event_flows":event_flows,
         "configuration":{"files":config_files,"code_references":code_configs},
