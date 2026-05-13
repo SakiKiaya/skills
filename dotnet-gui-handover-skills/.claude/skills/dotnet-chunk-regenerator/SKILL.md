@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-chunk-regenerator
 description: Regenerate documentation for a single analysis chunk, such as one Form, Project, Event Flow, Method, Dependency, Config, or Risk.
-version: 0.8.4
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

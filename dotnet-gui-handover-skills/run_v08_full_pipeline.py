@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 from pathlib import Path
 import subprocess
 import sys
@@ -22,4 +22,4 @@ run(ROOT / ".claude/skills/dotnet-analysis-chunker/scripts/analysis_chunker.py",
 run(ROOT / ".claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py", chunks, docs_chunks, "--all")
 run(ROOT / ".claude/skills/dotnet-chunk-aware-doc-generator/scripts/generate_chunk_aware_docs.py", analysis, chunks, docs_chunks, docs)
 run(ROOT / ".claude/skills/dotnet-openspec-generator/scripts/generate_openspec.py", analysis, chunks, docs_chunks, openspec)
-print("v0.8 full pipeline complete.")
+print("v1.0 full pipeline complete.")

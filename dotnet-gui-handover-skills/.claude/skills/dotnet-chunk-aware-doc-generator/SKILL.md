@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-chunk-aware-doc-generator
 description: Generate final enterprise GUI handover docs by reading analysis chunks and regenerated chunk docs, then merging them into 01-09 documentation.
-version: 0.8.5
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

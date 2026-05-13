@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-dotnet-method-purpose-analyzer v0.8.2
+dotnet-method-purpose-analyzer v1.0
 
 Usage:
     python method_purpose_analyzer.py <analysis_dir>

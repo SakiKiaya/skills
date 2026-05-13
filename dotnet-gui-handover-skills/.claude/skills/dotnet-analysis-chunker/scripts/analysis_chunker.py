@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-dotnet-analysis-chunker v0.8.5
+dotnet-analysis-chunker v1.0
 
 Step 1 of problem 3:
 - Add analysis_chunks split output.
@@ -200,7 +200,7 @@ def main(analysis_dir: str, chunks_dir: str) -> int:
     risks = load(analysis / "risks.json", [])
 
     index = {
-        "version": "0.8.3",
+        "version": "1.0.0",
         "source_analysis_dir": str(analysis),
         "chunks_dir": str(out),
         "counts": {},

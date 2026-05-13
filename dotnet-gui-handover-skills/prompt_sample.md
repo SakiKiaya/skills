@@ -1,4 +1,4 @@
-# README Generation Specification v0.9
+﻿# README Generation Specification v1.0
 
 ````text
 # README Generation Rules

@@ -1,227 +1,147 @@
-# dotnet-gui-handover-skills
+# dotnet-gui-handover-skills v1.0
 
+Skills and scripts for reverse-engineering enterprise .NET GUI projects and generating handover documentation for maintainers, technical leads, and AI agents.
 
-## v0.8
+Supported targets include WinForms, WPF, Avalonia, MAUI-style XAML projects, C#, and VB.NET.
 
-This version only solves problem 1:
+## What Is New In v1.0
 
-- `04_event_flow.md` sequence diagrams now use simplified fixed participants.
-- Avoids one participant per method call.
-- Keeps diagrams readable for long call chains.
+v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and README workflows into one full pipeline.
 
+### Analysis Contract
 
-## v0.8
+- `dotnet-gui-project-analyzer` now emits validated JSON under `exports/enterprise_analysis/`.
+- `source_files.json` records file-level metadata: `path`, `line_count`, `method_count`, and `class_count`.
+- `source_blocks.json` records semantic source ranges for classes, methods, and switch / Select Case blocks.
+- `schema_validation.json` is written so invalid analysis output stops downstream generation early.
 
-This version solves problem 2:
+### Large File Handling
 
-- Adds `dotnet-method-purpose-analyzer`
-- Generates `exports/enterprise_analysis/method_purposes.json`
-- Enhances `docs/05_method_flow.md`
-- Prevents blank method purpose output
-- Adds method explanation sections with:
-  - 用途
-  - 推測依據
-  - 觸發來源
-  - 主要責任
-  - 副作用
-  - 維護注意事項
-  - 分析來源
+- `dotnet-analysis-chunker` now creates `source_file` chunks.
+- Files over 1000 lines generate `large_file_task` chunks.
+- Large-file tasks prefer semantic boundaries:
+  1. class
+  2. method
+  3. switch / Select Case
+  4. line-window fallback
+- Every large-file task includes `line_range` plus `context_line_range` with up to 10 lines of overlap before and after the task.
 
-### Usage
+### Chunk-Aware Documentation
+
+- `dotnet-chunk-regenerator` can regenerate one chunk, one chunk type, or all chunk docs.
+- `source_file` and `large_file_task` chunk docs are supported.
+- `dotnet-chunk-aware-doc-generator` merges chunk docs and analysis JSON into final handover documents.
+- `05_method_flow.md` includes source-file and large-file task sections.
+
+### OpenSpec Output
+
+- `dotnet-openspec-generator` writes AI-agent-friendly specs under `openspec/specs/`.
+- Chunk excerpts are sanitized before being embedded in OpenSpec files, so GitHub Markdown rendering is not broken by truncated Mermaid or fenced code blocks.
+
+### README Generation
+
+- `dotnet-readme-generator` creates a target-project `docs/README.md` from analysis and chunks.
+- The README summarizes architecture, forms, methods, configuration, operations, and known risks.
+
+## Skill Set
+
+```text
+.claude/skills/
+  dotnet-gui-project-analyzer/
+  dotnet-method-purpose-analyzer/
+  dotnet-analysis-chunker/
+  dotnet-chunk-regenerator/
+  dotnet-chunk-aware-doc-generator/
+  dotnet-enterprise-doc-generator/
+  dotnet-openspec-generator/
+  dotnet-readme-generator/
+```
+
+`dotnet-enterprise-doc-generator` is kept as a fallback generator. Prefer the chunk-aware pipeline for v1.0 output.
+
+## Generated Outputs
+
+```text
+exports/
+  enterprise_analysis/
+  analysis_chunks/
+
+docs/
+  README.md
+  01_solution_structure.md
+  02_architecture.md
+  03_project_dependencies.md
+  04_event_flow.md
+  05_method_flow.md
+  06_configuration.md
+  07_user_workflow.md
+  08_external_dependencies.md
+  09_risk_analysis.md
+  chunks/
+
+openspec/
+  project.md
+  specs/
+    solution-architecture/spec.md
+    ui-forms/spec.md
+    event-flow/spec.md
+    method-flow/spec.md
+    configuration/spec.md
+    external-dependencies/spec.md
+    user-workflow/spec.md
+    risk-analysis/spec.md
+```
+
+## Quick Start
+
+Run the full v1.0 pipeline against a target .NET GUI repository:
+
+```bash
+python run_v09_full_pipeline.py /path/to/target/repo
+```
+
+The wrapper name is kept for compatibility, but the pipeline now produces v1.0 output.
+
+## Step-By-Step Pipeline
 
 ```bash
 python .claude/skills/dotnet-gui-project-analyzer/scripts/enterprise_gui_analyzer.py . exports/enterprise_analysis
 python .claude/skills/dotnet-method-purpose-analyzer/scripts/method_purpose_analyzer.py exports/enterprise_analysis
-python .claude/skills/dotnet-enterprise-doc-generator/scripts/generate_enterprise_docs.py exports/enterprise_analysis docs
-```
-
-`dotnet-gui-project-analyzer` validates the generated analysis JSON and writes
-`exports/enterprise_analysis/schema_validation.json`. A failed validation stops
-the pipeline before documentation generation.
-
-`dotnet-enterprise-doc-generator` is now marked as the fallback generator. Prefer
-`dotnet-chunk-aware-doc-generator` in the full v0.8/v0.9 pipeline when chunk
-outputs are present.
-
-Or:
-
-```bash
-python run_method_purpose_analysis.py /path/to/target/repo
-```
-
-
-## v0.8
-
-This version completes step 1 of the third issue:
-
-### Added
-
-- `dotnet-analysis-chunker`
-- `exports/analysis_chunks/`
-- per-project chunks
-- per-form chunks
-- per-event-flow chunks
-- per-method chunks
-- dependency chunks
-- config chunks
-- risk chunks
-- `index.json`
-
-### Usage
-
-```bash
 python .claude/skills/dotnet-analysis-chunker/scripts/analysis_chunker.py exports/enterprise_analysis exports/analysis_chunks
+python .claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py exports/analysis_chunks docs/chunks --all
+python .claude/skills/dotnet-chunk-aware-doc-generator/scripts/generate_chunk_aware_docs.py exports/enterprise_analysis exports/analysis_chunks docs/chunks docs
+python .claude/skills/dotnet-openspec-generator/scripts/generate_openspec.py exports/enterprise_analysis exports/analysis_chunks docs/chunks openspec
+python .claude/skills/dotnet-readme-generator/scripts/generate_readme.py .
 ```
 
-Or:
-
-```bash
-python run_analysis_chunker.py /path/to/target/repo
-```
-
-### Purpose
-
-This prepares the pipeline for later steps:
-
-1. Support regenerating a single Form / Project / Event Flow.
-2. Make docs generator read chunks and then merge.
-
-
-## v0.8
-
-This version completes step 2 of the third issue:
-
-### Added
-
-- `dotnet-chunk-regenerator`
-- single chunk doc regeneration
-- per-project local docs
-- per-form local docs
-- per-event-flow local docs
-- per-method local docs
-- dependency/config/risk local docs
-
-### Usage
-
-Regenerate one chunk:
+## Regenerate One Chunk
 
 ```bash
 python .claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py exports/analysis_chunks docs/chunks --chunk-id <chunk_id>
 ```
 
-Regenerate by type:
+Regenerate a chunk type:
 
 ```bash
-python .claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py exports/analysis_chunks docs/chunks --chunk-type form
+python .claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py exports/analysis_chunks docs/chunks --chunk-type large_file_task
 ```
 
-Regenerate all chunks:
+## Example
 
-```bash
-python .claude/skills/dotnet-chunk-regenerator/scripts/regenerate_chunk_doc.py exports/analysis_chunks docs/chunks --all
-```
-
-Wrapper:
-
-```bash
-python run_regenerate_chunk_doc.py /path/to/target/repo --chunk-type event_flow
-```
-
-### Output
+The repository includes a generated VB.NET large-file test project:
 
 ```text
-docs/chunks/
-  projects/
-  forms/
-  event_flows/
-  methods/
-  dependencies/
-  configs/
-  risks/
+examples/vbnet-large-file-doc-test/
 ```
 
+Useful files:
 
-## v0.8
+- `Forms/MainForm.vb`
+- `docs/05_method_flow.md`
+- `docs/chunks/source_files/Forms_MainForm.vb.md`
+- `docs/chunks/large_file_tasks/`
+- `openspec/specs/event-flow/spec.md`
 
-This version completes step 3 of the third issue:
+## Notes
 
-### Added
-
-- `dotnet-chunk-aware-doc-generator`
-- final 01-09 docs can now read:
-  - `exports/analysis_chunks/**/*.json`
-  - `docs/chunks/**/*.md`
-  - `exports/enterprise_analysis/*.json`
-- chunk docs are preferred over raw JSON when available.
-
-### Usage
-
-Generate final docs from chunks:
-
-```bash
-python .claude/skills/dotnet-chunk-aware-doc-generator/scripts/generate_chunk_aware_docs.py exports/enterprise_analysis exports/analysis_chunks docs/chunks docs
-```
-
-Wrapper:
-
-```bash
-python run_chunk_aware_docs.py /path/to/target/repo
-```
-
-Full chunk pipeline:
-
-```bash
-python run_chunk_pipeline.py /path/to/target/repo
-```
-
-
-## v0.8 Integrated OpenSpec Support
-
-This complete v0.8 version restores and upgrades OpenSpec output.
-
-### Generate OpenSpec only
-
-```bash
-python .claude/skills/dotnet-openspec-generator/scripts/generate_openspec.py exports/enterprise_analysis exports/analysis_chunks docs/chunks openspec
-```
-
-or:
-
-```bash
-python run_openspec_generation.py /path/to/target/repo
-```
-
-### Full v0.8 Pipeline
-
-```bash
-python run_v08_full_pipeline.py /path/to/target/repo
-```
-
-## v0.9 README Generator
-
-v0.9 adds `dotnet-readme-generator`.
-
-The generated `docs/README.md` follows the enterprise GUI handover format:
-
-- 專案名稱
-- 概述
-- 技術棧
-- 專案結構
-- 應用程式流程
-- 表單清單
-- 類別與模組清單
-- 參數設定指南
-- 常見操作
-- 已知注意事項
-
-### Generate README only
-
-```bash
-python .claude/skills/dotnet-readme-generator/scripts/generate_readme.py /path/to/target/repo
-```
-
-### Full v0.9 Pipeline
-
-```bash
-python run_v09_full_pipeline.py /path/to/target/repo
-```
+This is static analysis. All inferred behavior should be reviewed by engineers before being treated as confirmed system behavior.

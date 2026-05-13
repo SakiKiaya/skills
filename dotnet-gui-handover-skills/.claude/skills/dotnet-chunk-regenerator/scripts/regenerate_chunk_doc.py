@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-dotnet-chunk-regenerator v0.8.4
+dotnet-chunk-regenerator v1.0
 
 Regenerate local Markdown documentation for one or more analysis chunks.
 

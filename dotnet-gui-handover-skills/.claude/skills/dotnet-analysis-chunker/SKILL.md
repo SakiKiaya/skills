@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-analysis-chunker
 description: Split enterprise .NET GUI analysis output into project, form, event-flow, method, dependency, source-file, and semantic large-file task chunks for incremental documentation.
-version: 0.8.5
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

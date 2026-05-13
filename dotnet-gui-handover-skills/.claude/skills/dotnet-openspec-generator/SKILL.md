@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-openspec-generator
 description: Generate OpenSpec-compatible specifications for AI Agents from enterprise GUI analysis, analysis chunks, and regenerated chunk docs.
-version: 0.8.0
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Bash
 
 產生 AI Agent 可理解的 OpenSpec 規格文件。
 
-v0.8 版會讀取：
+v1.0 reads:
 
 ```text
 exports/enterprise_analysis/

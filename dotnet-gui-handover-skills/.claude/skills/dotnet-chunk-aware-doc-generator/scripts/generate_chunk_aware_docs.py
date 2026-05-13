@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-dotnet-chunk-aware-doc-generator v0.8.5
+dotnet-chunk-aware-doc-generator v1.0
 
 Generate final 01-09 enterprise GUI handover docs from:
 - exports/enterprise_analysis

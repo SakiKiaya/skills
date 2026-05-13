@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-readme-generator
 description: Generate enterprise-grade GUI project README.md for onboarding, maintenance, and AI Agent understanding.
-version: 0.9.0
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

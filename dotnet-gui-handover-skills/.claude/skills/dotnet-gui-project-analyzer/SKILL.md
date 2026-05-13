@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-gui-project-analyzer
 description: Analyze enterprise .NET GUI projects and emit normalized static-analysis JSON for downstream documentation skills.
-version: 0.7.1
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

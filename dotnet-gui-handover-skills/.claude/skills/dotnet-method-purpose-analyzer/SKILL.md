@@ -1,7 +1,7 @@
----
+﻿---
 name: dotnet-method-purpose-analyzer
 description: Infer method purpose, triggers, responsibility, side effects, evidence, and maintenance notes for .NET GUI projects.
-version: 0.8.2
+version: 1.0.0
 allowed-tools: Read Write Edit Bash
 ---
 

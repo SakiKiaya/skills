@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-dotnet-gui enterprise reverse engineering analyzer v0.7.1
+dotnet-gui enterprise reverse engineering analyzer v1.0
 
 Usage:
     python enterprise_gui_analyzer.py <repo_root> <out_dir>

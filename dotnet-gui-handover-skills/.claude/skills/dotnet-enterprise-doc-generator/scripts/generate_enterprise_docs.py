@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Generate enterprise GUI handover docs v0.8-problem2.
+Generate enterprise GUI handover docs v1.0.
 
 Focus:
 - 05_method_flow.md now uses method_purposes.json when available.
@@ -253,7 +253,7 @@ def main(analysis_dir, docs_dir):
     doc += "\n\n## Dependency Table\n\n" + table(["Project", "Type", "Target", "Source"], [[x.get("project"), x.get("type"), x.get("target"), x.get("source")] for x in deps])
     (d / "03_project_dependencies.md").write_text(doc, encoding="utf-8")
 
-    doc = "# 04 Event Flow\n\n## Diagram Style Note\n\nv0.8 uses simplified fixed-participant sequence diagrams to avoid horizontal expansion.\n\n## Event Flow Overview\n\n"
+    doc = "# 04 Event Flow\n\n## Diagram Style Note\n\nv1.0 uses simplified fixed-participant sequence diagrams to avoid horizontal expansion.\n\n## Event Flow Overview\n\n"
     doc += table(["Entry", "Handler", "Call Chain", "Side Effects", "Source"], [[f.get("entry"), f.get("handler"), " -> ".join(f.get("call_chain") or []), f.get("side_effects"), f.get("source")] for f in event_flows])
     for f in event_flows[:80]:
         doc += f"\n## {esc(f.get('handler'))}\n\n"

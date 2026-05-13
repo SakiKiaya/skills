@@ -1,4 +1,4 @@
-# Event Flow Diagram Style v0.8
+﻿# Event Flow Diagram Style v1.0
 
 Use fixed participants in sequence diagrams:
 
