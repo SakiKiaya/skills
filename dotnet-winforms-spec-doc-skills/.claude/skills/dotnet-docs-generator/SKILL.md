@@ -1,9 +1,9 @@
-    ---
-    name: dotnet-docs-generator
-    description: Generate human-readable architecture and onboarding documentation.
-    version: 0.1.0
-    ---
-
+---
+name: dotnet-docs-generator
+description: Generate human-readable technical documentation for .NET Framework / WinForms C# and VB.NET projects from normalized IR.
+version: 0.2.0
+allowed-tools: Read Write Edit Bash
+---
 
 # dotnet-docs-generator
 
@@ -25,22 +25,21 @@ docs/
   06_configuration.md
   07_dependencies.md
   10_learning_path_for_new_engineers.md
+  diagrams/
 ```
 
-## Documentation Goals
+## Script
 
-- Lower onboarding cost.
-- Explain architecture clearly.
-- Explain Forms and UserControls.
-- Explain event flow.
-- Explain dependencies and configuration.
-- Explain build and deployment process.
+Run from repository root:
+
+```bash
+python .claude/skills/dotnet-docs-generator/scripts/generate_docs.py exports/normalized docs
+```
 
 ## Rules
 
-- Prefer tables over large paragraphs.
-- Generate Mermaid diagrams.
+- Prefer tables over long paragraphs.
+- Generate Mermaid diagrams when data exists.
 - Include source file references.
 - Separate confirmed behavior from assumptions.
-- Explain why important modules exist.
-
+- Explain architecture, Forms/UserControls, event flow, config, dependencies, and onboarding order.

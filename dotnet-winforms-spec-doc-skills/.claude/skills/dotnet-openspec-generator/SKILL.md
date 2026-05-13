@@ -1,15 +1,15 @@
-    ---
-    name: dotnet-openspec-generator
-    description: Generate OpenSpec-compatible specifications for AI Agents.
-    version: 0.1.0
-    ---
-
+---
+name: dotnet-openspec-generator
+description: Generate OpenSpec-compatible specs for AI Agents from normalized .NET WinForms IR, including solution architecture, UI forms, business logic, configuration, and dependencies.
+version: 0.2.0
+allowed-tools: Read Write Edit Bash
+---
 
 # dotnet-openspec-generator
 
 ## Purpose
 
-Generate OpenSpec-compatible specifications from normalized project IR.
+Generate AI-Agent-readable OpenSpec files from normalized project IR.
 
 ## Output
 
@@ -20,32 +20,23 @@ openspec/
     solution-architecture/spec.md
     ui-forms/spec.md
     business-logic/spec.md
+    configuration/spec.md
     dependencies/spec.md
+  changes/
 ```
 
-## Spec Rules
+## Script
 
-- Use SHALL / MUST wording.
-- Include Scenario sections.
-- Separate assumptions from confirmed behavior.
+Run from repository root:
+
+```bash
+python .claude/skills/dotnet-openspec-generator/scripts/generate_openspec.py exports/normalized openspec
+```
+
+## Rules
+
+- Use `SHALL` / `MUST` wording for confirmed behavior.
+- Include Scenario sections where event flow or behavior is known.
+- Separate confirmed behavior from assumptions.
 - Do not convert guesses into requirements.
 - Preserve source references.
-
-## Example
-
-```markdown
-# UI Forms Specification
-
-## Requirements
-
-### Requirement: Start inspection flow
-
-The system SHALL start image acquisition when the operator clicks the Start button.
-
-#### Scenario: Operator starts inspection
-
-- GIVEN the MainForm is loaded
-- WHEN the operator clicks btnStart
-- THEN the system SHALL call CameraManager.StartGrab
-```
-
