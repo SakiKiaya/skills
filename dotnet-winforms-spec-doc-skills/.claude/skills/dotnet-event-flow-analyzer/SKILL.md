@@ -1,4 +1,3 @@
-
 ---
 name: dotnet-event-flow-analyzer
 description: Analyze startup flow, UI backend flow, and threading risks.

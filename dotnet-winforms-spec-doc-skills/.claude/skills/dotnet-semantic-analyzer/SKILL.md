@@ -1,4 +1,3 @@
-
 ---
 name: dotnet-semantic-analyzer
 description: Semantic reverse-engineering analyzer for legacy WinForms systems.
