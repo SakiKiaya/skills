@@ -11,7 +11,7 @@
       "path": "Forms/MainForm.vb",
       "language": "VB.NET",
       "extension": ".vb",
-      "line_count": 1143,
+      "line_count": 2017,
       "method_count": 9,
       "class_count": 1
     },
@@ -26,7 +26,7 @@
     },
     "context_before_lines": 0,
     "context_after_lines": 10,
-    "split_reason": "File has 1143 lines, exceeding the 1000-line threshold.",
+    "split_reason": "File has 2017 lines, exceeding the 1000-line threshold.",
     "task_strategy": "file_gap_fallback",
     "semantic_blocks": [],
     "methods": [],

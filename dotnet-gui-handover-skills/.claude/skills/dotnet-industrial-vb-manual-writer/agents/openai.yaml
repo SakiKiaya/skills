@@ -1,0 +1,7 @@
+interface:
+  display_name: "Industrial VB Manual Writer"
+  short_description: "Write industrial VB.NET handover manuals"
+  default_prompt: "Use $dotnet-industrial-vb-manual-writer to analyze this VB.NET WinForms automation project and write a handover-grade technical manual."
+
+policy:
+  allow_implicit_invocation: true

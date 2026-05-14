@@ -30,7 +30,20 @@ import sys
 import xml.etree.ElementTree as ET
 from typing import Any
 
-IGNORE = {".git", ".vs", "bin", "obj", "packages", "node_modules", ".claude", "exports", "docs", "openspec"}
+IGNORE = {
+    ".git",
+    ".vs",
+    "bin",
+    "obj",
+    "packages",
+    "node_modules",
+    ".claude",
+    "exports",
+    "docs",
+    "openspec",
+    "backup",
+    "backups",
+}
 CODE_EXTS = {".cs", ".vb", ".xaml", ".axaml"}
 CONFIG_EXTS = {".config", ".settings", ".json", ".xml", ".ini", ".yaml", ".yml"}
 
@@ -41,6 +54,12 @@ VB_METHOD = re.compile(r'^\s*(?P<mod>(?:Public|Private|Friend|Protected|Shared|O
 CLASS_RE = re.compile(r'\b(class|interface|enum|struct|Class|Interface|Enum|Structure|Module)\s+([A-Za-z_][A-Za-z0-9_]*)', re.I)
 CS_SWITCH = re.compile(r'\bswitch\s*\((?P<expr>[^)]*)\)\s*\{', re.M)
 VB_SELECT_CASE = re.compile(r'^\s*Select\s+Case\s+(?P<expr>.+)$', re.I | re.M)
+CS_IF = re.compile(r'\bif\s*\((?P<expr>[^)]*)\)\s*\{', re.M)
+VB_IF = re.compile(r'^\s*If\s+(?P<expr>.+?)\s+Then\b', re.I | re.M)
+CS_TRY = re.compile(r'\btry\s*\{', re.M)
+VB_TRY = re.compile(r'^\s*Try\b', re.I | re.M)
+REGION_START = re.compile(r'^\s*#\s*Region\b\s*(?P<name>.*)$', re.I)
+REGION_END = re.compile(r'^\s*#\s*End\s+Region\b|^\s*#\s*endregion\b', re.I)
 CALL_RE = re.compile(r'(?:(?P<target>[A-Za-z_][A-Za-z0-9_]*)\.)?(?P<method>[A-Za-z_][A-Za-z0-9_]*)\s*\(')
 EVENT_CS = re.compile(r'(?P<control>[A-Za-z_][A-Za-z0-9_]*)\.(?P<event>Click|Load|Shown|Closing|FormClosing|Tick|DoWork|DataReceived|SelectedIndexChanged|TextChanged|CheckedChanged|CellClick|Command)\s*\+=\s*(?:new\s+[\w\.]+\()?(?:this\.)?(?P<handler>[A-Za-z_][A-Za-z0-9_]*)', re.I)
 EVENT_VB = re.compile(r'(?:AddHandler\s+)?(?P<control>[A-Za-z_][A-Za-z0-9_]*)\.(?P<event>Click|Load|Shown|Closing|Tick|DoWork|DataReceived|SelectedIndexChanged|TextChanged|CheckedChanged|CellClick|Command).*?(?:AddressOf\s+)?(?P<handler>[A-Za-z_][A-Za-z0-9_]*)', re.I)
@@ -175,6 +194,12 @@ def line_count(text: str) -> int:
     if not text:
         return 0
     return text.count("\n") + 1
+
+def text_line_range(text: str, start_line: int, end_line: int) -> str:
+    lines = text.splitlines()
+    start = max(1, start_line)
+    end = max(start, end_line)
+    return "\n".join(lines[start - 1:end])
 
 def find_matching_brace(text: str, open_pos: int) -> int | None:
     if open_pos < 0 or open_pos >= len(text) or text[open_pos] != "{":
@@ -352,6 +377,27 @@ def analyze_code(repo: Path):
             "method_count": len(file_methods),
             "class_count": len(file_classes),
         })
+        region_stack: list[dict[str, Any]] = []
+        for line_index, line in enumerate(text.splitlines(), start=1):
+            start_match = REGION_START.match(line)
+            if start_match:
+                raw_name = (start_match.group("name") or "").strip().strip('"')
+                region_stack.append({
+                    "kind": "region",
+                    "name": raw_name or "Region",
+                    "source": rel(path, repo),
+                    "language": lang,
+                    "start_line": line_index,
+                })
+                continue
+            if REGION_END.match(line) and region_stack:
+                region = region_stack.pop()
+                region["end_line"] = line_index
+                source_blocks.append(region)
+        total_lines = line_count(text)
+        for region in region_stack:
+            region["end_line"] = total_lines
+            source_blocks.append(region)
         for m in file_classes:
             start_line = line_no(text,m.start())
             end_line = line_count(text)
@@ -397,13 +443,33 @@ def analyze_code(repo: Path):
                     "start_line": start_line,
                     "end_line": end_line,
                 })
-                method_entries.append((entry, text[m.end():m.end()+3000]))
+                method_entries.append((entry, text_line_range(text, start_line, end_line)))
             if path.suffix.lower() == ".cs":
                 for s in CS_SWITCH.finditer(text):
                     close_pos = find_matching_brace(text, s.end() - 1)
                     source_blocks.append({
                         "kind": "switch",
                         "name": (s.group("expr") or "switch").strip()[:120],
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": line_no(text, close_pos) if close_pos is not None else line_count(text),
+                    })
+                for s in CS_IF.finditer(text):
+                    close_pos = find_matching_brace(text, s.end() - 1)
+                    source_blocks.append({
+                        "kind": "if",
+                        "name": (s.group("expr") or "if").strip()[:120],
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": line_no(text, close_pos) if close_pos is not None else line_count(text),
+                    })
+                for s in CS_TRY.finditer(text):
+                    close_pos = find_matching_brace(text, s.end() - 1)
+                    source_blocks.append({
+                        "kind": "try",
+                        "name": "try/catch",
                         "source": rel(path, repo),
                         "language": lang,
                         "start_line": line_no(text, s.start()),
@@ -418,6 +484,24 @@ def analyze_code(repo: Path):
                         "language": lang,
                         "start_line": line_no(text, s.start()),
                         "end_line": find_vb_end_line(text, s.end(), r"^\s*End\s+Select\b"),
+                    })
+                for s in VB_IF.finditer(text):
+                    source_blocks.append({
+                        "kind": "if",
+                        "name": (s.group("expr") or "If").strip()[:120],
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": find_vb_end_line(text, s.end(), r"^\s*End\s+If\b"),
+                    })
+                for s in VB_TRY.finditer(text):
+                    source_blocks.append({
+                        "kind": "try",
+                        "name": "Try/Catch",
+                        "source": rel(path, repo),
+                        "language": lang,
+                        "start_line": line_no(text, s.start()),
+                        "end_line": find_vb_end_line(text, s.end(), r"^\s*End\s+Try\b"),
                     })
             erx = EVENT_CS if path.suffix.lower()==".cs" else EVENT_VB
             for e in erx.finditer(text):
@@ -471,16 +555,56 @@ def analyze_configs(repo: Path):
             files.append({"path":rel(p,repo), "extension":p.suffix.lower(), "kind":"configuration_candidate"})
     return files
 
-def detect_dependencies(projects, deps, methods, classes):
-    external = []
-    text = json.dumps({"projects":projects,"deps":deps,"methods":methods,"classes":classes}, ensure_ascii=False).lower()
+def dependency_name(value: Any) -> str:
+    return str(value or "").split(",", 1)[0].strip()
+
+def is_framework_reference(dep: dict[str, Any]) -> bool:
+    name = dependency_name(dep.get("target")).lower()
+    return dep.get("type") == "Reference" and (
+        name == "system"
+        or name.startswith("system.")
+        or name in {"mscorlib", "microsoft.visualbasic"}
+    )
+
+def dependency_device_matches(dep: dict[str, Any]) -> list[tuple[str, list[str]]]:
+    text = json.dumps(dep, ensure_ascii=False).lower()
+    matches = []
     for dep_type, words in DEVICE_KEYWORDS.items():
         hits = [w for w in words if w in text]
         if hits:
-            external.append({"dependency_type":dep_type,"matched_keywords":hits,"purpose":"External integration candidate 推測","risk":"Initialization, deployment, license, architecture, or runtime failure risk 推測","confidence":min(0.9,0.45+0.1*len(hits))})
+            matches.append((dep_type, hits))
+    return matches
+
+def detect_dependencies(projects, deps, methods, classes):
+    external_by_key: dict[tuple[str, str, str], dict[str, Any]] = {}
+    code_text = json.dumps({"projects":projects,"methods":methods,"classes":classes}, ensure_ascii=False).lower()
+    for dep_type, words in DEVICE_KEYWORDS.items():
+        hits = [w for w in words if w in code_text]
+        if hits:
+            external_by_key[(dep_type, "", "")] = {
+                "dependency_type":dep_type,
+                "matched_keywords":hits,
+                "purpose":"External integration candidate 推測",
+                "risk":"Initialization, deployment, license, architecture, or runtime failure risk 推測",
+                "confidence":min(0.9,0.45+0.1*len(hits)),
+            }
     for d in deps:
-        external.append({"dependency_type":d.get("type"),"name":d.get("target"),"project":d.get("project"),"purpose":"Referenced dependency","risk":"Version or deployment mismatch risk","confidence":0.75})
-    return external
+        if is_framework_reference(d):
+            continue
+        for dep_type, hits in dependency_device_matches(d):
+            name = dependency_name(d.get("target"))
+            key = (dep_type, name.lower(), str(d.get("project") or "").lower())
+            external_by_key[key] = {
+                "dependency_type":dep_type,
+                "name":name,
+                "project":d.get("project"),
+                "source":d.get("source"),
+                "matched_keywords":hits,
+                "purpose":"Special external dependency reference 推測",
+                "risk":"Version, deployment, license, architecture, or runtime failure risk 推測",
+                "confidence":0.8,
+            }
+    return list(external_by_key.values())
 
 def build_event_flows(events, methods):
     idx = {m["name"]:m for m in methods}

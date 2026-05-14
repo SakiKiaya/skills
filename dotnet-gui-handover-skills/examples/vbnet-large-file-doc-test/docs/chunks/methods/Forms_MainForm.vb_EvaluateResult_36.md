@@ -4,7 +4,7 @@
 執行 Start 類型流程。推測
 
 **推測依據：**
-- 被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection
+- 被其他方法呼叫: StartInspection
 - 名稱或呼叫鏈包含 Start 相關關鍵字: start
 - 未偵測到明確的內部方法呼叫
 
@@ -17,11 +17,9 @@
 
 **副作用：**
 - 可能更新 UI 狀態或顯示內容: form
-- 可能建立新物件或初始化流程: new
 
 **維護注意事項：**
 - 若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher
-- 檢查物件生命週期、Dispose、資源釋放與重複初始化風險
 
 ## Method Metadata
 
@@ -29,7 +27,7 @@
 |---|---|
 | Source | Forms/MainForm.vb |
 | Line | 36 |
-| Called By | ['New', 'btnStart_Click', 'btnSave_Click', 'StartInspection'] |
+| Called By | ['StartInspection'] |
 | Calls | [] |
 | Existing Purpose | N/A |
 | Existing Side Effects | [] |

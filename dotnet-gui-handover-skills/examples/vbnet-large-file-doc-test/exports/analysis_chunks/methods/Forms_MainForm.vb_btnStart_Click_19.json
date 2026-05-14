@@ -14,22 +14,14 @@
       "line": 19,
       "end_line": 23,
       "params": "sender As Object, e As EventArgs",
-      "called_by": [
-        "New"
-      ],
+      "called_by": [],
       "calls": [
-        "CaptureCameraImage",
-        "ConnectPlc",
-        "EvaluateResult",
-        "SaveRecipe",
         "StartInspection",
-        "UpdateStatus",
-        "btnSave_Click"
+        "UpdateStatus"
       ],
       "purpose": "Event handler / UI operation entry candidate 推測",
       "side_effects": [
-        "Persistence or write operation candidate 推測",
-        "External device/API interaction candidate 推測"
+        "Persistence or write operation candidate 推測"
       ],
       "risks": []
     },
@@ -39,17 +31,10 @@
         "class_or_file": "MainForm",
         "source": "Forms/MainForm.vb",
         "line": 19,
-        "called_by": [
-          "New"
-        ],
+        "called_by": [],
         "calls": [
-          "CaptureCameraImage",
-          "ConnectPlc",
-          "EvaluateResult",
-          "SaveRecipe",
           "StartInspection",
-          "UpdateStatus",
-          "btnSave_Click"
+          "UpdateStatus"
         ],
         "triggers": [
           {
@@ -71,24 +56,19 @@
           "協調或委派後續方法呼叫"
         ],
         "side_effects": [
-          "可能存取外部設備 / SDK: plc, camera, capture",
           "可能存取 DB 或資料儲存: update",
           "可能更新 UI 狀態或顯示內容: ui, form, update",
-          "可能建立新物件或初始化流程: new",
-          "Persistence or write operation candidate 推測",
-          "External device/API interaction candidate 推測"
+          "Persistence or write operation candidate 推測"
         ],
         "maintenance_notes": [
-          "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
           "檢查資料庫連線、交易、例外處理與設定來源",
-          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-          "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
         ],
         "evidence": [
           "由事件或事件流程觸發: btnStart.Click, btnStart.Click",
           "方法名稱包含事件處理常見關鍵字",
           "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-          "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click"
+          "呼叫方法: StartInspection, UpdateStatus"
         ],
         "analysis_inputs": {
           "method_name": "btnStart_Click",
@@ -98,24 +78,17 @@
             "btnStart.Click"
           ],
           "called_methods": [
-            "CaptureCameraImage",
-            "ConnectPlc",
-            "EvaluateResult",
-            "SaveRecipe",
             "StartInspection",
-            "UpdateStatus",
-            "btnSave_Click"
+            "UpdateStatus"
           ],
-          "called_by": [
-            "New"
-          ],
+          "called_by": [],
           "has_config_candidate": false,
           "has_db_candidate": true,
           "has_file_candidate": false,
-          "has_device_candidate": true,
+          "has_device_candidate": false,
           "has_ui_update_candidate": true,
           "has_async_thread_timer_candidate": false,
-          "has_object_creation_candidate": true
+          "has_object_creation_candidate": false
         },
         "confidence": 0.75
       }
@@ -138,32 +111,19 @@
         "line": 16,
         "call_chain": [
           "btnStart_Click",
-          "CaptureCameraImage",
-          "ConnectPlc",
-          "EvaluateResult",
-          "SaveRecipe",
           "StartInspection",
-          "UpdateStatus",
-          "btnSave_Click"
+          "UpdateStatus"
         ],
         "side_effects": [
-          "Persistence or write operation candidate 推測",
-          "External device/API interaction candidate 推測"
+          "Persistence or write operation candidate 推測"
         ],
         "confidence": 0.75
       }
     ],
-    "callers": [
-      "New"
-    ],
+    "callers": [],
     "callees": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
       "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click"
+      "UpdateStatus"
     ],
     "risk_candidates": [
       {
@@ -193,12 +153,7 @@
     ]
   },
   "related_chunks": [
-    "method:Forms_MainForm.vb_CaptureCameraImage_1126",
-    "method:Forms_MainForm.vb_ConnectPlc_1121",
-    "method:Forms_MainForm.vb_EvaluateResult_36",
-    "method:Forms_MainForm.vb_SaveRecipe_1130",
     "method:Forms_MainForm.vb_StartInspection_29",
-    "method:Forms_MainForm.vb_UpdateStatus_1135",
-    "method:Forms_MainForm.vb_btnSave_Click_24"
+    "method:Forms_MainForm.vb_UpdateStatus_2008"
   ]
 }

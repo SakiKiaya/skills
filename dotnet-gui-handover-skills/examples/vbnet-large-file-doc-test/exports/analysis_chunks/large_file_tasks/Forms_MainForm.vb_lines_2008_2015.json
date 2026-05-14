@@ -1,0 +1,98 @@
+{
+  "chunk_type": "large_file_task",
+  "chunk_id": "Forms_MainForm.vb_lines_2008_2015",
+  "title": "Large File Task: Forms/MainForm.vb lines 2008-2015",
+  "summary": "Task chunk for reviewing a large source file in a bounded line range.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "source_file": {
+      "path": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "extension": ".vb",
+      "line_count": 2017,
+      "method_count": 9,
+      "class_count": 1
+    },
+    "task_no": 18,
+    "line_range": {
+      "start": 2008,
+      "end": 2015
+    },
+    "context_line_range": {
+      "start": 1998,
+      "end": 2017
+    },
+    "context_before_lines": 10,
+    "context_after_lines": 2,
+    "split_reason": "File has 2017 lines, exceeding the 1000-line threshold.",
+    "task_strategy": "method_aware",
+    "semantic_blocks": [
+      {
+        "kind": "method",
+        "name": "UpdateStatus",
+        "source": "Forms/MainForm.vb",
+        "language": "VB.NET",
+        "start_line": 2008,
+        "end_line": 2015
+      }
+    ],
+    "methods": [
+      {
+        "name": "UpdateStatus",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 2008,
+        "end_line": 2015,
+        "params": "message As String",
+        "called_by": [
+          "btnStart_Click",
+          "btnSave_Click"
+        ],
+        "calls": [],
+        "purpose": "",
+        "side_effects": [
+          "Persistence or write operation candidate 推測"
+        ],
+        "risks": []
+      }
+    ],
+    "events": [],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ],
+    "review_goals": [
+      "Summarize responsibilities in this line range.",
+      "Identify event handlers, side effects, device/config/database interactions, and maintenance risks.",
+      "Link findings back to related method, event-flow, form, and source-file chunks."
+    ]
+  },
+  "related_chunks": [
+    "source_file:Forms_MainForm.vb",
+    "method:Forms_MainForm.vb_UpdateStatus_2008"
+  ]
+}

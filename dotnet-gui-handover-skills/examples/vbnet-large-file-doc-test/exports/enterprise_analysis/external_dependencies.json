@@ -26,21 +26,5 @@
     "purpose": "External integration candidate 推測",
     "risk": "Initialization, deployment, license, architecture, or runtime failure risk 推測",
     "confidence": 0.55
-  },
-  {
-    "dependency_type": "Reference",
-    "name": "System.Windows.Forms",
-    "project": "VbLargeFileDocTest",
-    "purpose": "Referenced dependency",
-    "risk": "Version or deployment mismatch risk",
-    "confidence": 0.75
-  },
-  {
-    "dependency_type": "Reference",
-    "name": "System.Configuration",
-    "project": "VbLargeFileDocTest",
-    "purpose": "Referenced dependency",
-    "risk": "Version or deployment mismatch risk",
-    "confidence": 0.75
   }
 ]

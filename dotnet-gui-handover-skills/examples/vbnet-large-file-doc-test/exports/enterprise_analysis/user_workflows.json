@@ -3,13 +3,8 @@
     "workflow": "btnStart.Click",
     "steps": [
       "btnStart_Click",
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
       "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click"
+      "UpdateStatus"
     ],
     "success_path": "Handler completes without exception 推測",
     "failure_path": "Exception, validation failure, device/config dependency failure 推測",
@@ -19,11 +14,7 @@
     "workflow": "btnSave.Click",
     "steps": [
       "btnSave_Click",
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
       "SaveRecipe",
-      "StartInspection",
       "UpdateStatus"
     ],
     "success_path": "Handler completes without exception 推測",

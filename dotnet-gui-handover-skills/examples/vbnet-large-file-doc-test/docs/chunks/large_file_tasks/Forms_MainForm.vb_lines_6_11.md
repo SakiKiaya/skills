@@ -12,12 +12,13 @@
 | Context Before Lines | 5 |
 | Context After Lines | 10 |
 | Task Strategy | class_gap_fallback |
-| Split Reason | File has 1143 lines, exceeding the 1000-line threshold. |
+| Split Reason | File has 2017 lines, exceeding the 1000-line threshold. |
 
 ## Semantic Boundary
 
 | Kind | Name | Start Line | End Line |
 |---|---|---|---|
+| class | MainForm | 6 | 2016 |
 
 ## Methods In Scope
 

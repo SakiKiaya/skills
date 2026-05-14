@@ -83,17 +83,29 @@ graph TD
 
 以下列出非 Form 相關程式碼的初步職責推測。詳細內容請參考 `docs/05_method_flow.md` 與 `docs/chunks/methods/`。
 
-| 類型 | 職責 | 說明 |
-|---|---|---|
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 6 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 7 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 2 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 3 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 0 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 8 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 1 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 3 個方法；實際職責需參考 05_method_flow.md。推測 |
-| Forms/MainForm.vb | Service / Manager / Utility 推測 | 呼叫 0 個方法；實際職責需參考 05_method_flow.md。推測 |
+| 文件 | 類別/模組 | 角色推測 | 方法數 | 呼叫方法數 | 說明 |
+|---|---|---|---|---|---|
+| Forms/MainForm.vb | MainForm | Form / UI | 9 | 6 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule01.vb | MainFormAccessModule01 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule02.vb | MainFormAccessModule02 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule03.vb | MainFormAccessModule03 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule04.vb | MainFormAccessModule04 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule05.vb | MainFormAccessModule05 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule06.vb | MainFormAccessModule06 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule07.vb | MainFormAccessModule07 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule08.vb | MainFormAccessModule08 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule09.vb | MainFormAccessModule09 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule10.vb | MainFormAccessModule10 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule11.vb | MainFormAccessModule11 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule12.vb | MainFormAccessModule12 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule13.vb | MainFormAccessModule13 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule14.vb | MainFormAccessModule14 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule15.vb | MainFormAccessModule15 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule16.vb | MainFormAccessModule16 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule17.vb | MainFormAccessModule17 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule18.vb | MainFormAccessModule18 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule19.vb | MainFormAccessModule19 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
+| Modules/MainFormAccessModule20.vb | MainFormAccessModule20 | Form / UI | 2 | 0 | See docs/05_method_flow.md and docs/chunks/methods/ for method details. |
 
 
 ## 參數設定指南

@@ -1,0 +1,78 @@
+{
+  "chunk_type": "large_file_task",
+  "chunk_id": "Forms_MainForm.vb_lines_1992_1992",
+  "title": "Large File Task: Forms/MainForm.vb lines 1992-1992",
+  "summary": "Task chunk for reviewing a large source file in a bounded line range.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "source_file": {
+      "path": "Forms/MainForm.vb",
+      "language": "VB.NET",
+      "extension": ".vb",
+      "line_count": 2017,
+      "method_count": 9,
+      "class_count": 1
+    },
+    "task_no": 15,
+    "line_range": {
+      "start": 1992,
+      "end": 1992
+    },
+    "context_line_range": {
+      "start": 1982,
+      "end": 2002
+    },
+    "context_before_lines": 10,
+    "context_after_lines": 10,
+    "split_reason": "File has 2017 lines, exceeding the 1000-line threshold.",
+    "task_strategy": "class_gap_fallback",
+    "semantic_blocks": [
+      {
+        "kind": "class",
+        "name": "MainForm",
+        "source": "Forms/MainForm.vb",
+        "language": "VB.NET",
+        "start_line": 6,
+        "end_line": 2016
+      }
+    ],
+    "methods": [],
+    "events": [],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ],
+    "review_goals": [
+      "Summarize responsibilities in this line range.",
+      "Identify event handlers, side effects, device/config/database interactions, and maintenance risks.",
+      "Link findings back to related method, event-flow, form, and source-file chunks."
+    ]
+  },
+  "related_chunks": [
+    "source_file:Forms_MainForm.vb"
+  ]
+}

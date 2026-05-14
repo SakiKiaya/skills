@@ -120,7 +120,7 @@ def form_event_notes(forms):
     return "\n".join(out)
 
 
-def module_table(method_chunks):
+def legacy_module_table(method_chunks):
     rows=[]
     for c in method_chunks[:80]:
         data=c.get("data") or {}; m=data.get("method") or {}; name=m.get("name") or c.get("title"); source=m.get("source"); calls=m.get("calls") or []
@@ -132,6 +132,45 @@ def module_table(method_chunks):
         elif "util" in text or "helper" in text: kind="Utility"
         rows.append([source or name, kind, f"呼叫 {len(calls)} 個方法；實際職責需參考 05_method_flow.md。推測"])
     return table(["類型", "職責", "說明"], rows)
+
+
+def module_table(method_chunks):
+    grouped={}
+    for c in method_chunks:
+        data=c.get("data") or {}; m=data.get("method") or {}
+        source=m.get("source") or "Unknown"
+        module_name=Path(source).stem if source != "Unknown" else str(m.get("name") or c.get("title") or "Unknown")
+        key=(source, module_name)
+        item=grouped.setdefault(key, {"source":source, "module":module_name, "methods":set(), "calls":set(), "kind":"Service / Manager / Utility"})
+        name=m.get("name")
+        if name:
+            item["methods"].add(str(name))
+        for call in m.get("calls") or []:
+            item["calls"].add(str(call))
+        text=(str(module_name)+" "+str(source)+" "+str(name)).lower()
+        if "form" in text:
+            item["kind"]="Form / UI"
+        elif "service" in text:
+            item["kind"]="Service"
+        elif "repo" in text or "database" in text:
+            item["kind"]="Repository"
+        elif "manager" in text:
+            item["kind"]="Manager"
+        elif "viewmodel" in text:
+            item["kind"]="ViewModel"
+        elif "util" in text or "helper" in text:
+            item["kind"]="Utility"
+    rows=[]
+    for item in sorted(grouped.values(), key=lambda x: (x["source"], x["module"]))[:80]:
+        rows.append([
+            item["source"],
+            item["module"],
+            item["kind"],
+            len(item["methods"]),
+            len(item["calls"]),
+            "See docs/05_method_flow.md and docs/chunks/methods/ for method details.",
+        ])
+    return table(["文件", "類別/模組", "角色推測", "方法數", "呼叫方法數", "說明"], rows)
 
 
 def config_table(config_chunks):

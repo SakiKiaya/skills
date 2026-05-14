@@ -3,8 +3,168 @@
     "path": "Forms/MainForm.vb",
     "language": "VB.NET",
     "extension": ".vb",
-    "line_count": 1143,
+    "line_count": 2017,
     "method_count": 9,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule01.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule02.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule03.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule04.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule05.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule06.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule07.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule08.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule09.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule10.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule11.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule12.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule13.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule14.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule15.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule16.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule17.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule18.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule19.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
+    "class_count": 1
+  },
+  {
+    "path": "Modules/MainFormAccessModule20.vb",
+    "language": "VB.NET",
+    "extension": ".vb",
+    "line_count": 14,
+    "method_count": 2,
     "class_count": 1
   }
 ]

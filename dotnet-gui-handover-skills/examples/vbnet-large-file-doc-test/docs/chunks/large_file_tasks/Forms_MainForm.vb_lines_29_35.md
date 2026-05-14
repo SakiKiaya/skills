@@ -12,7 +12,7 @@
 | Context Before Lines | 10 |
 | Context After Lines | 10 |
 | Task Strategy | method_aware |
-| Split Reason | File has 1143 lines, exceeding the 1000-line threshold. |
+| Split Reason | File has 2017 lines, exceeding the 1000-line threshold. |
 
 ## Semantic Boundary
 

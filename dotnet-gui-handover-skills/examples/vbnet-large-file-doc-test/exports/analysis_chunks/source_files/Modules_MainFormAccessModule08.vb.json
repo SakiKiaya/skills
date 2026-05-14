@@ -1,0 +1,79 @@
+{
+  "chunk_type": "source_file",
+  "chunk_id": "Modules_MainFormAccessModule08.vb",
+  "title": "Source File: Modules/MainFormAccessModule08.vb",
+  "summary": "Source-file chunk for file-level ownership, size, methods, events, and risks.",
+  "source_refs": [
+    "Modules/MainFormAccessModule08.vb"
+  ],
+  "data": {
+    "source_file": {
+      "path": "Modules/MainFormAccessModule08.vb",
+      "language": "VB.NET",
+      "extension": ".vb",
+      "line_count": 14,
+      "method_count": 2,
+      "class_count": 1
+    },
+    "source_blocks": [
+      {
+        "kind": "class",
+        "name": "MainFormAccessModule08",
+        "source": "Modules/MainFormAccessModule08.vb",
+        "language": "VB.NET",
+        "start_line": 5,
+        "end_line": 13
+      },
+      {
+        "kind": "method",
+        "name": "BuildForm",
+        "source": "Modules/MainFormAccessModule08.vb",
+        "language": "VB.NET",
+        "start_line": 6,
+        "end_line": 8
+      },
+      {
+        "kind": "method",
+        "name": "ReadFormTitle",
+        "source": "Modules/MainFormAccessModule08.vb",
+        "language": "VB.NET",
+        "start_line": 9,
+        "end_line": 12
+      }
+    ],
+    "methods": [
+      {
+        "name": "BuildForm",
+        "language": "VB.NET",
+        "source": "Modules/MainFormAccessModule08.vb",
+        "line": 6,
+        "end_line": 8,
+        "params": "",
+        "called_by": [],
+        "calls": [],
+        "purpose": "",
+        "side_effects": [],
+        "risks": []
+      },
+      {
+        "name": "ReadFormTitle",
+        "language": "VB.NET",
+        "source": "Modules/MainFormAccessModule08.vb",
+        "line": 9,
+        "end_line": 12,
+        "params": "form As MainForm",
+        "called_by": [],
+        "calls": [],
+        "purpose": "",
+        "side_effects": [],
+        "risks": []
+      }
+    ],
+    "events": [],
+    "risk_candidates": []
+  },
+  "related_chunks": [
+    "method:Modules_MainFormAccessModule08.vb_BuildForm_6",
+    "method:Modules_MainFormAccessModule08.vb_ReadFormTitle_9"
+  ]
+}

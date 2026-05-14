@@ -29,6 +29,7 @@ PLURAL = {
     "source_file": "source_files",
     "large_file_task": "large_file_tasks",
 }
+CHUNK_DOC_FOLDERS = sorted(set(PLURAL.values()))
 
 def load(path: Path, default: Any = None):
     if path.exists():
@@ -338,6 +339,13 @@ def render_chunk(path: Path, out_dir: Path) -> Path:
     out_path.write_text(doc, encoding="utf-8")
     return out_path
 
+def clean_generated_docs(out_dir: Path):
+    for folder in CHUNK_DOC_FOLDERS:
+        doc_dir = out_dir / folder
+        if doc_dir.exists():
+            for path in doc_dir.glob("*.md"):
+                path.unlink()
+
 def find_chunk_by_id(chunks_dir: Path, chunk_id: str) -> list[Path]:
     return list(chunks_dir.rglob(f"{chunk_id}.json"))
 
@@ -367,6 +375,7 @@ def main():
     elif args.chunk_type:
         paths = find_chunks_by_type(chunks_dir, args.chunk_type)
     elif args.all:
+        clean_generated_docs(out_dir)
         paths = sorted(chunks_dir.rglob("*.json"))
         paths = [p for p in paths if p.name != "index.json"]
 

@@ -17,13 +17,9 @@ graph TD
   UI --> Config
   Logic --> Config
   UI --> P_VbLargeFileDocTest["VbLargeFileDocTest"]
-  Device -.-> D_System_Windows_Forms["System.Windows.Forms"]
-  Device -.-> D_System_Configuration["System.Configuration"]
   Device -.-> D_PLC["PLC"]
   Device -.-> D_Camera_SDK["Camera SDK"]
   Device -.-> D_Vision_SDK["Vision SDK"]
-  Device -.-> D_Reference["Reference"]
-  Device -.-> D_Reference["Reference"]
 ```
 
 ## Layer Explanation

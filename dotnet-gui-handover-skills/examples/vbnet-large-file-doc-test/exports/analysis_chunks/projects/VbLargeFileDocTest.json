@@ -37,24 +37,7 @@
       }
     ],
     "related_methods": [],
-    "external_dependency_candidates": [
-      {
-        "dependency_type": "Reference",
-        "name": "System.Windows.Forms",
-        "project": "VbLargeFileDocTest",
-        "purpose": "Referenced dependency",
-        "risk": "Version or deployment mismatch risk",
-        "confidence": 0.75
-      },
-      {
-        "dependency_type": "Reference",
-        "name": "System.Configuration",
-        "project": "VbLargeFileDocTest",
-        "purpose": "Referenced dependency",
-        "risk": "Version or deployment mismatch risk",
-        "confidence": 0.75
-      }
-    ],
+    "external_dependency_candidates": [],
     "risk_candidates": []
   },
   "related_chunks": []

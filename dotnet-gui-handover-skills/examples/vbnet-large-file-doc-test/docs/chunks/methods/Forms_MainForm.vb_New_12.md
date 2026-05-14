@@ -1,31 +1,25 @@
 # Method: New
 
 **用途：**
-執行 Start 類型流程。推測
+執行 Stop 類型流程。推測
 
 **推測依據：**
 - 未偵測到明確觸發來源，需人工確認
-- 名稱或呼叫鏈包含 Start 相關關鍵字: start
-- 呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click, btnStart_Click
+- 名稱或呼叫鏈包含 Stop 相關關鍵字: end
+- 未偵測到明確的內部方法呼叫
 
 **觸發來源：**
 - 未偵測到明確 GUI 事件觸發來源。推測
 
 **主要責任：**
 - 需人工確認此方法在系統中的責任
-- 協調或委派後續方法呼叫
+- 可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認
 
 **副作用：**
-- 可能存取外部設備 / SDK: plc, camera, capture
-- 可能存取 DB 或資料儲存: update
-- 可能更新 UI 狀態或顯示內容: form, update
+- 可能更新 UI 狀態或顯示內容: form
 - 可能建立新物件或初始化流程: new
-- Persistence or write operation candidate 推測
-- External device/API interaction candidate 推測
 
 **維護注意事項：**
-- 檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態
-- 檢查資料庫連線、交易、例外處理與設定來源
 - 若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher
 - 檢查物件生命週期、Dispose、資源釋放與重複初始化風險
 
@@ -36,9 +30,9 @@
 | Source | Forms/MainForm.vb |
 | Line | 12 |
 | Called By | [] |
-| Calls | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus', 'btnSave_Click', 'btnStart_Click'] |
+| Calls | [] |
 | Existing Purpose | N/A |
-| Existing Side Effects | ['Persistence or write operation candidate 推測', 'External device/API interaction candidate 推測'] |
+| Existing Side Effects | [] |
 
 ## Event Triggers
 

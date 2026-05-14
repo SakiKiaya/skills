@@ -12,7 +12,7 @@
 | Context Before Lines | 10 |
 | Context After Lines | 10 |
 | Task Strategy | method_aware |
-| Split Reason | File has 1143 lines, exceeding the 1000-line threshold. |
+| Split Reason | File has 2017 lines, exceeding the 1000-line threshold. |
 
 ## Semantic Boundary
 
@@ -24,7 +24,7 @@
 
 | Method | Start Line | End Line | Calls | Side Effects |
 |---|---|---|---|---|
-| btnSave_Click | 24 | 28 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測', 'External device/API interaction candidate 推測'] |
+| btnSave_Click | 24 | 28 | ['SaveRecipe', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] |
 
 ## Events In Scope
 

@@ -38,7 +38,20 @@ The system SHALL document `MainForm` as a GUI surface with detected events and h
 
 | Method | Calls | Side Effects | Source |
 |---|---|---|---|
-| btnSave_Click | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測', 'External device/API interaction candidate 推測'] | Forms/MainForm.vb |
+| btnStart_Click | ['StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] | Forms/MainForm.vb |
+| btnSave_Click | ['SaveRecipe', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] | Forms/MainForm.vb |
+
+#### Maintenance Notes
+
+- 檢查此 Form 是否過度集中業務邏輯。
+- 檢查事件 handler 是否直接操作設備、DB 或設定檔。
+- 檢查長時間操作是否會阻塞 UI thread。
+
+#### Risks
+
+| Risk | Evidence | Confidence |
+|---|---|---|
+| cross-thread UI risk | invoke | 0.55 |
 
 > Excerpt truncated. See the full chunk document.
 

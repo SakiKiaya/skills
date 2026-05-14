@@ -4,44 +4,23 @@
 
 | Chunk ID | Title | Summary | Sources |
 |---|---|---|---|
-| 0000_VbLargeFileDocTest_System.Windows.Forms | Dependency: VbLargeFileDocTest -> System.Windows.Forms | Dependency chunk. | VbLargeFileDocTest.vbproj |
-| 0001_VbLargeFileDocTest_System.Configuration | Dependency: VbLargeFileDocTest -> System.Configuration | Dependency chunk. | VbLargeFileDocTest.vbproj |
+| 0000_System_References | Dependency Group: System References | Aggregated framework references from System.* assemblies. | VbLargeFileDocTest.vbproj |
 | external_0000_PLC | External Dependency: PLC | External dependency candidate chunk. | N/A |
 | external_0001_Camera_SDK | External Dependency: Camera SDK | External dependency candidate chunk. | N/A |
 | external_0002_Vision_SDK | External Dependency: Vision SDK | External dependency candidate chunk. | N/A |
-| external_0003_Reference | External Dependency: Reference | External dependency candidate chunk. | N/A |
-| external_0004_Reference | External Dependency: Reference | External dependency candidate chunk. | N/A |
 
 ## Dependency Details
 
 
-### [Dependency: VbLargeFileDocTest -> System.Windows.Forms](chunks/dependencies/0000_VbLargeFileDocTest_System.Windows.Forms.md)
+### [Dependency Group: System References](chunks/dependencies/0000_System_References.md)
 
-# Dependency: VbLargeFileDocTest -> System.Windows.Forms
-
-| Field | Value |
-|---|---|
-| type | Reference |
-| project | VbLargeFileDocTest |
-| target | System.Windows.Forms |
-| source | VbLargeFileDocTest.vbproj |
-
-## Maintenance Notes
-
-- 確認版本、部署路徑、x86/x64 相容性。
-- 若為 SDK / COM / Native DLL，需確認 runtime 與授權。
-
-
-### [Dependency: VbLargeFileDocTest -> System.Configuration](chunks/dependencies/0001_VbLargeFileDocTest_System.Configuration.md)
-
-# Dependency: VbLargeFileDocTest -> System.Configuration
+# Dependency Group: System References
 
 | Field | Value |
 |---|---|
-| type | Reference |
-| project | VbLargeFileDocTest |
-| target | System.Configuration |
-| source | VbLargeFileDocTest.vbproj |
+| dependency_group | System References |
+| count | 2 |
+| dependencies | [{'type': 'Reference', 'project': 'VbLargeFileDocTest', 'target': 'System.Windows.Forms', 'source': 'VbLargeFileDocTest.vbproj'}, {'type': 'Reference', 'project': 'VbLargeFileDocTest', 'target': 'System.Configuration', 'source': 'VbLargeFileDocTest.vbproj'}] |
 
 ## Maintenance Notes
 
@@ -96,44 +75,6 @@
 | purpose | External integration candidate 推測 |
 | risk | Initialization, deployment, license, architecture, or runtime failure risk 推測 |
 | confidence | 0.55 |
-
-## Maintenance Notes
-
-- 確認版本、部署路徑、x86/x64 相容性。
-- 若為 SDK / COM / Native DLL，需確認 runtime 與授權。
-
-
-### [External Dependency: Reference](chunks/dependencies/external_0003_Reference.md)
-
-# External Dependency: Reference
-
-| Field | Value |
-|---|---|
-| dependency_type | Reference |
-| name | System.Windows.Forms |
-| project | VbLargeFileDocTest |
-| purpose | Referenced dependency |
-| risk | Version or deployment mismatch risk |
-| confidence | 0.75 |
-
-## Maintenance Notes
-
-- 確認版本、部署路徑、x86/x64 相容性。
-- 若為 SDK / COM / Native DLL，需確認 runtime 與授權。
-
-
-### [External Dependency: Reference](chunks/dependencies/external_0004_Reference.md)
-
-# External Dependency: Reference
-
-| Field | Value |
-|---|---|
-| dependency_type | Reference |
-| name | System.Configuration |
-| project | VbLargeFileDocTest |
-| purpose | Referenced dependency |
-| risk | Version or deployment mismatch risk |
-| confidence | 0.75 |
 
 ## Maintenance Notes
 

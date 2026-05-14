@@ -1,0 +1,108 @@
+{
+  "chunk_type": "method",
+  "chunk_id": "Forms_MainForm.vb_SaveRecipe_2003",
+  "title": "Method: SaveRecipe",
+  "summary": "Method-level chunk for purpose, flow, side effects, and maintenance notes.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "method": {
+      "name": "SaveRecipe",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 2003,
+      "end_line": 2007,
+      "params": "",
+      "called_by": [
+        "btnSave_Click"
+      ],
+      "calls": [],
+      "purpose": "",
+      "side_effects": [
+        "Persistence or write operation candidate 推測"
+      ],
+      "risks": []
+    },
+    "purpose_analysis": [
+      {
+        "method": "SaveRecipe",
+        "class_or_file": "MainForm",
+        "source": "Forms/MainForm.vb",
+        "line": 2003,
+        "called_by": [
+          "btnSave_Click"
+        ],
+        "calls": [],
+        "triggers": [],
+        "inferred_purpose": "執行 Stop 類型流程。推測",
+        "main_responsibility": [
+          "作為內部流程中的被呼叫方法",
+          "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+        ],
+        "side_effects": [
+          "可能更新 UI 狀態或顯示內容: form",
+          "Persistence or write operation candidate 推測"
+        ],
+        "maintenance_notes": [
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+        ],
+        "evidence": [
+          "被其他方法呼叫: btnSave_Click",
+          "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+          "未偵測到明確的內部方法呼叫"
+        ],
+        "analysis_inputs": {
+          "method_name": "SaveRecipe",
+          "class_or_file": "MainForm",
+          "event_triggers": [],
+          "called_methods": [],
+          "called_by": [
+            "btnSave_Click"
+          ],
+          "has_config_candidate": false,
+          "has_db_candidate": false,
+          "has_file_candidate": false,
+          "has_device_candidate": false,
+          "has_ui_update_candidate": true,
+          "has_async_thread_timer_candidate": false,
+          "has_object_creation_candidate": false
+        },
+        "confidence": 0.75
+      }
+    ],
+    "event_triggers": [],
+    "event_flows": [],
+    "callers": [
+      "btnSave_Click"
+    ],
+    "callees": [],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ]
+  },
+  "related_chunks": []
+}

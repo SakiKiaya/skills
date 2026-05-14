@@ -16,7 +16,7 @@
     {
       "type": "ConfigurationManager.AppSettings",
       "source": "Forms/MainForm.vb",
-      "line": 1132,
+      "line": 2005,
       "expression": "ConfigurationManager.AppSettings"
     }
   ]

@@ -1,0 +1,28 @@
+{
+  "chunk_type": "dependency",
+  "chunk_id": "0000_System_References",
+  "title": "Dependency Group: System References",
+  "summary": "Aggregated framework references from System.* assemblies.",
+  "source_refs": [
+    "VbLargeFileDocTest.vbproj"
+  ],
+  "data": {
+    "dependency_group": "System References",
+    "count": 2,
+    "dependencies": [
+      {
+        "type": "Reference",
+        "project": "VbLargeFileDocTest",
+        "target": "System.Windows.Forms",
+        "source": "VbLargeFileDocTest.vbproj"
+      },
+      {
+        "type": "Reference",
+        "project": "VbLargeFileDocTest",
+        "target": "System.Configuration",
+        "source": "VbLargeFileDocTest.vbproj"
+      }
+    ]
+  },
+  "related_chunks": []
+}

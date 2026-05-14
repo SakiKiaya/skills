@@ -11,7 +11,7 @@
       "path": "Forms/MainForm.vb",
       "language": "VB.NET",
       "extension": ".vb",
-      "line_count": 1143,
+      "line_count": 2017,
       "method_count": 9,
       "class_count": 1
     },
@@ -26,7 +26,7 @@
     },
     "context_before_lines": 10,
     "context_after_lines": 10,
-    "split_reason": "File has 1143 lines, exceeding the 1000-line threshold.",
+    "split_reason": "File has 2017 lines, exceeding the 1000-line threshold.",
     "task_strategy": "method_aware",
     "semantic_blocks": [
       {
@@ -46,22 +46,14 @@
         "line": 19,
         "end_line": 23,
         "params": "sender As Object, e As EventArgs",
-        "called_by": [
-          "New"
-        ],
+        "called_by": [],
         "calls": [
-          "CaptureCameraImage",
-          "ConnectPlc",
-          "EvaluateResult",
-          "SaveRecipe",
           "StartInspection",
-          "UpdateStatus",
-          "btnSave_Click"
+          "UpdateStatus"
         ],
         "purpose": "Event handler / UI operation entry candidate 推測",
         "side_effects": [
-          "Persistence or write operation candidate 推測",
-          "External device/API interaction candidate 推測"
+          "Persistence or write operation candidate 推測"
         ],
         "risks": []
       }

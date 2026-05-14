@@ -5,82 +5,51 @@
     "source": "Forms/MainForm.vb",
     "line": 12,
     "called_by": [],
-    "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
-      "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click",
-      "btnStart_Click"
-    ],
+    "calls": [],
     "triggers": [],
-    "inferred_purpose": "執行 Start 類型流程。推測",
+    "inferred_purpose": "執行 Stop 類型流程。推測",
     "main_responsibility": [
       "需人工確認此方法在系統中的責任",
-      "協調或委派後續方法呼叫"
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
     ],
     "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
-      "可能存取 DB 或資料儲存: update",
-      "可能更新 UI 狀態或顯示內容: form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
+      "可能更新 UI 狀態或顯示內容: form",
+      "可能建立新物件或初始化流程: new"
     ],
     "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "檢查資料庫連線、交易、例外處理與設定來源",
       "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
       "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
     ],
     "evidence": [
       "未偵測到明確觸發來源，需人工確認",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click, btnStart_Click"
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
     ],
     "analysis_inputs": {
       "method_name": "New",
       "class_or_file": "MainForm",
       "event_triggers": [],
-      "called_methods": [
-        "CaptureCameraImage",
-        "ConnectPlc",
-        "EvaluateResult",
-        "SaveRecipe",
-        "StartInspection",
-        "UpdateStatus",
-        "btnSave_Click",
-        "btnStart_Click"
-      ],
+      "called_methods": [],
       "called_by": [],
       "has_config_candidate": false,
-      "has_db_candidate": true,
+      "has_db_candidate": false,
       "has_file_candidate": false,
-      "has_device_candidate": true,
+      "has_device_candidate": false,
       "has_ui_update_candidate": true,
       "has_async_thread_timer_candidate": false,
       "has_object_creation_candidate": true
     },
-    "confidence": 0.75
+    "confidence": 0.45
   },
   {
     "method": "btnStart_Click",
     "class_or_file": "MainForm",
     "source": "Forms/MainForm.vb",
     "line": 19,
-    "called_by": [
-      "New"
-    ],
+    "called_by": [],
     "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
       "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click"
+      "UpdateStatus"
     ],
     "triggers": [
       {
@@ -102,24 +71,19 @@
       "協調或委派後續方法呼叫"
     ],
     "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
       "可能存取 DB 或資料儲存: update",
       "可能更新 UI 狀態或顯示內容: ui, form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
+      "Persistence or write operation candidate 推測"
     ],
     "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
       "檢查資料庫連線、交易、例外處理與設定來源",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
     ],
     "evidence": [
       "由事件或事件流程觸發: btnStart.Click, btnStart.Click",
       "方法名稱包含事件處理常見關鍵字",
       "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus, btnSave_Click"
+      "呼叫方法: StartInspection, UpdateStatus"
     ],
     "analysis_inputs": {
       "method_name": "btnStart_Click",
@@ -129,24 +93,17 @@
         "btnStart.Click"
       ],
       "called_methods": [
-        "CaptureCameraImage",
-        "ConnectPlc",
-        "EvaluateResult",
-        "SaveRecipe",
         "StartInspection",
-        "UpdateStatus",
-        "btnSave_Click"
+        "UpdateStatus"
       ],
-      "called_by": [
-        "New"
-      ],
+      "called_by": [],
       "has_config_candidate": false,
       "has_db_candidate": true,
       "has_file_candidate": false,
-      "has_device_candidate": true,
+      "has_device_candidate": false,
       "has_ui_update_candidate": true,
       "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
+      "has_object_creation_candidate": false
     },
     "confidence": 0.75
   },
@@ -155,16 +112,9 @@
     "class_or_file": "MainForm",
     "source": "Forms/MainForm.vb",
     "line": 24,
-    "called_by": [
-      "New",
-      "btnStart_Click"
-    ],
+    "called_by": [],
     "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
       "SaveRecipe",
-      "StartInspection",
       "UpdateStatus"
     ],
     "triggers": [
@@ -181,30 +131,25 @@
         "line": 17
       }
     ],
-    "inferred_purpose": "處理 GUI 或系統事件；執行 Start 類型流程。推測",
+    "inferred_purpose": "處理 GUI 或系統事件；執行 Stop 類型流程。推測",
     "main_responsibility": [
       "作為 GUI / 事件流程的入口或處理節點",
       "協調或委派後續方法呼叫"
     ],
     "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
       "可能存取 DB 或資料儲存: update",
       "可能更新 UI 狀態或顯示內容: ui, form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
+      "Persistence or write operation candidate 推測"
     ],
     "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
       "檢查資料庫連線、交易、例外處理與設定來源",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
     ],
     "evidence": [
       "由事件或事件流程觸發: btnSave.Click, btnSave.Click",
       "方法名稱包含事件處理常見關鍵字",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult, SaveRecipe, StartInspection, UpdateStatus"
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "呼叫方法: SaveRecipe, UpdateStatus"
     ],
     "analysis_inputs": {
       "method_name": "btnSave_Click",
@@ -214,24 +159,17 @@
         "btnSave.Click"
       ],
       "called_methods": [
-        "CaptureCameraImage",
-        "ConnectPlc",
-        "EvaluateResult",
         "SaveRecipe",
-        "StartInspection",
         "UpdateStatus"
       ],
-      "called_by": [
-        "New",
-        "btnStart_Click"
-      ],
+      "called_by": [],
       "has_config_candidate": false,
       "has_db_candidate": true,
       "has_file_candidate": false,
-      "has_device_candidate": true,
+      "has_device_candidate": false,
       "has_ui_update_candidate": true,
       "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
+      "has_object_creation_candidate": false
     },
     "confidence": 0.75
   },
@@ -241,9 +179,7 @@
     "source": "Forms/MainForm.vb",
     "line": 29,
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click"
+      "btnStart_Click"
     ],
     "calls": [
       "CaptureCameraImage",
@@ -259,16 +195,14 @@
     "side_effects": [
       "可能存取外部設備 / SDK: plc, camera, capture",
       "可能更新 UI 狀態或顯示內容: form",
-      "可能建立新物件或初始化流程: new",
       "External device/API interaction candidate 推測"
     ],
     "maintenance_notes": [
       "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
     ],
     "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click",
+      "被其他方法呼叫: btnStart_Click",
       "名稱或呼叫鏈包含 Start 相關關鍵字: start",
       "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult"
     ],
@@ -282,9 +216,7 @@
         "EvaluateResult"
       ],
       "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click"
+        "btnStart_Click"
       ],
       "has_config_candidate": false,
       "has_db_candidate": false,
@@ -292,7 +224,7 @@
       "has_device_candidate": true,
       "has_ui_update_candidate": true,
       "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
+      "has_object_creation_candidate": false
     },
     "confidence": 0.75
   },
@@ -302,9 +234,6 @@
     "source": "Forms/MainForm.vb",
     "line": 36,
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
       "StartInspection"
     ],
     "calls": [],
@@ -315,15 +244,13 @@
       "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
     ],
     "side_effects": [
-      "可能更新 UI 狀態或顯示內容: form",
-      "可能建立新物件或初始化流程: new"
+      "可能更新 UI 狀態或顯示內容: form"
     ],
     "maintenance_notes": [
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
     ],
     "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection",
+      "被其他方法呼叫: StartInspection",
       "名稱或呼叫鏈包含 Start 相關關鍵字: start",
       "未偵測到明確的內部方法呼叫"
     ],
@@ -333,11 +260,238 @@
       "event_triggers": [],
       "called_methods": [],
       "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click",
         "StartInspection"
       ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ConnectPlc",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1994,
+    "called_by": [
+      "StartInspection"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: plc",
+      "可能更新 UI 狀態或顯示內容: form",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "被其他方法呼叫: StartInspection",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ConnectPlc",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "StartInspection"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "CaptureCameraImage",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 1998,
+    "called_by": [
+      "StartInspection"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能存取外部設備 / SDK: camera, capture",
+      "可能更新 UI 狀態或顯示內容: form",
+      "External device/API interaction candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "被其他方法呼叫: StartInspection",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "CaptureCameraImage",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "StartInspection"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": true,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "SaveRecipe",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 2003,
+    "called_by": [
+      "btnSave_Click"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form",
+      "Persistence or write operation candidate 推測"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "被其他方法呼叫: btnSave_Click",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "SaveRecipe",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "btnSave_Click"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "UpdateStatus",
+    "class_or_file": "MainForm",
+    "source": "Forms/MainForm.vb",
+    "line": 2008,
+    "called_by": [
+      "btnStart_Click",
+      "btnSave_Click"
+    ],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Start 類型流程。推測",
+    "main_responsibility": [
+      "作為內部流程中的被呼叫方法",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能存取 DB 或資料儲存: update",
+      "可能更新 UI 狀態或顯示內容: form, update",
+      "Persistence or write operation candidate 推測"
+    ],
+    "maintenance_notes": [
+      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "被其他方法呼叫: btnStart_Click, btnSave_Click",
+      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "UpdateStatus",
+      "class_or_file": "MainForm",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [
+        "btnStart_Click",
+        "btnSave_Click"
+      ],
+      "has_config_candidate": false,
+      "has_db_candidate": true,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.75
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule01",
+    "source": "Modules/MainFormAccessModule01.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule01",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
       "has_config_candidate": false,
       "has_db_candidate": false,
       "has_file_candidate": false,
@@ -349,259 +503,1601 @@
     "confidence": 0.45
   },
   {
-    "method": "ConnectPlc",
-    "class_or_file": "MainForm",
-    "source": "Forms/MainForm.vb",
-    "line": 1121,
-    "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "StartInspection"
-    ],
-    "calls": [
-      "CaptureCameraImage",
-      "SaveRecipe",
-      "UpdateStatus"
-    ],
-    "triggers": [],
-    "inferred_purpose": "執行 Start 類型流程。推測",
-    "main_responsibility": [
-      "作為內部流程中的被呼叫方法",
-      "協調或委派後續方法呼叫"
-    ],
-    "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
-      "可能存取 DB 或資料儲存: update",
-      "可能更新 UI 狀態或顯示內容: form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
-    ],
-    "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "檢查資料庫連線、交易、例外處理與設定來源",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
-    ],
-    "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: CaptureCameraImage, SaveRecipe, UpdateStatus"
-    ],
-    "analysis_inputs": {
-      "method_name": "ConnectPlc",
-      "class_or_file": "MainForm",
-      "event_triggers": [],
-      "called_methods": [
-        "CaptureCameraImage",
-        "SaveRecipe",
-        "UpdateStatus"
-      ],
-      "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click",
-        "StartInspection"
-      ],
-      "has_config_candidate": false,
-      "has_db_candidate": true,
-      "has_file_candidate": false,
-      "has_device_candidate": true,
-      "has_ui_update_candidate": true,
-      "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
-    },
-    "confidence": 0.75
-  },
-  {
-    "method": "CaptureCameraImage",
-    "class_or_file": "MainForm",
-    "source": "Forms/MainForm.vb",
-    "line": 1126,
-    "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "StartInspection",
-      "ConnectPlc"
-    ],
-    "calls": [
-      "SaveRecipe",
-      "UpdateStatus"
-    ],
-    "triggers": [],
-    "inferred_purpose": "執行 Start 類型流程。推測",
-    "main_responsibility": [
-      "作為內部流程中的被呼叫方法",
-      "協調或委派後續方法呼叫"
-    ],
-    "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
-      "可能存取 DB 或資料儲存: update",
-      "可能更新 UI 狀態或顯示內容: form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
-    ],
-    "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "檢查資料庫連線、交易、例外處理與設定來源",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
-    ],
-    "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, StartInspection, ConnectPlc",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: SaveRecipe, UpdateStatus"
-    ],
-    "analysis_inputs": {
-      "method_name": "CaptureCameraImage",
-      "class_or_file": "MainForm",
-      "event_triggers": [],
-      "called_methods": [
-        "SaveRecipe",
-        "UpdateStatus"
-      ],
-      "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click",
-        "StartInspection",
-        "ConnectPlc"
-      ],
-      "has_config_candidate": false,
-      "has_db_candidate": true,
-      "has_file_candidate": false,
-      "has_device_candidate": true,
-      "has_ui_update_candidate": true,
-      "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
-    },
-    "confidence": 0.75
-  },
-  {
-    "method": "SaveRecipe",
-    "class_or_file": "MainForm",
-    "source": "Forms/MainForm.vb",
-    "line": 1130,
-    "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "ConnectPlc",
-      "CaptureCameraImage"
-    ],
-    "calls": [
-      "UpdateStatus"
-    ],
-    "triggers": [],
-    "inferred_purpose": "執行 Start 類型流程。推測",
-    "main_responsibility": [
-      "作為內部流程中的被呼叫方法",
-      "協調或委派後續方法呼叫"
-    ],
-    "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
-      "可能存取 DB 或資料儲存: update",
-      "可能更新 UI 狀態或顯示內容: form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測"
-    ],
-    "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "檢查資料庫連線、交易、例外處理與設定來源",
-      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
-    ],
-    "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, ConnectPlc, CaptureCameraImage",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
-      "呼叫方法: UpdateStatus"
-    ],
-    "analysis_inputs": {
-      "method_name": "SaveRecipe",
-      "class_or_file": "MainForm",
-      "event_triggers": [],
-      "called_methods": [
-        "UpdateStatus"
-      ],
-      "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click",
-        "ConnectPlc",
-        "CaptureCameraImage"
-      ],
-      "has_config_candidate": false,
-      "has_db_candidate": true,
-      "has_file_candidate": false,
-      "has_device_candidate": true,
-      "has_ui_update_candidate": true,
-      "has_async_thread_timer_candidate": false,
-      "has_object_creation_candidate": true
-    },
-    "confidence": 0.75
-  },
-  {
-    "method": "UpdateStatus",
-    "class_or_file": "MainForm",
-    "source": "Forms/MainForm.vb",
-    "line": 1135,
-    "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "ConnectPlc",
-      "CaptureCameraImage",
-      "SaveRecipe"
-    ],
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule01",
+    "source": "Modules/MainFormAccessModule01.vb",
+    "line": 9,
+    "called_by": [],
     "calls": [],
     "triggers": [],
-    "inferred_purpose": "執行 Start 類型流程。推測",
+    "inferred_purpose": "執行 Stop 類型流程。推測",
     "main_responsibility": [
-      "作為內部流程中的被呼叫方法",
+      "需人工確認此方法在系統中的責任",
       "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
     ],
     "side_effects": [
-      "可能存取外部設備 / SDK: plc, camera, capture",
-      "可能存取 DB 或資料儲存: update",
-      "可能更新 UI 狀態或顯示內容: form, update",
-      "可能建立新物件或初始化流程: new",
-      "Persistence or write operation candidate 推測"
+      "可能更新 UI 狀態或顯示內容: form"
     ],
     "maintenance_notes": [
-      "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-      "檢查資料庫連線、交易、例外處理與設定來源",
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule01",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule02",
+    "source": "Modules/MainFormAccessModule02.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
       "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
       "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
     ],
     "evidence": [
-      "被其他方法呼叫: New, btnStart_Click, btnSave_Click, ConnectPlc, CaptureCameraImage, SaveRecipe",
-      "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
       "未偵測到明確的內部方法呼叫"
     ],
     "analysis_inputs": {
-      "method_name": "UpdateStatus",
-      "class_or_file": "MainForm",
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule02",
       "event_triggers": [],
       "called_methods": [],
-      "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click",
-        "ConnectPlc",
-        "CaptureCameraImage",
-        "SaveRecipe"
-      ],
+      "called_by": [],
       "has_config_candidate": false,
-      "has_db_candidate": true,
+      "has_db_candidate": false,
       "has_file_candidate": false,
-      "has_device_candidate": true,
+      "has_device_candidate": false,
       "has_ui_update_candidate": true,
       "has_async_thread_timer_candidate": false,
       "has_object_creation_candidate": true
     },
-    "confidence": 0.75
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule02",
+    "source": "Modules/MainFormAccessModule02.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule02",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule03",
+    "source": "Modules/MainFormAccessModule03.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule03",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule03",
+    "source": "Modules/MainFormAccessModule03.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule03",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule04",
+    "source": "Modules/MainFormAccessModule04.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule04",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule04",
+    "source": "Modules/MainFormAccessModule04.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule04",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule05",
+    "source": "Modules/MainFormAccessModule05.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule05",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule05",
+    "source": "Modules/MainFormAccessModule05.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule05",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule06",
+    "source": "Modules/MainFormAccessModule06.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule06",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule06",
+    "source": "Modules/MainFormAccessModule06.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule06",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule07",
+    "source": "Modules/MainFormAccessModule07.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule07",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule07",
+    "source": "Modules/MainFormAccessModule07.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule07",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule08",
+    "source": "Modules/MainFormAccessModule08.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule08",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule08",
+    "source": "Modules/MainFormAccessModule08.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule08",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule09",
+    "source": "Modules/MainFormAccessModule09.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule09",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule09",
+    "source": "Modules/MainFormAccessModule09.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule09",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule10",
+    "source": "Modules/MainFormAccessModule10.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule10",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule10",
+    "source": "Modules/MainFormAccessModule10.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule10",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule11",
+    "source": "Modules/MainFormAccessModule11.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule11",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule11",
+    "source": "Modules/MainFormAccessModule11.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule11",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule12",
+    "source": "Modules/MainFormAccessModule12.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule12",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule12",
+    "source": "Modules/MainFormAccessModule12.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule12",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule13",
+    "source": "Modules/MainFormAccessModule13.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule13",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule13",
+    "source": "Modules/MainFormAccessModule13.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule13",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule14",
+    "source": "Modules/MainFormAccessModule14.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule14",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule14",
+    "source": "Modules/MainFormAccessModule14.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule14",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule15",
+    "source": "Modules/MainFormAccessModule15.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule15",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule15",
+    "source": "Modules/MainFormAccessModule15.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule15",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule16",
+    "source": "Modules/MainFormAccessModule16.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule16",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule16",
+    "source": "Modules/MainFormAccessModule16.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule16",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule17",
+    "source": "Modules/MainFormAccessModule17.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule17",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule17",
+    "source": "Modules/MainFormAccessModule17.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule17",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule18",
+    "source": "Modules/MainFormAccessModule18.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule18",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule18",
+    "source": "Modules/MainFormAccessModule18.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule18",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule19",
+    "source": "Modules/MainFormAccessModule19.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule19",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule19",
+    "source": "Modules/MainFormAccessModule19.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule19",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "BuildForm",
+    "class_or_file": "MainFormAccessModule20",
+    "source": "Modules/MainFormAccessModule20.vb",
+    "line": 6,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: ui, form",
+      "可能建立新物件或初始化流程: build"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
+      "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "BuildForm",
+      "class_or_file": "MainFormAccessModule20",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": true
+    },
+    "confidence": 0.45
+  },
+  {
+    "method": "ReadFormTitle",
+    "class_or_file": "MainFormAccessModule20",
+    "source": "Modules/MainFormAccessModule20.vb",
+    "line": 9,
+    "called_by": [],
+    "calls": [],
+    "triggers": [],
+    "inferred_purpose": "執行 Stop 類型流程。推測",
+    "main_responsibility": [
+      "需人工確認此方法在系統中的責任",
+      "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+    ],
+    "side_effects": [
+      "可能更新 UI 狀態或顯示內容: form"
+    ],
+    "maintenance_notes": [
+      "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+    ],
+    "evidence": [
+      "未偵測到明確觸發來源，需人工確認",
+      "名稱或呼叫鏈包含 Stop 相關關鍵字: end",
+      "未偵測到明確的內部方法呼叫"
+    ],
+    "analysis_inputs": {
+      "method_name": "ReadFormTitle",
+      "class_or_file": "MainFormAccessModule20",
+      "event_triggers": [],
+      "called_methods": [],
+      "called_by": [],
+      "has_config_candidate": false,
+      "has_db_candidate": false,
+      "has_file_candidate": false,
+      "has_device_candidate": false,
+      "has_ui_update_candidate": true,
+      "has_async_thread_timer_candidate": false,
+      "has_object_creation_candidate": false
+    },
+    "confidence": 0.45
   }
 ]

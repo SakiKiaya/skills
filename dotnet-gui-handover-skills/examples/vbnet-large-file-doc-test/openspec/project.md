@@ -14,13 +14,13 @@ This OpenSpec workspace describes the current structure and behavior of the anal
 
 ```json
 {
-  "source_file": 1,
-  "large_file_task": 15,
+  "source_file": 21,
+  "large_file_task": 20,
   "project": 1,
-  "method": 9,
+  "method": 49,
   "event_flow": 2,
   "form": 1,
-  "dependency": 7,
+  "dependency": 4,
   "config": 3,
   "risk": 4
 }

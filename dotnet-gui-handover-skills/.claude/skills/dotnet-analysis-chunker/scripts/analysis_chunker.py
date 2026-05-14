@@ -22,6 +22,17 @@ from typing import Any
 LARGE_FILE_LINE_THRESHOLD = 1000
 LARGE_FILE_TASK_LINES = 800
 OVERLAP_CONTEXT_LINES = 10
+CHUNK_FOLDERS = [
+    "source_files",
+    "large_file_tasks",
+    "projects",
+    "methods",
+    "event_flows",
+    "forms",
+    "dependencies",
+    "configs",
+    "risks",
+]
 
 def load(path: Path, default: Any):
     if path.exists():
@@ -34,6 +45,16 @@ def load(path: Path, default: Any):
 def write(path: Path, data: Any):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def clean_generated_chunks(out: Path):
+    for folder in CHUNK_FOLDERS:
+        chunk_dir = out / folder
+        if chunk_dir.exists():
+            for path in chunk_dir.glob("*.json"):
+                path.unlink()
+    index_path = out / "index.json"
+    if index_path.exists():
+        index_path.unlink()
 
 def safe_id(value: Any) -> str:
     s = str(value or "unknown")
@@ -66,6 +87,13 @@ def make_chunk(chunk_type: str, chunk_id: str, title: str, data: Any, summary: s
         "data": data,
         "related_chunks": related or [],
     }
+
+def dependency_name(value: Any) -> str:
+    return str(value or "").split(",", 1)[0].strip()
+
+def is_system_reference(dep: dict[str, Any]) -> bool:
+    name = dependency_name(dep.get("target"))
+    return dep.get("type") == "Reference" and (name == "System" or name.startswith("System."))
 
 def method_key(method: dict[str, Any]) -> str:
     return safe_id(f"{method.get('source','unknown')}::{method.get('name','method')}::{method.get('line','')}")
@@ -122,21 +150,90 @@ def block_end(block: dict[str, Any]) -> int:
 def block_size(start_line: int, end_line: int) -> int:
     return max(0, end_line - start_line + 1)
 
-def child_blocks(blocks: list[dict[str, Any]], start_line: int, end_line: int, kinds: set[str]) -> list[dict[str, Any]]:
-    children = []
+SCOPE_CHILD_PRIORITIES: dict[str, list[set[str]]] = {
+    "file": [{"class"}],
+    "class": [{"region", "method"}],
+    "region": [{"method"}, {"switch", "if", "try"}],
+    "method": [{"region"}, {"switch", "if", "try"}],
+    "switch": [{"if", "try"}],
+    "if": [{"try"}],
+    "try": [{"switch", "if"}],
+}
+
+def sorted_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(blocks, key=lambda b: (block_start(b), block_end(b), str(b.get("kind")), str(b.get("name"))))
+
+def priority_child_blocks(
+    blocks: list[dict[str, Any]],
+    start_line: int,
+    end_line: int,
+    priority_levels: list[set[str]],
+) -> list[dict[str, Any]]:
+    selected: list[dict[str, Any]] = []
+    selected_ranges: list[tuple[int, int]] = []
+    for kinds in priority_levels:
+        candidates = []
+        for block in blocks:
+            b_start = block_start(block)
+            b_end = block_end(block)
+            if block.get("kind") not in kinds:
+                continue
+            if not (start_line <= b_start <= end_line and b_end <= end_line):
+                continue
+            if b_start == start_line and b_end == end_line:
+                continue
+            if any(ranges_overlap(b_start, b_end, s, e) for s, e in selected_ranges):
+                continue
+            candidates.append(block)
+        for child in sorted_blocks(candidates):
+            c_start = block_start(child)
+            c_end = block_end(child)
+            if any(ranges_overlap(c_start, c_end, s, e) for s, e in selected_ranges):
+                continue
+            selected.append(child)
+            selected_ranges.append((c_start, c_end))
+    return sorted_blocks(selected)
+
+def covering_semantic_blocks(
+    blocks: list[dict[str, Any]],
+    start_line: int,
+    end_line: int,
+    kinds: set[str],
+) -> list[dict[str, Any]]:
+    covering = []
+    span = block_size(start_line, end_line)
     for block in blocks:
         b_start = block_start(block)
         b_end = block_end(block)
-        if block.get("kind") in kinds and start_line <= b_start <= end_line and b_end <= end_line:
-            children.append(block)
-    return sorted(children, key=lambda b: (block_start(b), block_end(b), str(b.get("kind")), str(b.get("name"))))
+        overlap = max(0, min(end_line, b_end) - max(start_line, b_start) + 1)
+        contains_range = b_start <= start_line and end_line <= b_end
+        mostly_overlaps_range = span > 0 and overlap / span >= 0.5
+        if block.get("kind") in kinds and (contains_range or mostly_overlaps_range):
+            covering.append(block)
+    return sorted(covering, key=lambda b: (block_size(block_start(b), block_end(b)), block_start(b), block_end(b)))
 
-def fallback_task_specs(start_line: int, end_line: int, reason: str) -> list[dict[str, Any]]:
+def merge_semantic_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    seen = set()
+    merged = []
+    for block in sorted_blocks([b for b in blocks if b]):
+        key = (block.get("kind"), block.get("source"), block_start(block), block_end(block), block.get("name"))
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(block)
+    return merged
+
+def fallback_task_specs(
+    start_line: int,
+    end_line: int,
+    reason: str,
+    semantic_blocks: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     return [
         {
             "line_range": {"start": start, "end": end},
             "split_strategy": reason,
-            "semantic_blocks": [],
+            "semantic_blocks": merge_semantic_blocks(semantic_blocks or []),
         }
         for start, end in line_windows_for_range(start_line, end_line)
     ]
@@ -159,14 +256,14 @@ def split_semantic_range(
             "semantic_blocks": semantic_blocks,
         }]
 
-    child_kind_order = {
-        "file": {"class"},
-        "class": {"method"},
-        "method": {"switch"},
-    }
-    children = child_blocks(blocks, start_line, end_line, child_kind_order.get(scope_kind, set()))
+    children = priority_child_blocks(blocks, start_line, end_line, SCOPE_CHILD_PRIORITIES.get(scope_kind, []))
     if not children:
-        return fallback_task_specs(start_line, end_line, f"{scope_kind}_line_window_fallback")
+        return fallback_task_specs(
+            start_line,
+            end_line,
+            f"{scope_kind}_line_window_fallback",
+            [scope_block] if scope_block else [],
+        )
 
     specs = []
     cursor = start_line
@@ -174,17 +271,31 @@ def split_semantic_range(
         child_start = block_start(child)
         child_end = block_end(child)
         if cursor < child_start:
-            specs.extend(fallback_task_specs(cursor, child_start - 1, f"{scope_kind}_gap_fallback"))
+            gap_end = child_start - 1
+            gap_blocks = ([scope_block] if scope_block else []) + covering_semantic_blocks(
+                blocks,
+                cursor,
+                gap_end,
+                {"region", "method", "switch", "if", "try"},
+            )
+            specs.extend(fallback_task_specs(cursor, gap_end, f"{scope_kind}_gap_fallback", gap_blocks))
         specs.extend(split_semantic_range(child_start, child_end, str(child.get("kind") or "block"), blocks, child))
         cursor = max(cursor, child_end + 1)
     if cursor <= end_line:
-        specs.extend(fallback_task_specs(cursor, end_line, f"{scope_kind}_gap_fallback"))
+        gap_blocks = ([scope_block] if scope_block else []) + covering_semantic_blocks(
+            blocks,
+            cursor,
+            end_line,
+            {"region", "method", "switch", "if", "try"},
+        )
+        specs.extend(fallback_task_specs(cursor, end_line, f"{scope_kind}_gap_fallback", gap_blocks))
     return specs
 
 def main(analysis_dir: str, chunks_dir: str) -> int:
     analysis = Path(analysis_dir)
     out = Path(chunks_dir)
     out.mkdir(parents=True, exist_ok=True)
+    clean_generated_chunks(out)
 
     projects = load(analysis / "projects.json", [])
     dependencies = load(analysis / "dependencies.json", [])
@@ -423,7 +534,27 @@ def main(analysis_dir: str, chunks_dir: str) -> int:
         add_index(chunk)
 
     # Dependency chunks
-    for i, d in enumerate(dependencies):
+    system_dependencies = [d for d in dependencies if is_system_reference(d)]
+    regular_dependencies = [d for d in dependencies if not is_system_reference(d)]
+
+    if system_dependencies:
+        data = {
+            "dependency_group": "System References",
+            "count": len(system_dependencies),
+            "dependencies": system_dependencies,
+        }
+        chunk = make_chunk(
+            "dependency",
+            "0000_System_References",
+            "Dependency Group: System References",
+            data,
+            "Aggregated framework references from System.* assemblies.",
+        )
+        write(out / "dependencies" / "0000_System_References.json", chunk)
+        add_index(chunk)
+
+    offset = 1 if system_dependencies else 0
+    for i, d in enumerate(regular_dependencies, start=offset):
         cid = safe_id(f"{i:04d}_{d.get('project')}_{d.get('target')}")
         chunk = make_chunk("dependency", cid, f"Dependency: {d.get('project')} -> {d.get('target')}", d, "Dependency chunk.")
         write(out / "dependencies" / f"{cid}.json", chunk)

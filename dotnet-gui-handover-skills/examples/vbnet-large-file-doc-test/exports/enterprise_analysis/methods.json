@@ -7,21 +7,9 @@
     "end_line": 18,
     "params": "",
     "called_by": [],
-    "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
-      "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click",
-      "btnStart_Click"
-    ],
+    "calls": [],
     "purpose": "",
-    "side_effects": [
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
-    ],
+    "side_effects": [],
     "risks": []
   },
   {
@@ -31,22 +19,14 @@
     "line": 19,
     "end_line": 23,
     "params": "sender As Object, e As EventArgs",
-    "called_by": [
-      "New"
-    ],
+    "called_by": [],
     "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
-      "SaveRecipe",
       "StartInspection",
-      "UpdateStatus",
-      "btnSave_Click"
+      "UpdateStatus"
     ],
     "purpose": "Event handler / UI operation entry candidate 推測",
     "side_effects": [
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
+      "Persistence or write operation candidate 推測"
     ],
     "risks": []
   },
@@ -57,22 +37,14 @@
     "line": 24,
     "end_line": 28,
     "params": "sender As Object, e As EventArgs",
-    "called_by": [
-      "New",
-      "btnStart_Click"
-    ],
+    "called_by": [],
     "calls": [
-      "CaptureCameraImage",
-      "ConnectPlc",
-      "EvaluateResult",
       "SaveRecipe",
-      "StartInspection",
       "UpdateStatus"
     ],
     "purpose": "Event handler / UI operation entry candidate 推測",
     "side_effects": [
-      "Persistence or write operation candidate 推測",
-      "External device/API interaction candidate 推測"
+      "Persistence or write operation candidate 推測"
     ],
     "risks": []
   },
@@ -84,9 +56,7 @@
     "end_line": 35,
     "params": "",
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click"
+      "btnStart_Click"
     ],
     "calls": [
       "CaptureCameraImage",
@@ -104,12 +74,9 @@
     "language": "VB.NET",
     "source": "Forms/MainForm.vb",
     "line": 36,
-    "end_line": 1120,
+    "end_line": 1991,
     "params": "mode As Integer",
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
       "StartInspection"
     ],
     "calls": [],
@@ -121,23 +88,15 @@
     "name": "ConnectPlc",
     "language": "VB.NET",
     "source": "Forms/MainForm.vb",
-    "line": 1121,
-    "end_line": 1125,
+    "line": 1994,
+    "end_line": 1997,
     "params": "ip As String",
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
       "StartInspection"
     ],
-    "calls": [
-      "CaptureCameraImage",
-      "SaveRecipe",
-      "UpdateStatus"
-    ],
+    "calls": [],
     "purpose": "",
     "side_effects": [
-      "Persistence or write operation candidate 推測",
       "External device/API interaction candidate 推測"
     ],
     "risks": []
@@ -146,23 +105,15 @@
     "name": "CaptureCameraImage",
     "language": "VB.NET",
     "source": "Forms/MainForm.vb",
-    "line": 1126,
-    "end_line": 1129,
+    "line": 1998,
+    "end_line": 2001,
     "params": "",
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "StartInspection",
-      "ConnectPlc"
+      "StartInspection"
     ],
-    "calls": [
-      "SaveRecipe",
-      "UpdateStatus"
-    ],
+    "calls": [],
     "purpose": "",
     "side_effects": [
-      "Persistence or write operation candidate 推測",
       "External device/API interaction candidate 推測"
     ],
     "risks": []
@@ -171,19 +122,13 @@
     "name": "SaveRecipe",
     "language": "VB.NET",
     "source": "Forms/MainForm.vb",
-    "line": 1130,
-    "end_line": 1134,
+    "line": 2003,
+    "end_line": 2007,
     "params": "",
     "called_by": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click",
-      "ConnectPlc",
-      "CaptureCameraImage"
+      "btnSave_Click"
     ],
-    "calls": [
-      "UpdateStatus"
-    ],
+    "calls": [],
     "purpose": "",
     "side_effects": [
       "Persistence or write operation candidate 推測"
@@ -194,22 +139,538 @@
     "name": "UpdateStatus",
     "language": "VB.NET",
     "source": "Forms/MainForm.vb",
-    "line": 1135,
-    "end_line": 1142,
+    "line": 2008,
+    "end_line": 2015,
     "params": "message As String",
     "called_by": [
-      "New",
       "btnStart_Click",
-      "btnSave_Click",
-      "ConnectPlc",
-      "CaptureCameraImage",
-      "SaveRecipe"
+      "btnSave_Click"
     ],
     "calls": [],
     "purpose": "",
     "side_effects": [
       "Persistence or write operation candidate 推測"
     ],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule01.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule01.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule02.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule02.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule03.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule03.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule04.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule04.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule05.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule05.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule06.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule06.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule07.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule07.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule08.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule08.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule09.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule09.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule10.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule10.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule11.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule11.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule12.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule12.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule13.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule13.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule14.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule14.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule15.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule15.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule16.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule16.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule17.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule17.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule18.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule18.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule19.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule19.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "BuildForm",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule20.vb",
+    "line": 6,
+    "end_line": 8,
+    "params": "",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
+    "risks": []
+  },
+  {
+    "name": "ReadFormTitle",
+    "language": "VB.NET",
+    "source": "Modules/MainFormAccessModule20.vb",
+    "line": 9,
+    "end_line": 12,
+    "params": "form As MainForm",
+    "called_by": [],
+    "calls": [],
+    "purpose": "",
+    "side_effects": [],
     "risks": []
   }
 ]

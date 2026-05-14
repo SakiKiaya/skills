@@ -7,7 +7,7 @@
 | Path | Forms/MainForm.vb |
 | Language | VB.NET |
 | Extension | .vb |
-| Line Count | 1143 |
+| Line Count | 2017 |
 | Method Count | 9 |
 | Class Count | 1 |
 
@@ -15,31 +15,36 @@
 
 | Kind | Name | Start Line | End Line |
 |---|---|---|---|
-| class | MainForm | 6 | 1143 |
+| class | MainForm | 6 | 2016 |
 | method | New | 12 | 18 |
 | method | btnStart_Click | 19 | 23 |
 | method | btnSave_Click | 24 | 28 |
 | method | StartInspection | 29 | 35 |
-| method | EvaluateResult | 36 | 1120 |
-| switch | mode | 38 | 45 |
-| method | ConnectPlc | 1121 | 1125 |
-| method | CaptureCameraImage | 1126 | 1129 |
-| method | SaveRecipe | 1130 | 1134 |
-| method | UpdateStatus | 1135 | 1142 |
+| method | EvaluateResult | 36 | 1991 |
+| switch | mode | 38 | 916 |
+| region | inspection branch filler 0 | 833 | 846 |
+| region | inspection branch filler 1 | 883 | 892 |
+| region | inspection branch filler 2 | 894 | 901 |
+| region | PLC and Camera Simulation | 1993 | 2002 |
+| method | ConnectPlc | 1994 | 1997 |
+| method | CaptureCameraImage | 1998 | 2001 |
+| method | SaveRecipe | 2003 | 2007 |
+| method | UpdateStatus | 2008 | 2015 |
+| if | Me.InvokeRequired | 2010 | 2013 |
 
 ## Methods
 
 | Method | Start Line | End Line | Calls | Called By |
 |---|---|---|---|---|
-| New | 12 | 18 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus', 'btnSave_Click', 'btnStart_Click'] | [] |
-| btnStart_Click | 19 | 23 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus', 'btnSave_Click'] | ['New'] |
-| btnSave_Click | 24 | 28 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult', 'SaveRecipe', 'StartInspection', 'UpdateStatus'] | ['New', 'btnStart_Click'] |
-| StartInspection | 29 | 35 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult'] | ['New', 'btnStart_Click', 'btnSave_Click'] |
-| EvaluateResult | 36 | 1120 | [] | ['New', 'btnStart_Click', 'btnSave_Click', 'StartInspection'] |
-| ConnectPlc | 1121 | 1125 | ['CaptureCameraImage', 'SaveRecipe', 'UpdateStatus'] | ['New', 'btnStart_Click', 'btnSave_Click', 'StartInspection'] |
-| CaptureCameraImage | 1126 | 1129 | ['SaveRecipe', 'UpdateStatus'] | ['New', 'btnStart_Click', 'btnSave_Click', 'StartInspection', 'ConnectPlc'] |
-| SaveRecipe | 1130 | 1134 | ['UpdateStatus'] | ['New', 'btnStart_Click', 'btnSave_Click', 'ConnectPlc', 'CaptureCameraImage'] |
-| UpdateStatus | 1135 | 1142 | [] | ['New', 'btnStart_Click', 'btnSave_Click', 'ConnectPlc', 'CaptureCameraImage', 'SaveRecipe'] |
+| New | 12 | 18 | [] | [] |
+| btnStart_Click | 19 | 23 | ['StartInspection', 'UpdateStatus'] | [] |
+| btnSave_Click | 24 | 28 | ['SaveRecipe', 'UpdateStatus'] | [] |
+| StartInspection | 29 | 35 | ['CaptureCameraImage', 'ConnectPlc', 'EvaluateResult'] | ['btnStart_Click'] |
+| EvaluateResult | 36 | 1991 | [] | ['StartInspection'] |
+| ConnectPlc | 1994 | 1997 | [] | ['StartInspection'] |
+| CaptureCameraImage | 1998 | 2001 | [] | ['StartInspection'] |
+| SaveRecipe | 2003 | 2007 | [] | ['btnSave_Click'] |
+| UpdateStatus | 2008 | 2015 | [] | ['btnStart_Click', 'btnSave_Click'] |
 
 ## Events
 

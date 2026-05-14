@@ -1,0 +1,110 @@
+{
+  "chunk_type": "method",
+  "chunk_id": "Forms_MainForm.vb_CaptureCameraImage_1998",
+  "title": "Method: CaptureCameraImage",
+  "summary": "Method-level chunk for purpose, flow, side effects, and maintenance notes.",
+  "source_refs": [
+    "Forms/MainForm.vb"
+  ],
+  "data": {
+    "method": {
+      "name": "CaptureCameraImage",
+      "language": "VB.NET",
+      "source": "Forms/MainForm.vb",
+      "line": 1998,
+      "end_line": 2001,
+      "params": "",
+      "called_by": [
+        "StartInspection"
+      ],
+      "calls": [],
+      "purpose": "",
+      "side_effects": [
+        "External device/API interaction candidate 推測"
+      ],
+      "risks": []
+    },
+    "purpose_analysis": [
+      {
+        "method": "CaptureCameraImage",
+        "class_or_file": "MainForm",
+        "source": "Forms/MainForm.vb",
+        "line": 1998,
+        "called_by": [
+          "StartInspection"
+        ],
+        "calls": [],
+        "triggers": [],
+        "inferred_purpose": "執行 Start 類型流程。推測",
+        "main_responsibility": [
+          "作為內部流程中的被呼叫方法",
+          "可能是簡單 setter/getter、事件終點、或外部 API 呼叫點，需人工確認"
+        ],
+        "side_effects": [
+          "可能存取外部設備 / SDK: camera, capture",
+          "可能更新 UI 狀態或顯示內容: form",
+          "External device/API interaction candidate 推測"
+        ],
+        "maintenance_notes": [
+          "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
+        ],
+        "evidence": [
+          "被其他方法呼叫: StartInspection",
+          "名稱或呼叫鏈包含 Start 相關關鍵字: start",
+          "未偵測到明確的內部方法呼叫"
+        ],
+        "analysis_inputs": {
+          "method_name": "CaptureCameraImage",
+          "class_or_file": "MainForm",
+          "event_triggers": [],
+          "called_methods": [],
+          "called_by": [
+            "StartInspection"
+          ],
+          "has_config_candidate": false,
+          "has_db_candidate": false,
+          "has_file_candidate": false,
+          "has_device_candidate": true,
+          "has_ui_update_candidate": true,
+          "has_async_thread_timer_candidate": false,
+          "has_object_creation_candidate": false
+        },
+        "confidence": 0.75
+      }
+    ],
+    "event_triggers": [],
+    "event_flows": [],
+    "callers": [
+      "StartInspection"
+    ],
+    "callees": [],
+    "risk_candidates": [
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "invoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "cross-thread UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "begininvoke",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "event leak risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "addhandler",
+        "confidence": 0.55
+      },
+      {
+        "risk_type": "blocking UI risk",
+        "source": "Forms/MainForm.vb",
+        "evidence": "thread.sleep",
+        "confidence": 0.55
+      }
+    ]
+  },
+  "related_chunks": []
+}

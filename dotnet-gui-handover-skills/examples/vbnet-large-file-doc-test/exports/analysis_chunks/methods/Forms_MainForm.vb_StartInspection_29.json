@@ -15,9 +15,7 @@
       "end_line": 35,
       "params": "",
       "called_by": [
-        "New",
-        "btnStart_Click",
-        "btnSave_Click"
+        "btnStart_Click"
       ],
       "calls": [
         "CaptureCameraImage",
@@ -37,9 +35,7 @@
         "source": "Forms/MainForm.vb",
         "line": 29,
         "called_by": [
-          "New",
-          "btnStart_Click",
-          "btnSave_Click"
+          "btnStart_Click"
         ],
         "calls": [
           "CaptureCameraImage",
@@ -55,16 +51,14 @@
         "side_effects": [
           "可能存取外部設備 / SDK: plc, camera, capture",
           "可能更新 UI 狀態或顯示內容: form",
-          "可能建立新物件或初始化流程: new",
           "External device/API interaction candidate 推測"
         ],
         "maintenance_notes": [
           "檢查設備呼叫是否有 timeout、重試、例外處理與安全狀態",
-          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher",
-          "檢查物件生命週期、Dispose、資源釋放與重複初始化風險"
+          "若此方法可能在背景執行，需檢查 UI thread Invoke / Dispatcher"
         ],
         "evidence": [
-          "被其他方法呼叫: New, btnStart_Click, btnSave_Click",
+          "被其他方法呼叫: btnStart_Click",
           "名稱或呼叫鏈包含 Start 相關關鍵字: start",
           "呼叫方法: CaptureCameraImage, ConnectPlc, EvaluateResult"
         ],
@@ -78,9 +72,7 @@
             "EvaluateResult"
           ],
           "called_by": [
-            "New",
-            "btnStart_Click",
-            "btnSave_Click"
+            "btnStart_Click"
           ],
           "has_config_candidate": false,
           "has_db_candidate": false,
@@ -88,7 +80,7 @@
           "has_device_candidate": true,
           "has_ui_update_candidate": true,
           "has_async_thread_timer_candidate": false,
-          "has_object_creation_candidate": true
+          "has_object_creation_candidate": false
         },
         "confidence": 0.75
       }
@@ -96,9 +88,7 @@
     "event_triggers": [],
     "event_flows": [],
     "callers": [
-      "New",
-      "btnStart_Click",
-      "btnSave_Click"
+      "btnStart_Click"
     ],
     "callees": [
       "CaptureCameraImage",
@@ -133,8 +123,8 @@
     ]
   },
   "related_chunks": [
-    "method:Forms_MainForm.vb_CaptureCameraImage_1126",
-    "method:Forms_MainForm.vb_ConnectPlc_1121",
+    "method:Forms_MainForm.vb_CaptureCameraImage_1998",
+    "method:Forms_MainForm.vb_ConnectPlc_1994",
     "method:Forms_MainForm.vb_EvaluateResult_36"
   ]
 }

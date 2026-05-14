@@ -2,25 +2,14 @@
 
 ## Requirements
 
-### Requirement: Dependency System.Windows.Forms shall be reviewed
+### Requirement: Dependency Dependency Group: System References shall be reviewed
 
-The system SHALL document dependency `System.Windows.Forms` with its purpose and deployment risk.
+The system SHALL document dependency `Dependency Group: System References` with its purpose and deployment risk.
 
-#### Scenario: Dependency System.Windows.Forms shall be reviewed
-
-- GIVEN the system is built or deployed
-- THEN dependency `System.Windows.Forms` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
-
-**Source:** `VbLargeFileDocTest.vbproj`
-
-### Requirement: Dependency System.Configuration shall be reviewed
-
-The system SHALL document dependency `System.Configuration` with its purpose and deployment risk.
-
-#### Scenario: Dependency System.Configuration shall be reviewed
+#### Scenario: Dependency Dependency Group: System References shall be reviewed
 
 - GIVEN the system is built or deployed
-- THEN dependency `System.Configuration` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
+- THEN dependency `Dependency Group: System References` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
 
 **Source:** `VbLargeFileDocTest.vbproj`
 
@@ -50,22 +39,4 @@ The system SHALL document dependency `Vision SDK` with its purpose and deploymen
 
 - GIVEN the system is built or deployed
 - THEN dependency `Vision SDK` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
-
-### Requirement: Dependency Reference shall be reviewed
-
-The system SHALL document dependency `Reference` with its purpose and deployment risk.
-
-#### Scenario: Dependency Reference shall be reviewed
-
-- GIVEN the system is built or deployed
-- THEN dependency `Reference` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
-
-### Requirement: Dependency Reference shall be reviewed
-
-The system SHALL document dependency `Reference` with its purpose and deployment risk.
-
-#### Scenario: Dependency Reference shall be reviewed
-
-- GIVEN the system is built or deployed
-- THEN dependency `Reference` MUST be verified for version, runtime availability, x86/x64 compatibility, and initialization failure behavior.
 

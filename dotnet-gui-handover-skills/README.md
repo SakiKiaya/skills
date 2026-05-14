@@ -43,6 +43,12 @@ v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and R
 - `dotnet-readme-generator` creates a target-project `docs/README.md` from analysis and chunks.
 - The README summarizes architecture, forms, methods, configuration, operations, and known risks.
 
+### Industrial VB.NET Deep Manual Writing
+
+- `dotnet-industrial-vb-manual-writer` provides a deep-dive workflow for industrial automation VB.NET WinForms systems.
+- It focuses on PLC monitoring, BackgroundWorker loops, timers, state machines, socket handshakes, MES/SOAP integration, barcode readers, INI source-of-truth behavior, permissions, and DataGridView or tray-map rendering.
+- Use it when a core form such as `frmMain.vb` needs a file-level handover manual.
+
 ## Skill Set
 
 ```text
@@ -52,6 +58,7 @@ v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and R
   dotnet-analysis-chunker/
   dotnet-chunk-regenerator/
   dotnet-chunk-aware-doc-generator/
+  dotnet-industrial-vb-manual-writer/
   dotnet-enterprise-doc-generator/
   dotnet-openspec-generator/
   dotnet-readme-generator/
