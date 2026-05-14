@@ -1,0 +1,581 @@
+{
+  "version": "0.1",
+  "source": "Forms/MainForm.vb",
+  "generated_from": "static source-backed manual insight extractor",
+  "confirmed_workflows": [
+    {
+      "entry": "btnStart.Click",
+      "handler": "btnStart_Click",
+      "call_chain": [
+        "btnStart_Click",
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "summary": "執行檢測流程，包含連線、取像、結果評估與狀態更新。",
+      "source": "Forms/MainForm.vb",
+      "line": 16,
+      "evidence": "Forms/MainForm.vb:16",
+      "status": "confirmed"
+    },
+    {
+      "entry": "btnSave.Click",
+      "handler": "btnSave_Click",
+      "call_chain": [
+        "btnSave_Click",
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "summary": "儲存配方或設定資料，並更新畫面狀態。",
+      "source": "Forms/MainForm.vb",
+      "line": 17,
+      "evidence": "Forms/MainForm.vb:17",
+      "status": "confirmed"
+    }
+  ],
+  "confirmed_side_effects": [
+    {
+      "method": "StartInspection",
+      "effect": "config access",
+      "evidence": [
+        "ConfigurationManager"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 29,
+        "end": 35
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "StartInspection",
+      "effect": "device/camera/plc call",
+      "evidence": [
+        "Plc",
+        "Camera",
+        "Capture"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 29,
+        "end": 35
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "ConnectPlc",
+      "effect": "blocking wait",
+      "evidence": [
+        "Thread.Sleep"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1994,
+        "end": 1997
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "ConnectPlc",
+      "effect": "device/camera/plc call",
+      "evidence": [
+        "Plc"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1994,
+        "end": 1997
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "CaptureCameraImage",
+      "effect": "blocking wait",
+      "evidence": [
+        "Thread.Sleep"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1998,
+        "end": 2001
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "CaptureCameraImage",
+      "effect": "device/camera/plc call",
+      "evidence": [
+        "Camera",
+        "Capture"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1998,
+        "end": 2001
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "SaveRecipe",
+      "effect": "config access",
+      "evidence": [
+        "ConfigurationManager"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 2003,
+        "end": 2007
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "SaveRecipe",
+      "effect": "file access",
+      "evidence": [
+        "File."
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 2003,
+        "end": 2007
+      },
+      "status": "confirmed"
+    },
+    {
+      "method": "UpdateStatus",
+      "effect": "ui thread update",
+      "evidence": [
+        "BeginInvoke",
+        "InvokeRequired"
+      ],
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 2008,
+        "end": 2015
+      },
+      "status": "confirmed"
+    }
+  ],
+  "method_details": [
+    {
+      "name": "New",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 12,
+        "end": 18
+      },
+      "calls": [],
+      "called_by": [],
+      "params": [],
+      "description": "已定位方法內容；實際業務語意仍需人工確認。",
+      "logic": "靜態分析未偵測到內部呼叫或主要副作用。",
+      "side_effects": [],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-new",
+      "status": "confirmed"
+    },
+    {
+      "name": "btnStart_Click",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 19,
+        "end": 23
+      },
+      "calls": [
+        "StartInspection",
+        "UpdateStatus"
+      ],
+      "called_by": [],
+      "params": [
+        {
+          "name": "sender",
+          "type": "Object",
+          "range": "See caller / validation logic",
+          "description": "sender As Object"
+        },
+        {
+          "name": "e",
+          "type": "EventArgs",
+          "range": "See caller / validation logic",
+          "description": "e As EventArgs"
+        }
+      ],
+      "description": "執行檢測流程，包含連線、取像、結果評估與狀態更新。",
+      "logic": "Calls: StartInspection -> UpdateStatus",
+      "side_effects": [],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-btnstart_click",
+      "status": "confirmed"
+    },
+    {
+      "name": "btnSave_Click",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 24,
+        "end": 28
+      },
+      "calls": [
+        "SaveRecipe",
+        "UpdateStatus"
+      ],
+      "called_by": [],
+      "params": [
+        {
+          "name": "sender",
+          "type": "Object",
+          "range": "See caller / validation logic",
+          "description": "sender As Object"
+        },
+        {
+          "name": "e",
+          "type": "EventArgs",
+          "range": "See caller / validation logic",
+          "description": "e As EventArgs"
+        }
+      ],
+      "description": "儲存配方或設定資料，並更新畫面狀態。",
+      "logic": "Calls: SaveRecipe -> UpdateStatus",
+      "side_effects": [],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-btnsave_click",
+      "status": "confirmed"
+    },
+    {
+      "name": "StartInspection",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 29,
+        "end": 35
+      },
+      "calls": [
+        "CaptureCameraImage",
+        "ConnectPlc",
+        "EvaluateResult"
+      ],
+      "called_by": [
+        "btnStart_Click"
+      ],
+      "params": [],
+      "description": "執行檢測流程，包含連線、取像、結果評估與狀態更新。",
+      "logic": "Calls: CaptureCameraImage -> ConnectPlc -> EvaluateResult 已確認副作用：config access, device/camera/plc call",
+      "side_effects": [
+        {
+          "method": "StartInspection",
+          "effect": "config access",
+          "evidence": [
+            "ConfigurationManager"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 29,
+            "end": 35
+          },
+          "status": "confirmed"
+        },
+        {
+          "method": "StartInspection",
+          "effect": "device/camera/plc call",
+          "evidence": [
+            "Plc",
+            "Camera",
+            "Capture"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 29,
+            "end": 35
+          },
+          "status": "confirmed"
+        }
+      ],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-startinspection",
+      "status": "confirmed"
+    },
+    {
+      "name": "EvaluateResult",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 36,
+        "end": 1991
+      },
+      "calls": [],
+      "called_by": [
+        "StartInspection"
+      ],
+      "params": [
+        {
+          "name": "mode",
+          "type": "Integer",
+          "range": "See caller / validation logic",
+          "description": "mode As Integer"
+        }
+      ],
+      "description": "執行檢測流程，包含連線、取像、結果評估與狀態更新。",
+      "logic": "Contains branch/state-machine style logic.",
+      "side_effects": [],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-evaluateresult",
+      "status": "confirmed"
+    },
+    {
+      "name": "ConnectPlc",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1994,
+        "end": 1997
+      },
+      "calls": [],
+      "called_by": [
+        "StartInspection"
+      ],
+      "params": [
+        {
+          "name": "ip",
+          "type": "String",
+          "range": "See caller / validation logic",
+          "description": "ip As String"
+        }
+      ],
+      "description": "已定位方法內容；實際業務語意仍需人工確認。",
+      "logic": "已確認副作用：blocking wait, device/camera/plc call",
+      "side_effects": [
+        {
+          "method": "ConnectPlc",
+          "effect": "blocking wait",
+          "evidence": [
+            "Thread.Sleep"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 1994,
+            "end": 1997
+          },
+          "status": "confirmed"
+        },
+        {
+          "method": "ConnectPlc",
+          "effect": "device/camera/plc call",
+          "evidence": [
+            "Plc"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 1994,
+            "end": 1997
+          },
+          "status": "confirmed"
+        }
+      ],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-connectplc",
+      "status": "confirmed"
+    },
+    {
+      "name": "CaptureCameraImage",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 1998,
+        "end": 2001
+      },
+      "calls": [],
+      "called_by": [
+        "StartInspection"
+      ],
+      "params": [],
+      "description": "執行檢測流程，包含連線、取像、結果評估與狀態更新。",
+      "logic": "已確認副作用：blocking wait, device/camera/plc call",
+      "side_effects": [
+        {
+          "method": "CaptureCameraImage",
+          "effect": "blocking wait",
+          "evidence": [
+            "Thread.Sleep"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 1998,
+            "end": 2001
+          },
+          "status": "confirmed"
+        },
+        {
+          "method": "CaptureCameraImage",
+          "effect": "device/camera/plc call",
+          "evidence": [
+            "Camera",
+            "Capture"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 1998,
+            "end": 2001
+          },
+          "status": "confirmed"
+        }
+      ],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-capturecameraimage",
+      "status": "confirmed"
+    },
+    {
+      "name": "SaveRecipe",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 2003,
+        "end": 2007
+      },
+      "calls": [],
+      "called_by": [
+        "btnSave_Click"
+      ],
+      "params": [],
+      "description": "儲存配方或設定資料，並更新畫面狀態。",
+      "logic": "已確認副作用：config access, file access",
+      "side_effects": [
+        {
+          "method": "SaveRecipe",
+          "effect": "config access",
+          "evidence": [
+            "ConfigurationManager"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 2003,
+            "end": 2007
+          },
+          "status": "confirmed"
+        },
+        {
+          "method": "SaveRecipe",
+          "effect": "file access",
+          "evidence": [
+            "File."
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 2003,
+            "end": 2007
+          },
+          "status": "confirmed"
+        }
+      ],
+      "output": "未偵測到輸出參數或新物件建立。",
+      "anchor": "method-saverecipe",
+      "status": "confirmed"
+    },
+    {
+      "name": "UpdateStatus",
+      "source": "Forms/MainForm.vb",
+      "line_range": {
+        "start": 2008,
+        "end": 2015
+      },
+      "calls": [],
+      "called_by": [
+        "btnStart_Click",
+        "btnSave_Click"
+      ],
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "range": "See caller / validation logic",
+          "description": "message As String"
+        }
+      ],
+      "description": "透過 UI 執行緒更新畫面狀態。",
+      "logic": "已確認副作用：ui thread update Contains conditional logic.",
+      "side_effects": [
+        {
+          "method": "UpdateStatus",
+          "effect": "ui thread update",
+          "evidence": [
+            "BeginInvoke",
+            "InvokeRequired"
+          ],
+          "source": "Forms/MainForm.vb",
+          "line_range": {
+            "start": 2008,
+            "end": 2015
+          },
+          "status": "confirmed"
+        }
+      ],
+      "output": "可能會建立新物件。",
+      "anchor": "method-updatestatus",
+      "status": "confirmed"
+    }
+  ],
+  "regions": [
+    {
+      "name": "inspection branch filler 0",
+      "line_range": {
+        "start": 833,
+        "end": 846
+      },
+      "source": "Forms/MainForm.vb",
+      "status": "confirmed"
+    },
+    {
+      "name": "inspection branch filler 1",
+      "line_range": {
+        "start": 883,
+        "end": 892
+      },
+      "source": "Forms/MainForm.vb",
+      "status": "confirmed"
+    },
+    {
+      "name": "inspection branch filler 2",
+      "line_range": {
+        "start": 894,
+        "end": 901
+      },
+      "source": "Forms/MainForm.vb",
+      "status": "confirmed"
+    },
+    {
+      "name": "PLC and Camera Simulation",
+      "line_range": {
+        "start": 1993,
+        "end": 2002
+      },
+      "source": "Forms/MainForm.vb",
+      "status": "confirmed"
+    }
+  ],
+  "state_machines": [
+    {
+      "kind": "Switch/Case",
+      "expression": "mode",
+      "line_range": {
+        "start": 38,
+        "end": 916
+      },
+      "source": "Forms/MainForm.vb",
+      "status": "confirmed"
+    }
+  ],
+  "ui_events": [
+    {
+      "control": "btnStart",
+      "event": "Click",
+      "handler": "btnStart_Click",
+      "source": "Forms/MainForm.vb",
+      "line": 16,
+      "status": "confirmed"
+    },
+    {
+      "control": "btnSave",
+      "event": "Click",
+      "handler": "btnSave_Click",
+      "source": "Forms/MainForm.vb",
+      "line": 17,
+      "status": "confirmed"
+    }
+  ],
+  "open_questions": [
+    "Confirm operator-facing names and expected pass/fail behavior with equipment owners.",
+    "Confirm external device, PLC, and camera semantics when source uses simulator or placeholder methods."
+  ]
+}

@@ -76,6 +76,19 @@ def chunk_md_path(docs_chunks_dir: Path, chunk: dict[str, Any]) -> Path:
 def load_chunk(path: Path):
     return load(path, {})
 
+def load_manual_insights(analysis_dir: Path) -> list[dict[str, Any]]:
+    insights_dir = analysis_dir.parent / "manual_insights"
+    if not insights_dir.exists():
+        return []
+    return [load(path, {}) for path in sorted(insights_dir.glob("*.insights.json"))]
+
+def insight_workflow_map(manual_insights: list[dict[str, Any]]) -> dict[tuple[str, str], dict[str, Any]]:
+    out = {}
+    for insight in manual_insights:
+        for flow in insight.get("confirmed_workflows") or []:
+            out[(str(flow.get("entry") or ""), str(flow.get("handler") or ""))] = flow
+    return out
+
 def project_graph(project_chunks: list[dict[str, Any]]):
     lines = ["```mermaid", "graph TD"]
     if not project_chunks:
@@ -270,7 +283,10 @@ def workflow_title(flow: dict[str, Any]) -> str:
         return "Update Status"
     return entry.replace(".", " ")
 
-def workflow_expected_result(flow: dict[str, Any]) -> str:
+def workflow_expected_result(flow: dict[str, Any], manual_insights: list[dict[str, Any]] | None = None) -> str:
+    insight = insight_workflow_map(manual_insights or []).get((str(flow.get("entry") or ""), str(flow.get("handler") or "")))
+    if insight and insight.get("summary"):
+        return f"{insight.get('summary')} (confirmed: {insight.get('evidence')})"
     chain = [str(x) for x in (flow.get("call_chain") or []) if x]
     lower = " ".join(chain + [str(flow.get("entry") or ""), str(flow.get("handler") or "")]).lower()
     if "startinspection" in lower or "capturecameraimage" in lower or "evaluateresult" in lower:
@@ -309,6 +325,7 @@ def workflow_overview_table(
     docs_chunks_dir: Path,
     event_flow_chunks: list[dict[str, Any]],
     method_chunks: list[dict[str, Any]],
+    manual_insights: list[dict[str, Any]] | None = None,
 ) -> str:
     method_lookup = method_chunks_by_name(method_chunks)
     rows = []
@@ -323,7 +340,7 @@ def workflow_overview_table(
             workflow_title(flow),
             flow.get("entry"),
             flow.get("handler"),
-            workflow_expected_result(flow),
+            workflow_expected_result(flow, manual_insights),
             " -> ".join(method_links),
             chunk_link(docs_dir, docs_chunks_dir, c, "event flow"),
         ])
@@ -334,6 +351,7 @@ def workflow_detail_sections(
     docs_chunks_dir: Path,
     event_flow_chunks: list[dict[str, Any]],
     method_chunks: list[dict[str, Any]],
+    manual_insights: list[dict[str, Any]] | None = None,
 ) -> str:
     method_lookup = method_chunks_by_name(method_chunks)
     sections = []
@@ -356,7 +374,7 @@ def workflow_detail_sections(
                 ["Entry Event", flow.get("entry")],
                 ["Handler", flow.get("handler")],
                 ["Source", flow.get("source")],
-                ["Expected Result", workflow_expected_result(flow)],
+                ["Expected Result", workflow_expected_result(flow, manual_insights)],
                 ["Related Event Flow", chunk_link(docs_dir, docs_chunks_dir, c, c.get("chunk_id"))],
                 ["Related Methods", ", ".join(method_links) if method_links else "N/A"],
             ])
@@ -368,6 +386,22 @@ def workflow_detail_sections(
             + "- Confirm failures are visible to the operator and do not leave the UI in an inconsistent state.\n"
         )
     return "\n".join(sections)
+
+def manual_insight_summary_table(docs_dir: Path, manual_insights: list[dict[str, Any]]) -> str:
+    rows = []
+    for insight in manual_insights:
+        source = insight.get("source")
+        manual_path = docs_dir / "manuals" / f"{Path(str(source)).name}.md"
+        link = f"[{esc(Path(str(source)).name)}]({rel_link(docs_dir, manual_path)})" if manual_path.exists() else esc(source)
+        rows.append([
+            source,
+            link,
+            len(insight.get("confirmed_workflows") or []),
+            len(insight.get("confirmed_side_effects") or []),
+            len(insight.get("state_machines") or []),
+            len(insight.get("regions") or []),
+        ])
+    return table(["Source", "Manual", "Confirmed Workflows", "Confirmed Side Effects", "State Machines", "Regions"], rows)
 
 def source_file_index_table(docs_dir: Path, docs_chunks_dir: Path, source_file_chunks: list[dict[str, Any]]) -> str:
     rows = []
@@ -461,6 +495,7 @@ def main(analysis_dir: str, chunks_dir: str, docs_chunks_dir: str, docs_dir: str
     risks = [load_chunk(p) for p in list_chunk_json(chunks, "risks")]
     source_files = [load_chunk(p) for p in list_chunk_json(chunks, "source_files")]
     large_file_tasks = [load_chunk(p) for p in list_chunk_json(chunks, "large_file_tasks")]
+    manual_insights = load_manual_insights(analysis)
 
     # fallback counts / data
     enterprise_projects = load(analysis / "projects.json", [])
@@ -582,6 +617,9 @@ See `docs/chunks/` for regenerated single-chunk documentation.
     doc += method_graph(methods, event_flows) + "\n\n"
     doc += "## Key Flow Summary\n\n"
     doc += method_summary(methods) + "\n\n"
+    if manual_insights:
+        doc += "## Manual Insight Summary\n\n"
+        doc += manual_insight_summary_table(docs, manual_insights) + "\n"
     doc += "## How To Read This Document\n\n"
     doc += (
         "- Start with the Mermaid overview to understand the main call path.\n"
@@ -626,9 +664,9 @@ See `docs/chunks/` for regenerated single-chunk documentation.
         "- Use the links below to jump from a user workflow to the related event-flow and method chunks.\n\n"
     )
     doc += "## Workflow Summary\n\n"
-    doc += workflow_overview_table(docs, docs_chunks, event_flows, methods)
+    doc += workflow_overview_table(docs, docs_chunks, event_flows, methods, manual_insights)
     doc += "\n## Scenario Details\n\n"
-    doc += workflow_detail_sections(docs, docs_chunks, event_flows, methods)
+    doc += workflow_detail_sections(docs, docs_chunks, event_flows, methods, manual_insights)
     doc += "\n## UI Entry Points\n\n"
     doc += table(["Form", "Chunk", "Source Refs"], [[c.get("title"), chunk_link(docs, docs_chunks, c, c.get("chunk_id")), c.get("source_refs")] for c in forms])
     (docs / "07_user_workflow.md").write_text(doc, encoding="utf-8")

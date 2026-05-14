@@ -40,8 +40,8 @@ flowchart TD
 
 | Workflow | User Action / Event | Handler | Expected Result | Key Technical Path | Detail |
 |---|---|---|---|---|---|
-| Start Inspection | btnStart.Click | btnStart_Click | Run inspection logic, interact with device/camera simulation, evaluate result, then refresh status. | [btnStart_Click](chunks/methods/Forms_MainForm.vb_btnStart_Click_19.md) -> [StartInspection](chunks/methods/Forms_MainForm.vb_StartInspection_29.md) -> [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) | [event flow](chunks/event_flows/0000_btnStart.Click_btnStart_Click.md) |
-| Save Recipe | btnSave.Click | btnSave_Click | Save recipe/configuration data and refresh status. | [btnSave_Click](chunks/methods/Forms_MainForm.vb_btnSave_Click_24.md) -> [SaveRecipe](chunks/methods/Forms_MainForm.vb_SaveRecipe_2003.md) -> [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) | [event flow](chunks/event_flows/0001_btnSave.Click_btnSave_Click.md) |
+| Start Inspection | btnStart.Click | btnStart_Click | 執行檢測流程，包含連線、取像、結果評估與狀態更新。 (confirmed: Forms/MainForm.vb:16) | [btnStart_Click](chunks/methods/Forms_MainForm.vb_btnStart_Click_19.md) -> [StartInspection](chunks/methods/Forms_MainForm.vb_StartInspection_29.md) -> [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) | [event flow](chunks/event_flows/0000_btnStart.Click_btnStart_Click.md) |
+| Save Recipe | btnSave.Click | btnSave_Click | 儲存配方或設定資料，並更新畫面狀態。 (confirmed: Forms/MainForm.vb:17) | [btnSave_Click](chunks/methods/Forms_MainForm.vb_btnSave_Click_24.md) -> [SaveRecipe](chunks/methods/Forms_MainForm.vb_SaveRecipe_2003.md) -> [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) | [event flow](chunks/event_flows/0001_btnSave.Click_btnSave_Click.md) |
 
 ## Scenario Details
 
@@ -53,7 +53,7 @@ flowchart TD
 | Entry Event | btnStart.Click |
 | Handler | btnStart_Click |
 | Source | Forms/MainForm.vb |
-| Expected Result | Run inspection logic, interact with device/camera simulation, evaluate result, then refresh status. |
+| Expected Result | 執行檢測流程，包含連線、取像、結果評估與狀態更新。 (confirmed: Forms/MainForm.vb:16) |
 | Related Event Flow | [0000_btnStart.Click_btnStart_Click](chunks/event_flows/0000_btnStart.Click_btnStart_Click.md) |
 | Related Methods | [btnStart_Click](chunks/methods/Forms_MainForm.vb_btnStart_Click_19.md), [StartInspection](chunks/methods/Forms_MainForm.vb_StartInspection_29.md), [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) |
 
@@ -80,7 +80,7 @@ flowchart TD
 | Entry Event | btnSave.Click |
 | Handler | btnSave_Click |
 | Source | Forms/MainForm.vb |
-| Expected Result | Save recipe/configuration data and refresh status. |
+| Expected Result | 儲存配方或設定資料，並更新畫面狀態。 (confirmed: Forms/MainForm.vb:17) |
 | Related Event Flow | [0001_btnSave.Click_btnSave_Click](chunks/event_flows/0001_btnSave.Click_btnSave_Click.md) |
 | Related Methods | [btnSave_Click](chunks/methods/Forms_MainForm.vb_btnSave_Click_24.md), [SaveRecipe](chunks/methods/Forms_MainForm.vb_SaveRecipe_2003.md), [UpdateStatus](chunks/methods/Forms_MainForm.vb_UpdateStatus_2008.md) |
 

@@ -48,6 +48,7 @@ v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and R
 - `dotnet-industrial-vb-manual-writer` provides a deep-dive workflow for industrial automation VB.NET WinForms systems.
 - It focuses on PLC monitoring, BackgroundWorker loops, timers, state machines, socket handshakes, MES/SOAP integration, barcode readers, INI source-of-truth behavior, permissions, and DataGridView or tray-map rendering.
 - Use it when a core form such as `frmMain.vb` needs a file-level handover manual.
+- `dotnet-industrial-handover-pipeline` orchestrates the full flow: run the standard pipeline, generate source-backed manual insights for core VB files, refresh final docs, and write a quality report for remaining inferred content.
 
 ## Skill Set
 
@@ -59,6 +60,7 @@ v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and R
   dotnet-chunk-regenerator/
   dotnet-chunk-aware-doc-generator/
   dotnet-industrial-vb-manual-writer/
+  dotnet-industrial-handover-pipeline/
   dotnet-enterprise-doc-generator/
   dotnet-openspec-generator/
   dotnet-readme-generator/
@@ -72,6 +74,7 @@ v1.0 consolidates the earlier analyzer, chunking, documentation, OpenSpec, and R
 exports/
   enterprise_analysis/
   analysis_chunks/
+  manual_insights/
 
 docs/
   README.md
@@ -84,6 +87,8 @@ docs/
   07_user_workflow.md
   08_external_dependencies.md
   09_risk_analysis.md
+  manual_insight_quality.md
+  manuals/
   chunks/
 
 openspec/
@@ -108,6 +113,18 @@ python run_v09_full_pipeline.py /path/to/target/repo
 ```
 
 The wrapper name is kept for compatibility, but the pipeline now produces v1.0 output.
+
+For industrial VB.NET projects, run the handover orchestrator to add file-level manual insights and refresh docs with confirmed evidence:
+
+```bash
+python .claude/skills/dotnet-industrial-handover-pipeline/scripts/run_industrial_handover_pipeline.py /path/to/target/repo
+```
+
+Optionally pass one or more source files to force deep insight generation for specific files:
+
+```bash
+python .claude/skills/dotnet-industrial-handover-pipeline/scripts/run_industrial_handover_pipeline.py /path/to/target/repo Forms/MainForm.vb
+```
 
 ## Step-By-Step Pipeline
 

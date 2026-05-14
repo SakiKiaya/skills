@@ -34,6 +34,12 @@ UpdateStatus
 
 ```
 
+## Manual Insight Summary
+
+| Source | Manual | Confirmed Workflows | Confirmed Side Effects | State Machines | Regions |
+|---|---|---|---|---|---|
+| Forms/MainForm.vb | [MainForm.vb](manuals/MainForm.vb.md) | 2 | 9 | 1 | 4 |
+
 ## How To Read This Document
 
 - Start with the Mermaid overview to understand the main call path.

@@ -60,24 +60,6 @@
     ],
     "handler_methods": [
       {
-        "name": "btnStart_Click",
-        "language": "VB.NET",
-        "source": "Forms/MainForm.vb",
-        "line": 19,
-        "end_line": 23,
-        "params": "sender As Object, e As EventArgs",
-        "called_by": [],
-        "calls": [
-          "StartInspection",
-          "UpdateStatus"
-        ],
-        "purpose": "Event handler / UI operation entry candidate 推測",
-        "side_effects": [
-          "Persistence or write operation candidate 推測"
-        ],
-        "risks": []
-      },
-      {
         "name": "btnSave_Click",
         "language": "VB.NET",
         "source": "Forms/MainForm.vb",
@@ -87,6 +69,24 @@
         "called_by": [],
         "calls": [
           "SaveRecipe",
+          "UpdateStatus"
+        ],
+        "purpose": "Event handler / UI operation entry candidate 推測",
+        "side_effects": [
+          "Persistence or write operation candidate 推測"
+        ],
+        "risks": []
+      },
+      {
+        "name": "btnStart_Click",
+        "language": "VB.NET",
+        "source": "Forms/MainForm.vb",
+        "line": 19,
+        "end_line": 23,
+        "params": "sender As Object, e As EventArgs",
+        "called_by": [],
+        "calls": [
+          "StartInspection",
           "UpdateStatus"
         ],
         "purpose": "Event handler / UI operation entry candidate 推測",
@@ -124,7 +124,7 @@
     ]
   },
   "related_chunks": [
-    "method:Forms_MainForm.vb_btnStart_Click_19",
-    "method:Forms_MainForm.vb_btnSave_Click_24"
+    "method:Forms_MainForm.vb_btnSave_Click_24",
+    "method:Forms_MainForm.vb_btnStart_Click_19"
   ]
 }

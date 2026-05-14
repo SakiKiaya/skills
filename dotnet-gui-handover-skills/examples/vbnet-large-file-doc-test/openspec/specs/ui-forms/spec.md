@@ -38,8 +38,8 @@ The system SHALL document `MainForm` as a GUI surface with detected events and h
 
 | Method | Calls | Side Effects | Source |
 |---|---|---|---|
-| btnStart_Click | ['StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] | Forms/MainForm.vb |
 | btnSave_Click | ['SaveRecipe', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] | Forms/MainForm.vb |
+| btnStart_Click | ['StartInspection', 'UpdateStatus'] | ['Persistence or write operation candidate 推測'] | Forms/MainForm.vb |
 
 #### Maintenance Notes
 

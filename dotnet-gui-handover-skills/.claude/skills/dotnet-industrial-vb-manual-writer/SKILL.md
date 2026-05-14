@@ -192,7 +192,51 @@ docs/<FileName>.vb.md
 
 Use the required structure from `references/manual_standard.md`.
 
+When this skill is used as part of the industrial handover pipeline, also produce or update a machine-readable insight file:
+
+```text
+exports/manual_insights/<FileName>.insights.json
+```
+
+The insight file should prefer confirmed, source-backed statements and use this shape:
+
+```json
+{
+  "source": "Forms/MainForm.vb",
+  "confirmed_workflows": [],
+  "confirmed_side_effects": [],
+  "state_machines": [],
+  "regions": [],
+  "ui_events": [],
+  "open_questions": []
+}
+```
+
+These insights are consumed by the chunk-aware document generator to replace weak `推測` text with confirmed explanations where evidence exists.
+
 If the user asks for a full system manual, also create an index document that links the per-file manuals and summarizes cross-file flows.
+
+## Pipeline Integration
+
+For full-project execution, prefer the orchestrator skill:
+
+```text
+dotnet-industrial-handover-pipeline
+```
+
+Typical command:
+
+```powershell
+python .claude/skills/dotnet-industrial-handover-pipeline/scripts/run_industrial_handover_pipeline.py <project-root>
+```
+
+The orchestrator runs the broad project pipeline, generates file-level manual insights, refreshes final docs, and writes a quality report:
+
+```text
+docs/manual_insight_quality.md
+```
+
+The orchestrator script is path-tolerant. The skill folder may live under project `.claude/skills`, `~/.claude/skills`, or `~/.gemini/skills` as long as the sibling dotnet handover skills are installed beside it.
 
 ## Quality Rules
 
